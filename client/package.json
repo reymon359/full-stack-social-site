@@ -9,6 +9,7 @@
     "build": "next build",
     "start": "next start",
     "type-check": "tsc",
+    "type-check:watch": "tsc --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
