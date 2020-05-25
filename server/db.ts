@@ -2,7 +2,10 @@ import { Pool } from 'pg';
 import sql from 'sql-template-strings';
 import faker from 'faker';
 import addMinutes from 'date-fns/addMinutes';
-import { resetDb as envResetDb, fakedDb } from './env';
+import {
+  resetDb as envResetDb, postgresHost, postgresPort,
+  postgresUser, postgresPassword, postgresDb, fakedDb
+} from './env';
 
 export type User = {
   id: string;
@@ -25,11 +28,11 @@ export type Chat = {
 };
 
 export const dbConfig = {
-  host: process.env.POSTGRES_HOST ? process.env.POSTGRES_HOST : 'localhost',
-  port: process.env.POSTGRES_PORT ? parseInt(process.env.POSTGRES_PORT) : 5432,
-  user: process.env.POSTGRES_USER ? process.env.POSTGRES_USER : 'testuser',
-  password: process.env.POSTGRES_PASSWORD ? process.env.POSTGRES_PASSWORD : 'testpassword',
-  database: process.env.POSTGRES_DB ? process.env.POSTGRES_DB : 'whatsapp',
+  host: postgresHost,
+  port: postgresPort,
+  user: postgresUser,
+  password: postgresPassword,
+  database: postgresDb,
 };
 
 export let pool: Pool = new Pool(dbConfig);
