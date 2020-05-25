@@ -25,16 +25,18 @@ export type Chat = {
 };
 
 export const dbConfig = {
-  host: process.env.DB_HOST ? process.env.DB_HOST : 'localhost',
-  port: process.env.DB_PORT ? parseInt(process.env.DB_PORT) : 5432,
-  user: process.env.DB_USER ? process.env.DB_USER : 'testuser',
-  password: process.env.DB_PASSWORD ? process.env.DB_PASSWORD : 'testpassword',
-  database: process.env.DB_DATABASE ? process.env.DB_DATABASE : 'whatsapp',
+  host: process.env.POSTGRES_HOST ? process.env.POSTGRES_HOST : 'localhost',
+  port: process.env.POSTGRES_PORT ? parseInt(process.env.POSTGRES_PORT) : 5432,
+  user: process.env.POSTGRES_USER ? process.env.POSTGRES_USER : 'testuser',
+  password: process.env.POSTGRES_PASSWORD ? process.env.POSTGRES_PASSWORD : 'testpassword',
+  database: process.env.POSTGRES_DB ? process.env.POSTGRES_DB : 'whatsapp',
 };
 
 export let pool: Pool = new Pool(dbConfig);
 
 export async function initDb(): Promise<void> {
+  console.log('initDB');
+
   // Clear tables
   await pool.query(sql`DROP TABLE IF EXISTS messages;`);
   await pool.query(sql`DROP TABLE IF EXISTS chats_users;`);
@@ -73,6 +75,7 @@ export async function initDb(): Promise<void> {
 
 export const resetDb = async () => {
   await initDb();
+  console.log(`Reseting database`)
 
   const sampleUsers = [
     {
@@ -265,6 +268,6 @@ function addFakedMessages(messages: Message[], count: number) {
   });
 }
 
-if (envResetDb) {
-  resetDb();
-}
+// if (envResetDb) {
+//   resetDb();
+// }
