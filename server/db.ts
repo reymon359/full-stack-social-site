@@ -25,11 +25,11 @@ export type Chat = {
 };
 
 export const dbConfig = {
-  host: 'localhost',
+  host: process.env.DB_HOST ? process.env.DB_HOST : 'localhost',
   port: process.env.DB_PORT ? parseInt(process.env.DB_PORT) : 5432,
-  user: 'testuser',
-  password: 'testpassword',
-  database: 'whatsapp',
+  user: process.env.DB_USER ? process.env.DB_USER : 'testuser',
+  password: process.env.DB_PASSWORD ? process.env.DB_PASSWORD : 'testpassword',
+  database: process.env.DB_DATABASE ? process.env.DB_DATABASE : 'whatsapp',
 };
 
 export let pool: Pool = new Pool(dbConfig);
