@@ -14,40 +14,29 @@ services:
       POSTGRES_HOST: ${POSTGRES_HOST}
     ports:
       - '5432:5432'
-    # volumes:
-    #   - /var/lib/postgresql/data
+    volumes:
+      - /var/lib/postgresql/data
     # build: ./postgres
    
-  # postgresql:
-  #   restart: always
-  #   image: postgres:12.2-alpine
-  #   ports:
-  #     - "5432:5432"
+  # I tried to run both but got so many issues that could not get through it so i will do it later
+  # # GraphQL API
+  # graphql-api:
+  #   container_name: graphql-api
+  #   # image: node:12.16.1 If we use the build: ./ it will use the Dockerfile
+  #   depends_on:
+  #     - postgres
+  #   build: ./
+  #   command: npm start
+  #   working_dir: /usr/src/graphql-api
   #   environment:
-  #     - POSTGRES_USER=testuser
-  #     - POSTGRES_PASSWORD=testpassword
-  #     - POSTGRES_DB=whatsapp 
+  #     POSTGRES_USER: ${POSTGRES_USER}
+  #     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+  #     POSTGRES_DB: ${POSTGRES_DB}
+  #     POSTGRES_HOST: ${POSTGRES_HOST}
+  #   ports:
+  #     - '3000:3000'
   #   volumes:
-  #     - /var/lib/postgresql/data
-
-  # GraphQL API
-  graphql-api:
-    container_name: graphql-api
-    # image: node:12.16.1 If we use the build: ./ it will use the Dockerfile
-    depends_on:
-      - postgres
-    build: ./
-    command: npm start
-    working_dir: /usr/src/graphql-api
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_HOST: ${POSTGRES_HOST}
-    ports:
-      - '3000:3000'
-    volumes:
-      - ./:/usr/src/graphql-api
+  #     - ./:/usr/src/graphql-api
 
 
       
