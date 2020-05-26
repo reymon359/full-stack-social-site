@@ -7,13 +7,13 @@
   },
   "private": true,
   "scripts": {
-    "prestart": "yarn codegen",
-    "start": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' ./index.ts",
+    "prestart": "npm run codegen",
+    "start": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec ts-node ./index.ts",
     "prebuild": "yarn codegen",
     "prod": "node dist/index.js",
     "build": "tsc",
     "test": "jest --runInBand --forceExit",
-    "codegen": "yarn graphql-codegen init",
+    "codegen": "graphql-codegen",
     "format": "prettier \"**/*.ts\" --write",
     "loadtest": "yarn artillery run artillery.yml > loadtest.log",
     "loadtest:limit": "yarn artillery run artillery-limit.yml > loadtest.log"
