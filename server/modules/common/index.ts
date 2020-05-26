@@ -7,6 +7,10 @@ import { pool } from '../../db';
 import { Resolvers } from '../../types/graphql';
 import { Database } from './database.provider';
 import { PubSub } from './pubsub.provider';
+import {
+  postgresHost, postgresPort,
+  postgresUser, postgresPassword, postgresDb
+} from '../../env';
 
 const { PostgresPubSub } = require('graphql-postgres-subscriptions');
 
@@ -33,11 +37,11 @@ const resolvers: Resolvers = {
 };
 
 const pubsub = new PostgresPubSub({
-  host: 'localhost',
-  port: process.env.DB_PORT ? parseInt(process.env.DB_PORT) : 5432,
-  user: 'testuser',
-  password: 'testpassword',
-  database: 'whatsapp',
+  host: postgresHost,
+  port: postgresPort,
+  user: postgresUser,
+  password: postgresPassword,
+  database: postgresDb,
 });
 
 pubsub.ee.setMaxListeners(0); // raise max listeners in event emitter, 0 mean that is limited
