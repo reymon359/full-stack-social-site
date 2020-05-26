@@ -17,5 +17,5 @@ export const postgresHost = process.env.POSTGRES_HOST || 'localhost';
 export const postgresPort = process.env.POSTGRES_PORT ? parseInt(process.env.POSTGRES_PORT) : 5432;
 export const postgresUser = process.env.POSTGRES_USER || 'testuser';
 export const postgresPassword = process.env.POSTGRES_PASSWORD || 'testpassword';
-export const postgresDb = process.env.POSTGRES_DB || 'whatsapp';
+export const postgresDb = process.env.POSTGRES_DB || 'socialsite';
 
