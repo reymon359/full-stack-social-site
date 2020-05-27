@@ -32,7 +32,7 @@ Object {
   "users": Array [
     Object {
       "id": "1",
-      "name": "Ray Edwards",
+      "name": "Uri Goldshtein",
       "picture": "https://randomuser.me/api/portraits/thumb/lego/1.jpg",
     },
     Object {
