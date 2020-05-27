@@ -46,17 +46,20 @@ export class Auth {
 
   async signUp({
     name,
+    username,
+    email,
     password,
     passwordConfirm,
-    username,
   }: {
     name: string;
+    username: string;
+    email: string;
     password: string;
     passwordConfirm: string;
-    username: string;
   }) {
     validateLength('req.name', name, 3, 50);
     validateLength('req.username', username, 3, 18);
+    validateLength('req.email', username, 3, 100);
     validatePassword('req.password', password);
 
     if (password !== passwordConfirm) {
@@ -64,14 +67,20 @@ export class Auth {
     }
 
     const existingUser = await this.users.findByUsername(username);
+    const existingEmail = await this.users.findByEmail(email);
 
     if (existingUser) {
       throw Error('username already exists');
     }
 
+    if (existingEmail {
+      throw Error('email already exists');
+    }
+
     return this.users.newUser({
-      username,
       name,
+      username,
+      email,
       password,
     });
   }

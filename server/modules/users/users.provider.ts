@@ -36,15 +36,26 @@ export class Users {
     return rows[0] || null;
   }
 
+  async findByEmail(email: string) {
+    const { rows } = await this.db.query(
+      sql`SELECT * FROM users WHERE email = ${email}`
+    );
+
+    return rows[0] || null;
+  }
+
   async newUser({
-    username,
     name,
+    username,
+    email,
     password,
   }: {
-    username: string;
     name: string;
+    username: string;
+    email: string;
     password: string;
   }) {
+    // TODO: save new user
     const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(8));
     const createdUserQuery = await this.db.query(sql`
         INSERT INTO users(password, picture, username, name)

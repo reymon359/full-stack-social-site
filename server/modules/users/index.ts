@@ -27,6 +27,7 @@ const typeDefs = gql`
     signUp(
       name: String!
       username: String!
+      email: String!
       password: String!
       passwordConfirm: String!
     ): User
@@ -53,12 +54,12 @@ const resolvers: Resolvers = {
 
     async signUp(
       root,
-      { name, username, password, passwordConfirm },
+      { name, username, email, password, passwordConfirm },
       { injector }
     ) {
       return injector
         .get(Auth)
-        .signUp({ name, username, password, passwordConfirm });
+        .signUp({ name, username, email, password, passwordConfirm });
     },
   },
 };
