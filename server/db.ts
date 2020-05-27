@@ -86,7 +86,6 @@ export const resetDb = async () => {
 
   const sampleUsers = [
     {
-
       id: '1',
       name: 'Uri Goldshtein',
       username: 'uri',
