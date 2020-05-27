@@ -52,9 +52,13 @@ export async function initDb(): Promise<void> {
   );`);
   await pool.query(sql`CREATE TABLE users(
     id SERIAL PRIMARY KEY,
-    username VARCHAR (50) UNIQUE NOT NULL,
     name VARCHAR (50) NOT NULL,
+    username VARCHAR (50) UNIQUE NOT NULL,
     password VARCHAR (255) NOT NULL,
+    email VARCHAR (255) NOT NULL,
+    bio VARCHAR (255) NOT NULL,
+    followers INTEGER NOT NULL,
+    following INTEGER NOT NULL,
     picture VARCHAR (255) NOT NULL
   );`);
   await pool.query(sql`CREATE TABLE chats_users(
@@ -141,9 +145,9 @@ export const resetDb = async () => {
 
   for (const sampleUser of sampleUsers) {
     await pool.query(sql`
-      INSERT INTO users(id, name, username, password, picture)
-      VALUES(${sampleUser.id}, ${sampleUser.name}, ${sampleUser.username}, ${sampleUser.password}, ${sampleUser.picture})
-    `);
+      INSERT INTO users(id, name, username, password, email, bio, followers, following, picture)
+      VALUES(${sampleUser.id}, ${sampleUser.name}, ${sampleUser.username}, ${sampleUser.password}, ${sampleUser.email},
+             ${sampleUser.bio}, ${sampleUser.followers}, ${sampleUser.following}, ${sampleUser.picture})`);
   }
 
   await pool.query(
