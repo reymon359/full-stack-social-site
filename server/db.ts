@@ -82,10 +82,15 @@ export const resetDb = async () => {
 
   const sampleUsers = [
     {
+
       id: '1',
       name: 'Uri Goldshtein',
       username: 'uri',
       password: '$2a$08$NO9tkFLCoSqX1c5wk3s7z.JfxaVMKA.m7zUDdDwEquo4rvzimQeJm', // 111
+      email: 'uri@uri.com',
+      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
+      followers: 35,
+      following: 33,
       picture: 'https://randomuser.me/api/portraits/thumb/lego/1.jpg',
     },
     {
@@ -93,6 +98,10 @@ export const resetDb = async () => {
       name: 'Ethan Gonzalez',
       username: 'ethan',
       password: '$2a$08$xE4FuCi/ifxjL2S8CzKAmuKLwv18ktksSN.F3XYEnpmcKtpbpeZgO', // 222
+      email: 'ethan@ethan.com',
+      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      followers: 2,
+      following: 21,
       picture: 'https://randomuser.me/api/portraits/thumb/men/1.jpg',
     },
     {
@@ -100,6 +109,10 @@ export const resetDb = async () => {
       name: 'Bryan Wallace',
       username: 'bryan',
       password: '$2a$08$UHgH7J8G6z1mGQn2qx2kdeWv0jvgHItyAsL9hpEUI3KJmhVW5Q1d.', // 333
+      email: 'bryan@bryan.com',
+      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      followers: 3,
+      following: 31,
       picture: 'https://randomuser.me/api/portraits/thumb/men/2.jpg',
     },
     {
@@ -107,6 +120,10 @@ export const resetDb = async () => {
       name: 'Avery Stewart',
       username: 'avery',
       password: '$2a$08$wR1k5Q3T9FC7fUgB7Gdb9Os/GV7dGBBf4PLlWT7HERMFhmFDt47xi', // 444
+      email: 'avery@avery.com',
+      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      followers: 4,
+      following: 41,
       picture: 'https://randomuser.me/api/portraits/thumb/women/1.jpg',
     },
     {
@@ -114,6 +131,10 @@ export const resetDb = async () => {
       name: 'Katie Peterson',
       username: 'katie',
       password: '$2a$08$6.mbXqsDX82ZZ7q5d8Osb..JrGSsNp4R3IKj7mxgF6YGT0OmMw242', // 555
+      email: 'katie@katie.com',
+      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      followers: 5,
+      following: 51,
       picture: 'https://randomuser.me/api/portraits/thumb/women/2.jpg',
     },
   ];
