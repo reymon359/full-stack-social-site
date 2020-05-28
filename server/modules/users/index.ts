@@ -10,7 +10,7 @@ const typeDefs = gql`
     id: ID!
     name: String!
     username: String! 
-    email: String!
+    email: EmailAddress!
     bio: String
     followers: Int!
     following: Int!
