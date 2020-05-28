@@ -59,7 +59,7 @@ export class Users {
     const defaultUserPicture = `https://robohash.org/${username}?set=set5`;
 
     const createdUserQuery = await this.db.query(sql`
-        INSERT INTO users(name, surname, email, password, bio, followers, following, picture)
+        INSERT INTO users(name, username, email, password, bio, followers, following, picture)
         VALUES(${name}, ${username}, ${email}, ${passwordHash}, ${defaultUserBio}, 
         0, 0, ${defaultUserPicture})
         RETURNING *

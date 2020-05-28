@@ -61,7 +61,6 @@ export class Auth {
     validateLength('req.username', username, 3, 18);
     validateLength('req.email', email, 3, 100);
     validatePassword('req.password', password);
-    console.log(email);
 
     if (password !== passwordConfirm) {
       throw Error("req.password and req.passwordConfirm don't match");
