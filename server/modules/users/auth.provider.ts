@@ -73,7 +73,7 @@ export class Auth {
       throw Error('username already exists');
     }
 
-    if (existingEmail {
+    if (existingEmail) {
       throw Error('email already exists');
     }
 
