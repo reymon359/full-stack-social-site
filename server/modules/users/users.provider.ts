@@ -3,13 +3,6 @@ import sql from 'sql-template-strings';
 import bcrypt from 'bcrypt';
 import { Database } from '../common/database.provider';
 
-const DEFAULT_USER_BIO =
-  `My lucky number is ${Math.floor(Math.random() * 100)} and I joined this site on ${new Date().toUTCString}.`;
-const DEFAUL_USER_FOLLOWERS = 0;
-const DEFAUL_USER_FOLLOWING = 0;
-const DEFAUL_USER_PICTURE = (username: string) => `https://robohash.org/${username}?set=set5`;
-
-
 @Injectable({
   scope: ProviderScope.Session,
 })
@@ -60,11 +53,15 @@ export class Users {
     password: string;
   }) {
 
-    // TODO: save new user
     const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(8));
+    const defaultUserBio =
+      `My lucky number is ${Math.floor(Math.random() * 100)} and I joined this site on ${new Date().toUTCString}.`;
+    const defaultUserPicture = `https://robohash.org/${username}?set=set5`;
+
     const createdUserQuery = await this.db.query(sql`
         INSERT INTO users(name, surname, email, password, bio, followers, following, picture)
-        VALUES(${passwordHash}, ${DEFAULT_PROFILE_PIC}, ${username}, ${name})
+        VALUES(${name}, ${username}, ${email}, ${passwordHash}, ${defaultUserBio}, 
+        0, 0, ${defaultUserPicture})
         RETURNING *
       `);
     const user = createdUserQuery.rows[0];
