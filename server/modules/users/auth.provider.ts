@@ -61,19 +61,21 @@ export class Auth {
     validateLength('req.username', username, 3, 18);
     validateLength('req.email', email, 3, 100);
     validatePassword('req.password', password);
+    console.log(email);
 
     if (password !== passwordConfirm) {
       throw Error("req.password and req.passwordConfirm don't match");
     }
 
-    const existingUser = await this.users.findByUsername(username);
-    const existingEmail = await this.users.findByEmail(email);
+    const existingUserWithUsername = await this.users.findByUsername(username);
 
-    if (existingUser) {
+    if (existingUserWithUsername) {
       throw Error('username already exists');
     }
 
-    if (existingEmail) {
+    const existingUserWithEmail = await this.users.findByEmail(email);
+
+    if (existingUserWithEmail) {
       throw Error('email already exists');
     }
 
