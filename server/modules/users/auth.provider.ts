@@ -66,14 +66,15 @@ export class Auth {
       throw Error("req.password and req.passwordConfirm don't match");
     }
 
-    const existingUser = await this.users.findByUsername(username);
-    const existingEmail = await this.users.findByEmail(email);
+    const existingUserWithUsername = await this.users.findByUsername(username);
 
-    if (existingUser) {
+    if (existingUserWithUsername) {
       throw Error('username already exists');
     }
 
-    if (existingEmail) {
+    const existingUserWithEmail = await this.users.findByEmail(email);
+
+    if (existingUserWithEmail) {
       throw Error('email already exists');
     }
 
