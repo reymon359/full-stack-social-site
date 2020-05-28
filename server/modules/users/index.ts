@@ -10,7 +10,7 @@ const typeDefs = gql`
     id: ID!
     name: String!
     username: String! 
-    email: EmailAddress!
+    email: String!
     bio: String
     followers: Int!
     following: Int!
@@ -23,7 +23,7 @@ const typeDefs = gql`
   }
 
   extend type Mutation {
-    signIn(username: String!, password: String!): User
+    signIn(email: String!, password: String!): User
     signUp(
       name: String!
       username: String!
@@ -48,8 +48,8 @@ const resolvers: Resolvers = {
     },
   },
   Mutation: {
-    async signIn(root, { username, password }, { injector }) {
-      return injector.get(Auth).signIn({ username, password });
+    async signIn(root, { email, password }, { injector }) {
+      return injector.get(Auth).signIn({ email, password });
     },
 
     async signUp(
