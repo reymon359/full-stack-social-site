@@ -3,8 +3,12 @@ import sql from 'sql-template-strings';
 import bcrypt from 'bcrypt';
 import { Database } from '../common/database.provider';
 
-const DEFAULT_PROFILE_PIC =
-  'https://raw.githubusercontent.com/Urigo/WhatsApp-Clone-Client-React/legacy/public/assets/default-profile-pic.jpg';
+const DEFAULT_USER_BIO =
+  `My lucky number is ${Math.floor(Math.random() * 100)} and I joined this site on ${new Date().toUTCString}.`;
+const DEFAUL_USER_FOLLOWERS = 0;
+const DEFAUL_USER_FOLLOWING = 0;
+const DEFAUL_USER_PICTURE = (username: string) => `https://robohash.org/${username}?set=set5`;
+
 
 @Injectable({
   scope: ProviderScope.Session,
@@ -55,10 +59,11 @@ export class Users {
     email: string;
     password: string;
   }) {
+
     // TODO: save new user
     const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(8));
     const createdUserQuery = await this.db.query(sql`
-        INSERT INTO users(password, picture, username, name)
+        INSERT INTO users(name, surname, email, password, bio, followers, following, picture)
         VALUES(${passwordHash}, ${DEFAULT_PROFILE_PIC}, ${username}, ${name})
         RETURNING *
       `);
