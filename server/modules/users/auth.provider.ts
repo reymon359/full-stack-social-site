@@ -24,11 +24,11 @@ export class Auth {
     return this.module.session.res;
   }
 
-  async signIn({ username, password }: { username: string; password: string }) {
-    const user = await this.users.findByUsername(username);
+  async signIn({ email, password }: { email: string; password: string }) {
+    const user = await this.users.findByEmail(email);
 
     if (!user) {
-      throw new Error('user not found');
+      throw new Error('there is no user with that email');
     }
 
     const passwordsMatch = bcrypt.compareSync(password, user.password);
@@ -37,7 +37,7 @@ export class Auth {
       throw new Error('password is incorrect');
     }
 
-    const authToken = jwt.sign(username, secret);
+    const authToken = jwt.sign(user.username, secret);
 
     this.res.cookie('authToken', authToken, { maxAge: expiration });
 
@@ -59,7 +59,7 @@ export class Auth {
   }) {
     validateLength('req.name', name, 3, 50);
     validateLength('req.username', username, 3, 18);
-    validateLength('req.email', username, 3, 100);
+    validateLength('req.email', email, 3, 100);
     validatePassword('req.password', password);
 
     if (password !== passwordConfirm) {

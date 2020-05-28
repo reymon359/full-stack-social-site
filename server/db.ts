@@ -13,6 +13,10 @@ export type User = {
   username: string;
   password: string;
   picture: string;
+  email: string;
+  bio: string;
+  followers: number;
+  following: number;
 };
 
 export type Message = {
