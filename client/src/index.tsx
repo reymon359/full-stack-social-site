@@ -5,12 +5,12 @@ import App from './App';
 import client from './client';
 import * as serviceWorker from './serviceWorker';
 import { ThemeProvider } from 'styled-components';
-import theme from './styles/theme';
-import './styles/index.css';
+import { theme, GlobalStyle } from './styles';
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
+      <GlobalStyle />
       <ApolloProvider client={client}>
         <App />
       </ApolloProvider>
