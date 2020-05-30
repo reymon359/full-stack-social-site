@@ -4,7 +4,7 @@ export default gql`
   fragment User on User {
     id
     name
-    isername
+    username
     email
     followers
     following
