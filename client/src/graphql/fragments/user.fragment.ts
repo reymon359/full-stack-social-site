@@ -4,6 +4,10 @@ export default gql`
   fragment User on User {
     id
     name
+    isername
+    email
+    followers
+    following
     picture
   }
 `;
