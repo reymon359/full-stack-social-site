@@ -1,26 +1,20 @@
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ApolloProvider } from '@apollo/react-hooks';
-import './index.css';
 import App from './App';
 import client from './client';
 import * as serviceWorker from './serviceWorker';
-
-const theme = createMuiTheme({
-  palette: {
-    primary: { main: '#2c6157' },
-    secondary: { main: '#6fd056' },
-  },
-});
+import { ThemeProvider } from 'styled-components';
+import theme from './styles/theme';
+import './styles/index.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <MuiThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
       <ApolloProvider client={client}>
         <App />
       </ApolloProvider>
-    </MuiThemeProvider>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
