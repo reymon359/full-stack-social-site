@@ -13,14 +13,14 @@ import {
 import { RouteComponentProps } from 'react-router-dom';
 
 const SignInForm: React.FC<RouteComponentProps<any>> = ({ history }) => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [signIn] = useSignIn();
 
-  const onUsernameChange = useCallback(({ target }) => {
+  const onEmailChange = useCallback(({ target }) => {
     setError('');
-    setUsername(target.value);
+    setEmail(target.value);
   }, []);
 
   const onPasswordChange = useCallback(({ target }) => {
@@ -29,18 +29,18 @@ const SignInForm: React.FC<RouteComponentProps<any>> = ({ history }) => {
   }, []);
 
   const maySignIn = useCallback(() => {
-    return !!(username && password);
-  }, [username, password]);
+    return !!(email && password);
+  }, [email, password]);
 
   const handleSignIn = useCallback(() => {
-    signIn({ variables: { username, password } })
+    signIn({ variables: { email, password } })
       .then(() => {
         history.replace('/chats');
       })
       .catch((error) => {
         setError(error.message || error);
       });
-  }, [username, password, history, signIn]);
+  }, [email, password, history, signIn]);
 
   return (
     <SignForm>
@@ -48,12 +48,12 @@ const SignInForm: React.FC<RouteComponentProps<any>> = ({ history }) => {
         <Legend>Sign in</Legend>
         <Section style={{ width: '100%' }}>
           <TextField
-            data-testid="username-input"
-            label="Username"
-            value={username}
-            onChange={onUsernameChange}
+            data-testid="email-input"
+            label="Email"
+            value={email}
+            onChange={onEmailChange}
             margin="normal"
-            placeholder="Enter your username"
+            placeholder="Enter your email"
           />
           <TextField
             data-testid="password-input"
