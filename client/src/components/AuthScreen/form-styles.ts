@@ -11,7 +11,7 @@ export const LoginFormContainer = styled.div`
 
 export const StyledButton = styled.button`
   background-color: ${(props) => props.theme.primaryText};
-  color: #fff;
+  color:${(props) => props.theme.colors.white};
   position: relative;
   width: 50%;
   height: auto;
@@ -21,6 +21,13 @@ export const StyledButton = styled.button`
   border: none;
   cursor: pointer;
 
+  &[disabled] {
+    opacity: .5;
+  }
+
+  &:not([disabled]) {
+    opacity: 1;
+  }
   &:focus {
     opacity: 0.9;
     outline: none;

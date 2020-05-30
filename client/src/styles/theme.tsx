@@ -11,4 +11,8 @@ export const theme = {
   tertiaryBackground: '#F2F2F2',
   boxShadow1: '0 1px 2px 0 rgba(0, 0, 0, 0.1)',
   boxShadow2: '0 1px 2px 0 rgba(0, 0, 0, 0.2)',
+  colors: {
+    white: '#ffffff',
+    // grey: ''
+  },
 };

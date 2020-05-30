@@ -1,48 +1,100 @@
 import React from 'react';
 import { useMemo } from 'react';
 import { Route } from 'react-router-dom';
-import styled from 'styled-components';
-import AnimatedSwitch from '../AnimatedSwitch';
 import SignInForm from './SignInForm';
 import SignUpForm from './SignUpForm';
 import { RouteComponentProps } from 'react-router-dom';
+import styled, { keyframes } from 'styled-components';
 
-const Container = styled.div`
-  background: radial-gradient(rgb(34, 65, 67), rgb(17, 48, 50)),
-    url(/assets/chat-background.jpg) no-repeat;
-  background-size: cover;
-  background-blend-mode: multiply;
-  color: white;
-`;
-
-const Intro = styled.div`
-  height: 265px;
-`;
-
-const Icon = styled.img`
-  width: 125px;
-  height: auto;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 70px;
-  display: block;
-`;
-
-const Title = styled.h2`
-  width: 100%;
-  text-align: center;
-  color: white;
-`;
-
-// eslint-disable-next-line
-const Alternative = styled.div`
-  position: fixed;
-  bottom: 10px;
-  left: 10px;
-
-  label {
-    color: var(--secondary-bg);
+const inverseRotate = keyframes`
+  from {
+    transform: rotate(0);
   }
+  to {
+    transform: rotate(-360deg) ;
+  }
+`;
+
+const rotate = keyframes`
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg) ;
+  }
+`;
+
+const dash = keyframes`
+ to {
+   stroke-dashoffset: 1000;
+ }
+`;
+
+export const LoginPageContainer = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-image: url('https://source.unsplash.com/1600x900/?happy,people');
+`;
+
+export const LoginPageBackground = styled.div`
+  @media only screen and (min-width: 1100px) {
+    display: flex;
+    width: 85%;
+    height: 100%;
+  }
+`;
+
+export const FormContainer = styled.div`
+  background-color: rgba(25, 119, 243, 0.8);
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const ActionsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Alternative = styled.div`
+  margin-top: 20px;
+  color: ${(props) => props.theme.secondaryText};
+  font-weight: 400;
+  font-size: 1.5rem;
+  align-items: center;
+  display: flex;
+
+  @media only screen and (max-width: 480px) {
+    justify-content: center;
+  }
+`;
+
+// export const RegisterContainer = styled.div`
+//   margin-top: 20px;
+//   color: ${(props) => props.theme.secondaryText};
+//   font-weight: 400;
+//   font-size: 1.5rem;
+//   align-items: center;
+//   display: flex;
+
+//   @media only screen and (max-width: 480px) {
+//     justify-content: center;
+//   }
+// `;
+export const AlternativeLink = styled.h1`
+  font-weight: 400;
+  font-size: 1.5rem;
+  margin-left: 4px;
+  color: ${(props) => props.theme.primaryText};
 `;
 
 const AuthScreen: React.FC<RouteComponentProps<any>> = ({
@@ -57,8 +109,8 @@ const AuthScreen: React.FC<RouteComponentProps<any>> = ({
 
       return (
         <Alternative>
-          Don't have an account yet?{' '}
-          <label onClick={handleSignUp}>Sign up!</label>
+          Not a member?
+          <AlternativeLink onClick={handleSignUp}>Sign up now</AlternativeLink>
         </Alternative>
       );
     } else {
@@ -68,24 +120,26 @@ const AuthScreen: React.FC<RouteComponentProps<any>> = ({
 
       return (
         <Alternative>
-          Already have an accout? <label onClick={handleSignIn}>Sign in!</label>
+          Already have an accout?
+          <AlternativeLink onClick={handleSignIn}>Sign in!</AlternativeLink>
         </Alternative>
       );
     }
   }, [location.pathname, history]);
 
   return (
-    <Container className="AuthScreen Screen">
-      <Intro className="AuthScreen-intro">
-        <Icon src="assets/whatsapp-icon.png" className="AuthScreen-icon" />
-        <Title className="AuthScreen-title">WhatsApp</Title>
-      </Intro>
-      <AnimatedSwitch>
-        <Route exact path="/sign-in" component={SignInForm} />
-        <Route exact path="/sign-up" component={SignUpForm} />
-      </AnimatedSwitch>
-      {alternative}
-    </Container>
+    <>
+      <LoginPageContainer>
+        <LoginPageBackground>{/* <SVGImgBackground /> */}</LoginPageBackground>
+        <ActionsContainer>
+          <FormContainer>
+            <Route exact path="/sign-in" component={SignInForm} />
+            <Route exact path="/sign-up" component={SignUpForm} />
+            {alternative}
+          </FormContainer>
+        </ActionsContainer>
+      </LoginPageContainer>
+    </>
   );
 };
 
