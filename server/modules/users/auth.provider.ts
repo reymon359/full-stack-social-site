@@ -63,7 +63,7 @@ export class Auth {
     validatePassword('req.password', password);
 
     if (password !== passwordConfirm) {
-      throw Error("req.password and req.passwordConfirm don't match");
+      throw Error("Password and Confirm Password don't match");
     }
 
     const existingUserWithUsername = await this.users.findByUsername(username);

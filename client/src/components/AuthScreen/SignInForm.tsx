@@ -17,8 +17,8 @@ import LoadingSpinner from '../Shared/LoadingSpinner';
 
 const SignInForm: React.FC<RouteComponentProps<any>> = ({ history }) => {
   const [email, setEmail] = useState('');
-  const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [signIn] = useSignIn();
 
