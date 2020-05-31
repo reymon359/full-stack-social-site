@@ -12,11 +12,11 @@ export const Authcontainer = styled.div`
   height: 100%;
   min-height: 100%;
   background-size: cover;
-  background: url('https://source.unsplash.com/2100x1400/?happy,people')
+  background: url('https://source.unsplash.com/1600x900/?happy,people')
     no-repeat center center;
 `;
 
-export const AuthBackground = styled.div`
+export const AuthSide = styled.div`
   display: flex;
   width: 85%;
   height: 100%;
@@ -50,7 +50,7 @@ const Alternative = styled.div`
   margin-top: 20px;
   color: ${(props) => props.theme.secondaryText};
   font-weight: 400;
-  font-size: 1.5rem;
+  font-size: ${(props) => props.theme.fontSizes.medium};
   align-items: center;
   display: flex;
 
@@ -61,7 +61,7 @@ const Alternative = styled.div`
 
 export const AlternativeLink = styled.h1`
   font-weight: 400;
-  font-size: 1.5rem;
+  font-size: ${(props) => props.theme.fontSizes.medium};
   margin-left: 4px;
   cursor: pointer;
   color: ${(props) => props.theme.colors.lightBlue};
@@ -103,8 +103,9 @@ const AuthScreen: React.FC<RouteComponentProps<any>> = ({
 
   return (
     <>
+
       <Authcontainer>
-        <AuthBackground />
+        <AuthSide />
         <ActionsContainer>
           <FormContainer>
             <Route exact path="/sign-in" component={SignInForm} />

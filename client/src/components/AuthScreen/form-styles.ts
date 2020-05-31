@@ -1,11 +1,48 @@
 import styled from "styled-components";
 
-export const FormContainer = styled.div`
+export const FormContainer = styled.form`
   width: 400px;
 
   ${(props) => props.theme.media.md`
     width: 90%;
   `}
+`;
+
+
+export const FormHeading = styled.p`
+  font-size: ${(props) => props.theme.fontSizes.large};
+  font-weight: 600;
+  margin-bottom: 30px;
+  color: ${(props) => props.theme.colors.secondaryText};
+`;
+
+export const Label = styled.p`
+  display: inline-block;
+  margin: 0;
+  margin-bottom: 7px;
+  font-size: ${(props) => props.theme.fontSizes.medium};;
+  font-weight: 600;
+  line-height: 1;
+  color: ${(props) => props.theme.colors.secondaryText};
+`;
+
+export const Input = styled.input`
+  background-color: ${(props) => props.theme.inputColor};
+  border: none;
+  border-radius: 5px;
+  height: 40px;
+  padding: 0 8px;
+  box-sizing: border-box;
+  &:focus {
+    outline: none;
+    border: 2px solid ${(props) => props.theme.colors.primary};
+  }
+`;
+
+export const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
 `;
 
 export const StyledButton = styled.button`
@@ -16,7 +53,7 @@ export const StyledButton = styled.button`
   height: auto;
   padding: 10px 50px;
   border-radius: 5px;
-  font-size: 1.2rem;
+  font-size: ${(props) => props.theme.fontSizes.medium};;
   border: none;
   cursor: pointer;
   
@@ -48,41 +85,6 @@ export const StyledButton = styled.button`
   `}
 `;
 
-export const FormHeading = styled.p`
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: 30px;
-  color: ${(props) => props.theme.colors.secondaryText};
-`;
-
-export const Label = styled.p`
-  display: inline-block;
-  margin: 0;
-  margin-bottom: 7px;
-  font-size: 1.5rem;
-  font-weight: 600;
-  line-height: 1;
-  color: ${(props) => props.theme.colors.secondaryText};
-`;
-
-export const Input = styled.input`
-  background-color: ${(props) => props.theme.inputColor};
-  border: none;
-  border-radius: 5px;
-  height: 40px;
-  padding: 0 8px;
-  box-sizing: border-box;
-  &:focus {
-    outline: none;
-    border: 2px solid ${(props) => props.theme.colors.primary};
-  }
-`;
-
-export const InputContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-`;
 
 export const ErrorMessageContainer = styled.div`
   display: flex;
@@ -93,7 +95,7 @@ export const ErrorMessageContainer = styled.div`
 
 export const ErrorMessageHeading = styled.h1`
   color: ${(props) => props.theme.colors.lightDanger};
-  font-size: 1.2rem;
+  font-size: ${(props) => props.theme.fontSizes.medium};;
   font-weight: 800;
   margin-left: 7px;
 `;

@@ -2,14 +2,16 @@ import React from 'react';
 import { useCallback, useState } from 'react';
 import { useSignUp } from '../../services/auth.service';
 import {
-  SignForm,
-  ActualForm,
-  Legend,
-  Section,
-  TextField,
-  Button,
-  ErrorMessage,
-} from './form-components';
+  FormContainer,
+  Label,
+  Input,
+  InputContainer,
+  StyledButton,
+  FormHeading,
+  ErrorMessageContainer,
+  ErrorMessageHeading,
+} from './form-styles';
+import LoadingSpinner from '../Shared/LoadingSpinner';
 import { RouteComponentProps } from 'react-router-dom';
 
 const SignUpForm: React.FC<RouteComponentProps<any>> = ({ history }) => {
@@ -18,6 +20,7 @@ const SignUpForm: React.FC<RouteComponentProps<any>> = ({ history }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [signUp] = useSignUp();
 
@@ -60,84 +63,90 @@ const SignUpForm: React.FC<RouteComponentProps<any>> = ({ history }) => {
     signUp({ variables: { name, username, email, password, passwordConfirm } })
       .then(() => {
         history.replace('/sign-in');
+        setLoading(false);
       })
       .catch((error) => {
-        setError(error.message || error);
+        console.log(error);
+
+        setError(
+          error.graphQLErrors
+            ? error.graphQLErrors[0].message
+            : error.message || error
+        );
+        setLoading(false);
       });
   }, [name, username, email, password, passwordConfirm, history, signUp]);
 
   return (
-    <SignForm>
-      <ActualForm>
-        <Legend>Sign up</Legend>
-        <Section
-          style={{
-            float: 'left',
-            width: 'calc(50% - 10px)',
-            paddingRight: '10px',
-          }}>
-          <TextField
-            data-testid="name-input"
-            label="Name"
-            value={name}
-            onChange={updateName}
-            autoComplete="off"
-            margin="normal"
-          />
-          <TextField
-            data-testid="username-input"
-            label="Username"
-            value={username}
-            onChange={updateUsername}
-            autoComplete="off"
-            margin="normal"
-          />
-          <TextField
-            data-testid="email-input"
-            label="Email"
-            value={email}
-            onChange={updateEmail}
-            autoComplete="off"
-            margin="normal"
-          />
-        </Section>
-        <Section
-          style={{
-            float: 'right',
-            width: 'calc(50% - 10px)',
-            paddingLeft: '10px',
-          }}>
-          <TextField
-            data-testid="password-input"
-            label="Password"
-            type="password"
-            value={password}
-            onChange={updatePassword}
-            autoComplete="off"
-            margin="normal"
-          />
-          <TextField
-            data-testid="password-confirm-input"
-            label="Confirm password"
-            type="password"
-            value={passwordConfirm}
-            onChange={updatePasswordConfirm}
-            autoComplete="off"
-            margin="normal"
-          />
-        </Section>
-        <Button
-          data-testid="sign-up-button"
-          type="button"
-          color="secondary"
-          variant="contained"
-          disabled={!maySignUp()}
-          onClick={handleSignUp}>
-          Sign up
-        </Button>
-        <ErrorMessage data-testid="error-message">{error}</ErrorMessage>
-      </ActualForm>
-    </SignForm>
+    <FormContainer>
+      <FormHeading>Sign up to SocialQL</FormHeading>
+      <InputContainer>
+        <Label>Name</Label>
+        <Input
+          data-testid="name-input"
+          value={name}
+          type="text"
+          onChange={updateName}
+          placeholder="Enter your name"
+        />
+      </InputContainer>
+
+      <InputContainer>
+        <Label>Username</Label>
+        <Input
+          data-testid="username-input"
+          value={username}
+          type="text"
+          onChange={updateUsername}
+          placeholder="Enter your username"
+        />
+      </InputContainer>
+
+      <InputContainer>
+        <Label>Email</Label>
+        <Input
+          data-testid="email-input"
+          value={email}
+          type="text"
+          onChange={updateEmail}
+          placeholder="Enter your email"
+        />
+      </InputContainer>
+
+      <InputContainer>
+        <Label>Password</Label>
+        <Input
+          data-testid="password-input"
+          type="password"
+          value={password}
+          onChange={updatePassword}
+          placeholder="Enter your password"
+        />
+      </InputContainer>
+
+      <InputContainer>
+        <Label>Confirm password</Label>
+        <Input
+          data-testid="password-confirm-input"
+          type="password"
+          value={passwordConfirm}
+          onChange={updatePasswordConfirm}
+          placeholder="Confirm your password"
+        />
+      </InputContainer>
+
+      <StyledButton
+        data-testid="sign-up-button"
+        type="button"
+        color="secondary"
+        disabled={!maySignUp()}
+        onClick={handleSignUp}>
+        Sign up {loading && <LoadingSpinner />}
+      </StyledButton>
+      <ErrorMessageContainer data-testid="error-message">
+        <ErrorMessageHeading>{error}</ErrorMessageHeading>
+      </ErrorMessageContainer>
+    </FormContainer>
   );
 };
 
