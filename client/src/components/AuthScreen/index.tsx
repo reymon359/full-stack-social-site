@@ -12,11 +12,11 @@ export const Authcontainer = styled.div`
   height: 100%;
   min-height: 100%;
   background-size: cover;
-  background: url('https://source.unsplash.com/2100x1400/?happy,people')
+  background: url('https://source.unsplash.com/1600x900/?happy,people')
     no-repeat center center;
 `;
 
-export const AuthBackground = styled.div`
+export const AuthSide = styled.div`
   display: flex;
   width: 85%;
   height: 100%;
@@ -103,8 +103,9 @@ const AuthScreen: React.FC<RouteComponentProps<any>> = ({
 
   return (
     <>
+
       <Authcontainer>
-        <AuthBackground />
+        <AuthSide />
         <ActionsContainer>
           <FormContainer>
             <Route exact path="/sign-in" component={SignInForm} />
