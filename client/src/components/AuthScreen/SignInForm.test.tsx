@@ -152,6 +152,8 @@ describe('SignInForm', () => {
       fireEvent.click(signInButton);
     });
 
-    await waitFor(() => expect(history.location.pathname).toEqual('/chats'));
+    await waitFor(() => expect(history.location.pathname).toEqual('/chats'), {
+      timeout: 3000,
+    });
   });
 });

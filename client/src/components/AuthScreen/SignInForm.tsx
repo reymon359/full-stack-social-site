@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useContext } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useSignIn } from '../../services/auth.service';
 import {
   FormContainer,
@@ -48,10 +48,8 @@ const SignInForm: React.FC<RouteComponentProps<any>> = ({ history }) => {
       .catch((error) => {
         setMessage(
           error.graphQLErrors
-            ? error.graphQLErrors.length > 0
-              ? error.graphQLErrors[0].message
-              : error.message || error
-            : '❌ Unknown Error'
+            ? error.graphQLErrors[0].message
+            : error.message || error
         );
         setLoading(false);
       });
@@ -88,8 +86,8 @@ const SignInForm: React.FC<RouteComponentProps<any>> = ({ history }) => {
         Sign in
         {loading && <LoadingSpinner />}
       </StyledButton>
-      <MessageContainer data-testid="message">
-        <MessageHeading>{message}</MessageHeading>
+      <MessageContainer>
+        <MessageHeading data-testid="message">{message}</MessageHeading>
       </MessageContainer>
     </FormContainer>
   );
