@@ -4,7 +4,7 @@ import { Response } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { secret, expiration } from '../../env';
-import { validateLength, validatePassword } from '../../validators';
+import { validateLength, validateEmail, validatePassword } from '../../validators';
 import { Users } from './users.provider';
 import { User } from '../../db';
 
@@ -59,7 +59,7 @@ export class Auth {
   }) {
     validateLength('Name', name, 3, 50);
     validateLength('Username', username, 3, 18);
-    validateLength('Email', email, 3, 100);
+    validateEmail('Email', email);
     validatePassword('Password', password);
 
     if (password !== passwordConfirm) {

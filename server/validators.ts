@@ -18,6 +18,18 @@ export const validatePassword = (ctx: string, str: string) => {
   }
 };
 
+export const validateEmail = (ctx: string, str: string) => {
+  if (typeof str !== 'string') {
+    throw TypeError(`❌ ${ctx} must be a string`);
+  }
+
+  validateLength(ctx, str, 3, 70);
+
+  if (!/\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi.test(str)) {
+    throw TypeError(`❌ ${ctx} must be a valid email`);
+  }
+};
+
 export const validateLength = (ctx: string, str: string, ...args: number[]) => {
   let min, max;
 
