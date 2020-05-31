@@ -125,18 +125,16 @@ describe('SignInForm', () => {
 
     act(() => {
       getByTestId = render(
-        <ApolloProvider client={client}>
-          <SignInForm history={history} />
-        </ApolloProvider>
+        <ThemeProvider theme={theme}>
+          <ApolloProvider client={client}>
+            <SignInForm history={history} />
+          </ApolloProvider>
+        </ThemeProvider>
       ).getByTestId;
     });
 
-    const emailInput = await waitFor(() =>
-      getByTestId('email-input').querySelector('input')
-    );
-    const passwordInput = await waitFor(() =>
-      getByTestId('password-input').querySelector('input')
-    );
+    const emailInput = await waitFor(() => getByTestId('email-input'));
+    const passwordInput = await waitFor(() => getByTestId('password-input'));
     const signInButton = await waitFor(
       () => getByTestId('sign-in-button') as HTMLButtonElement
     );
