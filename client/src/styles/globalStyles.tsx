@@ -96,7 +96,7 @@ a {
 }
 
 ::selection {
-  color: ${theme.colors.yellow500};
+  color: ${theme.colors.lightBlue};
   background: transparent;
 }
 `;
