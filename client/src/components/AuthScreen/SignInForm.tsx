@@ -2,25 +2,29 @@ import React from 'react';
 import { useCallback, useState } from 'react';
 import { useSignIn } from '../../services/auth.service';
 import {
-  SignForm,
-  ActualForm,
-  Legend,
-  Section,
-  TextField,
-  Button,
-  ErrorMessage,
-} from './form-components';
+  FormContainer,
+  Label,
+  Input,
+  InputContainer,
+  StyledButton,
+  FormHeading,
+  ErrorMessageContainer,
+  ErrorMessageHeading,
+} from './form-styles';
+
 import { RouteComponentProps } from 'react-router-dom';
+import LoadingSpinner from '../Shared/LoadingSpinner';
 
 const SignInForm: React.FC<RouteComponentProps<any>> = ({ history }) => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [signIn] = useSignIn();
 
-  const onUsernameChange = useCallback(({ target }) => {
+  const onEmailChange = useCallback(({ target }) => {
     setError('');
-    setUsername(target.value);
+    setEmail(target.value);
   }, []);
 
   const onPasswordChange = useCallback(({ target }) => {
@@ -29,54 +33,67 @@ const SignInForm: React.FC<RouteComponentProps<any>> = ({ history }) => {
   }, []);
 
   const maySignIn = useCallback(() => {
-    return !!(username && password);
-  }, [username, password]);
+    return !!(email && password);
+  }, [email, password]);
 
   const handleSignIn = useCallback(() => {
-    signIn({ variables: { username, password } })
+    setLoading(true);
+    signIn({ variables: { email, password } })
       .then(() => {
         history.replace('/chats');
+        setLoading(false);
       })
       .catch((error) => {
-        setError(error.message || error);
+        setError(
+          error.graphQLErrors
+            ? error.graphQLErrors[0].message
+            : error.message || error
+        );
+        setLoading(false);
       });
-  }, [username, password, history, signIn]);
+  }, [email, password, history, signIn]);
 
   return (
-    <SignForm>
-      <ActualForm>
-        <Legend>Sign in</Legend>
-        <Section style={{ width: '100%' }}>
-          <TextField
-            data-testid="username-input"
-            label="Username"
-            value={username}
-            onChange={onUsernameChange}
-            margin="normal"
-            placeholder="Enter your username"
-          />
-          <TextField
-            data-testid="password-input"
-            label="Password"
-            type="password"
-            value={password}
-            onChange={onPasswordChange}
-            margin="normal"
-            placeholder="Enter your password"
-          />
-        </Section>
-        <Button
+    <FormContainer>
+      <FormHeading>Sign in to SocialQL</FormHeading>
+      <form>
+        <div>
+          <InputContainer>
+            <Label>Email</Label>
+            <Input
+              data-testid="email-input"
+              value={email}
+              type="text"
+              onChange={onEmailChange}
+              placeholder="Enter your email"
+            />
+          </InputContainer>
+        </div>
+        <div>
+          <InputContainer>
+            <Label>Password</Label>
+            <Input
+              data-testid="password-input"
+              type="password"
+              value={password}
+              onChange={onPasswordChange}
+              placeholder="Enter your password"
+            />
+          </InputContainer>
+        </div>
+        <StyledButton
           data-testid="sign-in-button"
           type="button"
-          color="secondary"
-          variant="contained"
           disabled={!maySignIn()}
           onClick={handleSignIn}>
           Sign in
-        </Button>
-        <ErrorMessage data-testid="error-message">{error}</ErrorMessage>
-      </ActualForm>
-    </SignForm>
+          {loading && <LoadingSpinner />}
+        </StyledButton>
+        <ErrorMessageContainer data-testid="error-message">
+          <ErrorMessageHeading>{error}</ErrorMessageHeading>
+        </ErrorMessageContainer>
+      </form>
+    </FormContainer>
   );
 };
 

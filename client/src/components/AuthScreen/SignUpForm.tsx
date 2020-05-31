@@ -15,6 +15,7 @@ import { RouteComponentProps } from 'react-router-dom';
 const SignUpForm: React.FC<RouteComponentProps<any>> = ({ history }) => {
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [error, setError] = useState('');
@@ -30,6 +31,11 @@ const SignUpForm: React.FC<RouteComponentProps<any>> = ({ history }) => {
     setUsername(target.value);
   }, []);
 
+  const updateEmail = useCallback(({ target }) => {
+    setError('');
+    setEmail(target.value);
+  }, []);
+
   const updatePassword = useCallback(({ target }) => {
     setError('');
     setPassword(target.value);
@@ -41,18 +47,24 @@ const SignUpForm: React.FC<RouteComponentProps<any>> = ({ history }) => {
   }, []);
 
   const maySignUp = useCallback(() => {
-    return !!(name && username && password && password === passwordConfirm);
-  }, [name, username, password, passwordConfirm]);
+    return !!(
+      name &&
+      username &&
+      email &&
+      password &&
+      password === passwordConfirm
+    );
+  }, [name, username, email, password, passwordConfirm]);
 
   const handleSignUp = useCallback(() => {
-    signUp({ variables: { username, password, passwordConfirm, name } })
+    signUp({ variables: { name, username, email, password, passwordConfirm } })
       .then(() => {
         history.replace('/sign-in');
       })
       .catch((error) => {
         setError(error.message || error);
       });
-  }, [name, username, password, passwordConfirm, history, signUp]);
+  }, [name, username, email, password, passwordConfirm, history, signUp]);
 
   return (
     <SignForm>
@@ -77,6 +89,14 @@ const SignUpForm: React.FC<RouteComponentProps<any>> = ({ history }) => {
             label="Username"
             value={username}
             onChange={updateUsername}
+            autoComplete="off"
+            margin="normal"
+          />
+          <TextField
+            data-testid="email-input"
+            label="Email"
+            value={email}
+            onChange={updateEmail}
             autoComplete="off"
             margin="normal"
           />

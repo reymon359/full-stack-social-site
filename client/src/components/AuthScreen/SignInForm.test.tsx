@@ -11,6 +11,8 @@ import {
 import SignInForm from './SignInForm';
 import { SignInDocument } from '../../graphql/types';
 import { mockApolloClient } from '../../test-helpers';
+import { ThemeProvider } from 'styled-components';
+import { theme } from '../../styles';
 
 describe('SignInForm', () => {
   afterEach(cleanup);
@@ -23,26 +25,24 @@ describe('SignInForm', () => {
 
     act(() => {
       getByTestId = render(
-        <ApolloProvider client={client}>
-          <SignInForm history={history} />
-        </ApolloProvider>
+        <ThemeProvider theme={theme}>
+          <ApolloProvider client={client}>
+            <SignInForm history={history} />
+          </ApolloProvider>
+        </ThemeProvider>
       ).getByTestId;
     });
 
     const signInButton = await waitFor(
       () => getByTestId('sign-in-button') as HTMLButtonElement
     );
-    const usernameInput = await waitFor(() =>
-      getByTestId('username-input').querySelector('input')
-    );
-    const passwordInput = await waitFor(() =>
-      getByTestId('password-input').querySelector('input')
-    );
+    const emailInput = await waitFor(() => getByTestId('email-input'));
+    const passwordInput = await waitFor(() => getByTestId('password-input'));
 
     expect(signInButton.disabled).toEqual(true);
 
     act(() => {
-      fireEvent.change(usernameInput, { target: { value: 'username' } });
+      fireEvent.change(emailInput, { target: { value: 'email' } });
       fireEvent.change(passwordInput, { target: { value: 'password' } });
     });
 
@@ -57,7 +57,7 @@ describe('SignInForm', () => {
         request: {
           query: SignInDocument,
           variables: {
-            username: 'username',
+            email: 'email',
             password: 'password',
           },
         },
@@ -71,28 +71,26 @@ describe('SignInForm', () => {
 
     act(() => {
       getByTestId = render(
-        <ApolloProvider client={client}>
-          <SignInForm history={history} />
-        </ApolloProvider>
+        <ThemeProvider theme={theme}>
+          <ApolloProvider client={client}>
+            <SignInForm history={history} />
+          </ApolloProvider>
+        </ThemeProvider>
       ).getByTestId;
     });
 
     const signInButton = await waitFor(
       () => getByTestId('sign-in-button') as HTMLButtonElement
     );
-    const usernameInput = await waitFor(() =>
-      getByTestId('username-input').querySelector('input')
-    );
-    const passwordInput = await waitFor(() =>
-      getByTestId('password-input').querySelector('input')
-    );
+    const emailInput = await waitFor(() => getByTestId('email-input'));
+    const passwordInput = await waitFor(() => getByTestId('password-input'));
 
     act(() => {
-      fireEvent.change(usernameInput, { target: { value: 'username' } });
+      fireEvent.change(emailInput, { target: { value: 'email' } });
       fireEvent.change(passwordInput, { target: { value: 'password' } });
     });
 
-    await waitFor(() => expect(usernameInput.value).toEqual('username'));
+    await waitFor(() => expect(emailInput.value).toEqual('email'));
 
     await waitFor(() => expect(passwordInput.value).toEqual('password'));
 
@@ -115,7 +113,7 @@ describe('SignInForm', () => {
         request: {
           query: SignInDocument,
           variables: {
-            username: 'username',
+            email: 'email',
             password: 'password',
           },
         },
@@ -127,28 +125,26 @@ describe('SignInForm', () => {
 
     act(() => {
       getByTestId = render(
-        <ApolloProvider client={client}>
-          <SignInForm history={history} />
-        </ApolloProvider>
+        <ThemeProvider theme={theme}>
+          <ApolloProvider client={client}>
+            <SignInForm history={history} />
+          </ApolloProvider>
+        </ThemeProvider>
       ).getByTestId;
     });
 
-    const usernameInput = await waitFor(() =>
-      getByTestId('username-input').querySelector('input')
-    );
-    const passwordInput = await waitFor(() =>
-      getByTestId('password-input').querySelector('input')
-    );
+    const emailInput = await waitFor(() => getByTestId('email-input'));
+    const passwordInput = await waitFor(() => getByTestId('password-input'));
     const signInButton = await waitFor(
       () => getByTestId('sign-in-button') as HTMLButtonElement
     );
 
     act(() => {
-      fireEvent.change(usernameInput, { target: { value: 'username' } });
+      fireEvent.change(emailInput, { target: { value: 'email' } });
       fireEvent.change(passwordInput, { target: { value: 'password' } });
     });
 
-    await waitFor(() => expect(usernameInput.value).toEqual('username'));
+    await waitFor(() => expect(emailInput.value).toEqual('email'));
 
     await waitFor(() => expect(passwordInput.value).toEqual('password'));
 
