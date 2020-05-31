@@ -57,30 +57,26 @@ const SignInForm: React.FC<RouteComponentProps<any>> = ({ history }) => {
     <FormContainer>
       <FormHeading>Sign in to SocialQL</FormHeading>
       <form>
-        <div>
-          <InputContainer>
-            <Label>Email</Label>
-            <Input
-              data-testid="email-input"
-              value={email}
-              type="text"
-              onChange={onEmailChange}
-              placeholder="Enter your email"
-            />
-          </InputContainer>
-        </div>
-        <div>
-          <InputContainer>
-            <Label>Password</Label>
-            <Input
-              data-testid="password-input"
-              type="password"
-              value={password}
-              onChange={onPasswordChange}
-              placeholder="Enter your password"
-            />
-          </InputContainer>
-        </div>
+        <InputContainer>
+          <Label>Email</Label>
+          <Input
+            data-testid="email-input"
+            value={email}
+            type="text"
+            onChange={onEmailChange}
+            placeholder="Enter your email"
+          />
+        </InputContainer>
+        <InputContainer>
+          <Label>Password</Label>
+          <Input
+            data-testid="password-input"
+            type="password"
+            value={password}
+            onChange={onPasswordChange}
+            placeholder="Enter your password"
+          />
+        </InputContainer>
         <StyledButton
           data-testid="sign-in-button"
           type="button"
