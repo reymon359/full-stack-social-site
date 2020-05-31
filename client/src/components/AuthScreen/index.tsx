@@ -4,33 +4,9 @@ import { Route } from 'react-router-dom';
 import SignInForm from './SignInForm';
 import SignUpForm from './SignUpForm';
 import { RouteComponentProps } from 'react-router-dom';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
-const inverseRotate = keyframes`
-  from {
-    transform: rotate(0);
-  }
-  to {
-    transform: rotate(-360deg) ;
-  }
-`;
-
-const rotate = keyframes`
-  from {
-    transform: rotate(0);
-  }
-  to {
-    transform: rotate(360deg) ;
-  }
-`;
-
-const dash = keyframes`
- to {
-   stroke-dashoffset: 1000;
- }
-`;
-
-export const LoginPageContainer = styled.div`
+export const Authcontainer = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
@@ -40,7 +16,7 @@ export const LoginPageContainer = styled.div`
     no-repeat center center;
 `;
 
-export const LoginPageBackground = styled.div`
+export const AuthBackground = styled.div`
   @media only screen and (min-width: 1100px) {
     display: flex;
     width: 85%;
@@ -83,24 +59,16 @@ const Alternative = styled.div`
   }
 `;
 
-// export const RegisterContainer = styled.div`
-//   margin-top: 20px;
-//   color: ${(props) => props.theme.secondaryText};
-//   font-weight: 400;
-//   font-size: 1.5rem;
-//   align-items: center;
-//   display: flex;
-
-//   @media only screen and (max-width: 480px) {
-//     justify-content: center;
-//   }
-// `;
 export const AlternativeLink = styled.h1`
   font-weight: 400;
   font-size: 1.5rem;
   margin-left: 4px;
   cursor: pointer;
   color: ${(props) => props.theme.colors.lightBlue};
+
+  &:hover {
+    color: ${(props) => props.theme.colors.blue};
+  }
 `;
 
 const AuthScreen: React.FC<RouteComponentProps<any>> = ({
@@ -135,8 +103,8 @@ const AuthScreen: React.FC<RouteComponentProps<any>> = ({
 
   return (
     <>
-      <LoginPageContainer>
-        <LoginPageBackground>{/* <SVGImgBackground /> */}</LoginPageBackground>
+      <Authcontainer>
+        <AuthBackground />
         <ActionsContainer>
           <FormContainer>
             <Route exact path="/sign-in" component={SignInForm} />
@@ -144,7 +112,7 @@ const AuthScreen: React.FC<RouteComponentProps<any>> = ({
             {alternative}
           </FormContainer>
         </ActionsContainer>
-      </LoginPageContainer>
+      </Authcontainer>
     </>
   );
 };
