@@ -20,7 +20,7 @@ export const AuthBackground = styled.div`
   display: flex;
   width: 85%;
   height: 100%;
- ${(props) => props.theme.media.sm`
+  ${(props) => props.theme.media.sm`
      display: none;
  `}
 `;
@@ -29,7 +29,6 @@ export const FormContainer = styled.div`
   background-color: ${(props) => props.theme.colors.darkBlue + '90'};
   color: ${(props) => props.theme.colors.white};
   font-size: 0.9rem;
-  font-family: ${(props) => props.theme.fonts.mono};
   display: flex;
   flex-flow: column;
   width: 100%;
@@ -58,7 +57,6 @@ const Alternative = styled.div`
   ${(props) => props.theme.media.sm`
     justify-content: center;
   `}
-
 `;
 
 export const AlternativeLink = styled.h1`

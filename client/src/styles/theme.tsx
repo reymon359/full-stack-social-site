@@ -47,8 +47,31 @@ export const theme = {
     // white: '#ffffff'
   },
   fonts: {
-    sansSerif: "'Roboto', stack-sans, sans-serif",
+    primary:
+      '"Open Sans", "Lato", "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif',
+    code:
+      '"SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace',
     mono: "'Roboto Mono', stack-mono, monospace",
+  },
+  fontWeights: {
+    thin: 200,
+    regular: 400,
+    bold: 600,
+    extrabold: 800,
+  },
+  fontSizes: {
+    small: '12px',
+    medium: '14px',
+    large: '16px',
+    xLarge: '24px',
+    xxLarge: '36px',
+    xxxLarge: '48px',
+    xxxxLarge: '72px',
+  },
+  buttons: {
+    primary: { color: '#ffffff', bg: '#0284fe', light: '#cce6ff' },
+    secondary: { color: '#ffffff', bg: '#fe7c02', light: '#ffe5cc' },
+    terciary: { color: '#ffffff', bg: '#666666', light: '#eeeeee' },
   },
   mq: {
     xs: '22em',

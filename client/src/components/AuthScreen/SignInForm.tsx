@@ -1,8 +1,6 @@
 import React from 'react';
 import { useCallback, useState } from 'react';
 import { useSignIn } from '../../services/auth.service';
-import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
-import Loader from 'react-loader-spinner';
 import {
   FormContainer,
   Label,
@@ -15,6 +13,7 @@ import {
 } from './form-styles';
 
 import { RouteComponentProps } from 'react-router-dom';
+import LoadingSpinner from '../Shared/LoadingSpinner';
 
 const SignInForm: React.FC<RouteComponentProps<any>> = ({ history }) => {
   const [email, setEmail] = useState('');
@@ -87,16 +86,7 @@ const SignInForm: React.FC<RouteComponentProps<any>> = ({ history }) => {
           disabled={!maySignIn()}
           onClick={handleSignIn}>
           Sign in
-          {loading && (
-            <div
-              style={{
-                position: 'absolute',
-                right: '15px',
-                top: '6px',
-              }}>
-              <Loader type="Oval" color="#fff" height={30} width={30} />
-            </div>
-          )}
+          {loading && <LoadingSpinner />}
         </StyledButton>
         <ErrorMessageContainer data-testid="error-message">
           <ErrorMessageHeading>{error}</ErrorMessageHeading>

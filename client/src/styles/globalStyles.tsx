@@ -65,7 +65,7 @@ html, body {
 body {
   background: ${theme.colors.primaryBackground};
   color: ${theme.colors.primaryText};
-  font-family: ${theme.fonts.sansSerif};
+  font-family: ${theme.fonts.primary};
   backface-visibility: hidden;
   margin: 0;
 }
