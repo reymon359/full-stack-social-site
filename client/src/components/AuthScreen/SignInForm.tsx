@@ -63,6 +63,7 @@ const SignInForm: React.FC<RouteComponentProps<any>> = ({ history }) => {
             <Input
               data-testid="email-input"
               value={email}
+              type="text"
               onChange={onEmailChange}
               placeholder="Enter your email"
             />

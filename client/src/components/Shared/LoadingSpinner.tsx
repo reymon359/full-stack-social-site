@@ -1,5 +1,5 @@
 import React from 'react';
-import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+// import styles from 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import Loader from 'react-loader-spinner';
 
 const LoadingSpinner: React.FC = () => (

@@ -76,21 +76,11 @@
   "devDependencies": {
     "@graphql-codegen/cli": "1.13.5",
     "apollo-link-mock": "1.0.1",
-    "identity-obj-proxy": "3.0.0",
-    "jest-transform-css": "2.0.0",
     "source-map-explorer": "2.4.2"
   },
   "jest": {
     "transformIgnorePatterns": [
       "node_modules/(?!(react-router-transition)/)"
-    ],
-    "moduleNameMapper": {
-      "\\.(css|less|sass|scss)$": "<rootDir>/__mocks__/styleMock.js",
-      "\\.(gif|ttf|eot|svg)$": "<rootDir>/__mocks__/fileMock.js"
-    },
-    "transform": {
-      "^.+\\.js$": "babel-jest",
-      ".+\\.(css|styl|less|sass|scss)$": "jest-transform-css"
-    }
+    ]
   }
 }
