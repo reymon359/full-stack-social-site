@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
-export const LoginFormContainer = styled.div`
+export const FormContainer = styled.div`
   width: 400px;
-  @media only screen and (max-width: 767px) {
-    padding: 0 20px;
-  }
+
+  ${(props) => props.theme.media.md`
+    width: 90%;
+  `}
 `;
 
 export const StyledButton = styled.button`
@@ -42,12 +43,12 @@ export const StyledButton = styled.button`
     transform: scale(0.96);
   }
 
-  @media only screen and (max-width: 480px) {
+  ${(props) => props.theme.media.sm`
     width: 100%;
-  }
+  `}
 `;
 
-export const LoginHeading = styled.p`
+export const FormHeading = styled.p`
   font-size: 2rem;
   font-weight: 600;
   margin-bottom: 30px;

@@ -4,12 +4,12 @@ import { useSignIn } from '../../services/auth.service';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import Loader from 'react-loader-spinner';
 import {
-  LoginFormContainer,
+  FormContainer,
   Label,
   Input,
   InputContainer,
   StyledButton,
-  LoginHeading,
+  FormHeading,
   ErrorMessageContainer,
   ErrorMessageHeading,
 } from './form-styles';
@@ -55,8 +55,8 @@ const SignInForm: React.FC<RouteComponentProps<any>> = ({ history }) => {
   }, [email, password, history, signIn]);
 
   return (
-    <LoginFormContainer>
-      <LoginHeading>Sign in to SocialQL</LoginHeading>
+    <FormContainer>
+      <FormHeading>Sign in to SocialQL</FormHeading>
       <form>
         <div>
           <InputContainer>
@@ -102,7 +102,7 @@ const SignInForm: React.FC<RouteComponentProps<any>> = ({ history }) => {
           <ErrorMessageHeading>{error}</ErrorMessageHeading>
         </ErrorMessageContainer>
       </form>
-    </LoginFormContainer>
+    </FormContainer>
   );
 };
 

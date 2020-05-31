@@ -17,11 +17,12 @@ export const Authcontainer = styled.div`
 `;
 
 export const AuthBackground = styled.div`
-  @media only screen and (min-width: 1100px) {
-    display: flex;
-    width: 85%;
-    height: 100%;
-  }
+  display: flex;
+  width: 85%;
+  height: 100%;
+ ${(props) => props.theme.media.sm`
+     display: none;
+ `}
 `;
 
 export const FormContainer = styled.div`
@@ -54,9 +55,10 @@ const Alternative = styled.div`
   align-items: center;
   display: flex;
 
-  @media only screen and (max-width: 480px) {
+  ${(props) => props.theme.media.sm`
     justify-content: center;
-  }
+  `}
+
 `;
 
 export const AlternativeLink = styled.h1`
