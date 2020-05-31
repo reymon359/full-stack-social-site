@@ -10,7 +10,7 @@ import {
   FormHeading,
   MessageContainer,
   MessageHeading,
-} from './form-styles';
+} from './form-components';
 import LoadingSpinner from '../Shared/LoadingSpinner';
 import { RouteComponentProps } from 'react-router-dom';
 
@@ -62,7 +62,7 @@ const SignUpForm: React.FC<RouteComponentProps<any>> = ({ history }) => {
   const handleSignUp = useCallback(() => {
     signUp({ variables: { name, username, email, password, passwordConfirm } })
       .then(() => {
-        setMessage('🎉 Sign Up succesfull! Redirecting to Sign in');
+        setMessage('🎉 Sign Up succesfull!');
         setTimeout(() => {
           history.replace('/sign-in');
           setLoading(false);
