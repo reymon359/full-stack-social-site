@@ -8,9 +8,9 @@ import {
   InputContainer,
   StyledButton,
   FormHeading,
-  ErrorMessageContainer,
-  ErrorMessageHeading,
-} from './form-styles';
+  MessageContainer,
+  MessageHeading,
+} from './form-components';
 import LoadingSpinner from '../Shared/LoadingSpinner';
 import { RouteComponentProps } from 'react-router-dom';
 
@@ -21,31 +21,31 @@ const SignUpForm: React.FC<RouteComponentProps<any>> = ({ history }) => {
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
   const [signUp] = useSignUp();
 
   const updateName = useCallback(({ target }) => {
-    setError('');
+    setMessage('');
     setName(target.value);
   }, []);
 
   const updateUsername = useCallback(({ target }) => {
-    setError('');
+    setMessage('');
     setUsername(target.value);
   }, []);
 
   const updateEmail = useCallback(({ target }) => {
-    setError('');
+    setMessage('');
     setEmail(target.value);
   }, []);
 
   const updatePassword = useCallback(({ target }) => {
-    setError('');
+    setMessage('');
     setPassword(target.value);
   }, []);
 
   const updatePasswordConfirm = useCallback(({ target }) => {
-    setError('');
+    setMessage('');
     setPasswordConfirm(target.value);
   }, []);
 
@@ -62,13 +62,16 @@ const SignUpForm: React.FC<RouteComponentProps<any>> = ({ history }) => {
   const handleSignUp = useCallback(() => {
     signUp({ variables: { name, username, email, password, passwordConfirm } })
       .then(() => {
-        history.replace('/sign-in');
-        setLoading(false);
+        setMessage('🎉 Sign Up succesfull!');
+        setTimeout(() => {
+          history.replace('/sign-in');
+          setLoading(false);
+        }, 2000);
       })
       .catch((error) => {
         console.log(error);
 
-        setError(
+        setMessage(
           error.graphQLErrors
             ? error.graphQLErrors[0].message
             : error.message || error
@@ -143,9 +146,9 @@ const SignUpForm: React.FC<RouteComponentProps<any>> = ({ history }) => {
         onClick={handleSignUp}>
         Sign up {loading && <LoadingSpinner />}
       </StyledButton>
-      <ErrorMessageContainer data-testid="error-message">
-        <ErrorMessageHeading>{error}</ErrorMessageHeading>
-      </ErrorMessageContainer>
+      <MessageContainer>
+        <MessageHeading data-testid="message">{message}</MessageHeading>
+      </MessageContainer>
     </FormContainer>
   );
 };

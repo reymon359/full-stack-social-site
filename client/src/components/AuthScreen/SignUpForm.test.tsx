@@ -124,7 +124,7 @@ describe('SignUpForm', () => {
       fireEvent.click(signUpButton);
     });
 
-    const errorMessage = await waitFor(() => getByTestId('error-message'));
+    const errorMessage = await waitFor(() => getByTestId('message'));
 
     await waitFor(() =>
       expect(errorMessage.innerHTML).toContain('sign-up failed')
@@ -191,6 +191,8 @@ describe('SignUpForm', () => {
       fireEvent.click(signUpButton);
     });
 
-    await waitFor(() => expect(history.location.pathname).toEqual('/sign-in'));
+    await waitFor(() => expect(history.location.pathname).toEqual('/sign-in'), {
+      timeout: 3000,
+    });
   });
 });

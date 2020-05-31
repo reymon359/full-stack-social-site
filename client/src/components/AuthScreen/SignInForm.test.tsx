@@ -98,7 +98,7 @@ describe('SignInForm', () => {
       fireEvent.click(signInButton);
     });
 
-    const errorMessage = await waitFor(() => getByTestId('error-message'));
+    const errorMessage = await waitFor(() => getByTestId('message'));
 
     await waitFor(() =>
       expect(errorMessage.innerHTML).toContain('sign-in failed')
@@ -152,6 +152,8 @@ describe('SignInForm', () => {
       fireEvent.click(signInButton);
     });
 
-    await waitFor(() => expect(history.location.pathname).toEqual('/chats'));
+    await waitFor(() => expect(history.location.pathname).toEqual('/chats'), {
+      timeout: 3000,
+    });
   });
 });
