@@ -57,10 +57,10 @@ export class Auth {
     password: string;
     passwordConfirm: string;
   }) {
-    validateLength('req.name', name, 3, 50);
-    validateLength('req.username', username, 3, 18);
-    validateLength('req.email', email, 3, 100);
-    validatePassword('req.password', password);
+    validateLength('Name', name, 3, 50);
+    validateLength('Username', username, 3, 18);
+    validateLength('Email', email, 3, 100);
+    validatePassword('Password', password);
 
     if (password !== passwordConfirm) {
       throw Error("❌ Password and Confirm Password don't match");
