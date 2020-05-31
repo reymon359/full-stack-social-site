@@ -50,7 +50,7 @@ const Alternative = styled.div`
   margin-top: 20px;
   color: ${(props) => props.theme.secondaryText};
   font-weight: 400;
-  font-size: 1.5rem;
+  font-size: ${(props) => props.theme.fontSizes.medium};
   align-items: center;
   display: flex;
 
@@ -61,7 +61,7 @@ const Alternative = styled.div`
 
 export const AlternativeLink = styled.h1`
   font-weight: 400;
-  font-size: 1.5rem;
+  font-size: ${(props) => props.theme.fontSizes.medium};
   margin-left: 4px;
   cursor: pointer;
   color: ${(props) => props.theme.colors.lightBlue};

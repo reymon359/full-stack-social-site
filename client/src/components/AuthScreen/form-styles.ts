@@ -16,7 +16,7 @@ export const StyledButton = styled.button`
   height: auto;
   padding: 10px 50px;
   border-radius: 5px;
-  font-size: 1.2rem;
+  font-size: ${(props) => props.theme.fontSizes.medium};;
   border: none;
   cursor: pointer;
   
@@ -49,7 +49,7 @@ export const StyledButton = styled.button`
 `;
 
 export const FormHeading = styled.p`
-  font-size: 2rem;
+  font-size: ${(props) => props.theme.fontSizes.large};
   font-weight: 600;
   margin-bottom: 30px;
   color: ${(props) => props.theme.colors.secondaryText};
@@ -59,7 +59,7 @@ export const Label = styled.p`
   display: inline-block;
   margin: 0;
   margin-bottom: 7px;
-  font-size: 1.5rem;
+  font-size: ${(props) => props.theme.fontSizes.medium};;
   font-weight: 600;
   line-height: 1;
   color: ${(props) => props.theme.colors.secondaryText};
@@ -93,7 +93,7 @@ export const ErrorMessageContainer = styled.div`
 
 export const ErrorMessageHeading = styled.h1`
   color: ${(props) => props.theme.colors.lightDanger};
-  font-size: 1.2rem;
+  font-size: ${(props) => props.theme.fontSizes.medium};;
   font-weight: 800;
   margin-left: 7px;
 `;
