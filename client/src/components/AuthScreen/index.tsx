@@ -6,14 +6,18 @@ import SignUpForm from './SignUpForm';
 import { RouteComponentProps } from 'react-router-dom';
 import styled from 'styled-components';
 
+const AuthBackCoverImage = styled.div`
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://source.unsplash.com/1600x900/?happy,people');
+`;
+
 const Authcontainer = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
   min-height: 100%;
-  background-size: cover;
-  background: url('https://source.unsplash.com/1600x900/?happy,people')
-    no-repeat center center;
 `;
 
 const AuthSide = styled.div`
@@ -23,6 +27,15 @@ const AuthSide = styled.div`
   ${(props) => props.theme.media.sm`
      display: none;
  `}
+`;
+
+const ActionsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
 `;
 
 const FormContainer = styled.div`
@@ -35,15 +48,7 @@ const FormContainer = styled.div`
   height: 100%;
   justify-content: center;
   align-items: center;
-`;
-
-const ActionsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
+  overflow: auto;
 `;
 
 const Alternative = styled.div`
@@ -103,16 +108,18 @@ const AuthScreen: React.FC<RouteComponentProps<any>> = ({
 
   return (
     <>
-      <Authcontainer>
-        <AuthSide />
-        <ActionsContainer>
-          <FormContainer>
-            <Route exact path="/sign-in" component={SignInForm} />
-            <Route exact path="/sign-up" component={SignUpForm} />
-            {alternative}
-          </FormContainer>
-        </ActionsContainer>
-      </Authcontainer>
+      <AuthBackCoverImage>
+        <Authcontainer>
+          <AuthSide />
+          <ActionsContainer>
+            <FormContainer>
+              <Route exact path="/sign-in" component={SignInForm} />
+              <Route exact path="/sign-up" component={SignUpForm} />
+              {alternative}
+            </FormContainer>
+          </ActionsContainer>
+        </Authcontainer>
+      </AuthBackCoverImage>
     </>
   );
 };
