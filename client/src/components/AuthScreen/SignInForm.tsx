@@ -1,5 +1,4 @@
-import React from 'react';
-import { useCallback, useState } from 'react';
+import React, { useCallback, useState, useContext } from 'react';
 import { useSignIn } from '../../services/auth.service';
 import {
   FormContainer,
@@ -8,8 +7,8 @@ import {
   InputContainer,
   StyledButton,
   FormHeading,
-  ErrorMessageContainer,
-  ErrorMessageHeading,
+  MessageContainer,
+  MessageHeading,
 } from './form-styles';
 
 import { RouteComponentProps } from 'react-router-dom';
@@ -19,16 +18,16 @@ const SignInForm: React.FC<RouteComponentProps<any>> = ({ history }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
   const [signIn] = useSignIn();
 
   const onEmailChange = useCallback(({ target }) => {
-    setError('');
+    setMessage('');
     setEmail(target.value);
   }, []);
 
   const onPasswordChange = useCallback(({ target }) => {
-    setError('');
+    setMessage('');
     setPassword(target.value);
   }, []);
 
@@ -40,14 +39,19 @@ const SignInForm: React.FC<RouteComponentProps<any>> = ({ history }) => {
     setLoading(true);
     signIn({ variables: { email, password } })
       .then(() => {
-        history.replace('/chats');
-        setLoading(false);
+        setMessage('✅ Sign In succesfull!');
+        setTimeout(() => {
+          history.replace('/chats');
+          setLoading(false);
+        }, 2000);
       })
       .catch((error) => {
-        setError(
+        setMessage(
           error.graphQLErrors
-            ? error.graphQLErrors[0].message
-            : error.message || error
+            ? error.graphQLErrors.length > 0
+              ? error.graphQLErrors[0].message
+              : error.message || error
+            : '❌ Unknown Error'
         );
         setLoading(false);
       });
@@ -84,9 +88,9 @@ const SignInForm: React.FC<RouteComponentProps<any>> = ({ history }) => {
         Sign in
         {loading && <LoadingSpinner />}
       </StyledButton>
-      <ErrorMessageContainer data-testid="error-message">
-        <ErrorMessageHeading>{error}</ErrorMessageHeading>
-      </ErrorMessageContainer>
+      <MessageContainer data-testid="message">
+        <MessageHeading>{message}</MessageHeading>
+      </MessageContainer>
     </FormContainer>
   );
 };

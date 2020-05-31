@@ -6,9 +6,9 @@ export const theme = {
     primary: '#3f51b5',
     primaryLight: '#92a3fe',
     primaryDark: '#08176c',
-    secondary: '#d893da',
-    secondaryLight: '#edc6da',
-    secondaryDark: '#ae3bb2',
+    secondary: '#9266c8',
+    secondaryLight: '#d3bfec',
+    secondaryDark: '#5a4ba3',
 
     terciary: '#9266c8',
     terciaryLight: '#d3bfec',

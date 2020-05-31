@@ -84,7 +84,7 @@ const FormContainer = styled.div`
     linear-gradient(
       90deg,
       ${(props) => props.theme.colors.primary + 'd1'},
-      ${(props) => props.theme.colors.secondary + 'd1'}
+      ${(props) => props.theme.colors.primaryLight + 'd1'}
     );
   color: ${(props) => props.theme.colors.lightest};
   font-size: 0.9rem;
@@ -115,10 +115,10 @@ const AlternativeLink = styled.h1`
   font-size: ${(props) => props.theme.fontSizes.medium};
   margin-left: 4px;
   cursor: pointer;
-  color: ${(props) => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.primaryDark};
 
   &:hover {
-    color: ${(props) => props.theme.colors.secondary};
+    color: ${(props) => props.theme.colors.secondaryDark};
   }
 `;
 

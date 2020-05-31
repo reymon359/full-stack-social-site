@@ -28,13 +28,13 @@ export class Auth {
     const user = await this.users.findByEmail(email);
 
     if (!user) {
-      throw new Error('there is no user with that email');
+      throw new Error('❌ There is no user with that email');
     }
 
     const passwordsMatch = bcrypt.compareSync(password, user.password);
 
     if (!passwordsMatch) {
-      throw new Error('password is incorrect');
+      throw new Error('❌ The password is incorrect');
     }
 
     const authToken = jwt.sign(user.username, secret);
@@ -63,19 +63,19 @@ export class Auth {
     validatePassword('req.password', password);
 
     if (password !== passwordConfirm) {
-      throw Error("Password and Confirm Password don't match");
+      throw Error("❌ Password and Confirm Password don't match");
     }
 
     const existingUserWithUsername = await this.users.findByUsername(username);
 
     if (existingUserWithUsername) {
-      throw Error('username already exists');
+      throw Error('❌ That username already exists');
     }
 
     const existingUserWithEmail = await this.users.findByEmail(email);
 
     if (existingUserWithEmail) {
-      throw Error('email already exists');
+      throw Error('❌ That email already exists');
     }
 
     return this.users.newUser({

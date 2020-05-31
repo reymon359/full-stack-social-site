@@ -8,8 +8,8 @@ import {
   InputContainer,
   StyledButton,
   FormHeading,
-  ErrorMessageContainer,
-  ErrorMessageHeading,
+  MessageContainer,
+  MessageHeading,
 } from './form-styles';
 import LoadingSpinner from '../Shared/LoadingSpinner';
 import { RouteComponentProps } from 'react-router-dom';
@@ -143,9 +143,9 @@ const SignUpForm: React.FC<RouteComponentProps<any>> = ({ history }) => {
         onClick={handleSignUp}>
         Sign up {loading && <LoadingSpinner />}
       </StyledButton>
-      <ErrorMessageContainer data-testid="error-message">
-        <ErrorMessageHeading>{error}</ErrorMessageHeading>
-      </ErrorMessageContainer>
+      <MessageContainer data-testid="message">
+        <MessageHeading>{error}</MessageHeading>
+      </MessageContainer>
     </FormContainer>
   );
 };

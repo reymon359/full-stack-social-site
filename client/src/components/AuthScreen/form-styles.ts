@@ -86,16 +86,16 @@ export const StyledButton = styled.button`
 `;
 
 
-export const ErrorMessageContainer = styled.div`
+export const MessageContainer = styled.div`
   display: flex;
   align-items: center;
   padding: 8px;
   margin-top: 10px;
 `;
 
-export const ErrorMessageHeading = styled.h1`
-  color: ${(props) => props.theme.colors.dangerLight};
-  font-size: ${(props) => props.theme.fontSizes.medium};;
+export const MessageHeading = styled.h1`
+  color: ${(props) => props.theme.colors.lightest};
+  font-size: ${(props) => props.theme.fontSizes.medium};
   font-weight: 800;
   margin-left: 7px;
 `;
