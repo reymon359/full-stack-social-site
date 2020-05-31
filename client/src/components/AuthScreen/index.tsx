@@ -34,8 +34,10 @@ export const LoginPageContainer = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
+  min-height: 100%;
   background-size: cover;
-  background-image: url('https://source.unsplash.com/1600x900/?happy,people');
+  background: url('https://source.unsplash.com/2100x1400/?happy,people')
+    no-repeat center center;
 `;
 
 export const LoginPageBackground = styled.div`
@@ -47,7 +49,10 @@ export const LoginPageBackground = styled.div`
 `;
 
 export const FormContainer = styled.div`
-  background-color: rgba(25, 119, 243, 0.8);
+  background-color: ${(props) => props.theme.colors.darkBlue + '90'};
+  color: ${(props) => props.theme.colors.white};
+  font-size: 0.9rem;
+  font-family: ${(props) => props.theme.fonts.mono};
   display: flex;
   flex-flow: column;
   width: 100%;
@@ -94,7 +99,8 @@ export const AlternativeLink = styled.h1`
   font-weight: 400;
   font-size: 1.5rem;
   margin-left: 4px;
-  color: ${(props) => props.theme.primaryText};
+  cursor: pointer;
+  color: ${(props) => props.theme.colors.lightBlue};
 `;
 
 const AuthScreen: React.FC<RouteComponentProps<any>> = ({

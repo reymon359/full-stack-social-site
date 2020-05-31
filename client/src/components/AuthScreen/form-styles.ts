@@ -1,45 +1,43 @@
 import styled from "styled-components";
 
 export const LoginFormContainer = styled.div`
-  width: 500px;
-  font-family: "Roboto";
-  font-size: 1.5rem;
+  width: 400px;
   @media only screen and (max-width: 767px) {
     padding: 0 20px;
   }
 `;
 
 export const StyledButton = styled.button`
-  background-color: ${(props) => props.theme.primaryText};
+  background-color: ${(props) => props.theme.colors.primaryText};
   color:${(props) => props.theme.colors.white};
   position: relative;
   width: 50%;
   height: auto;
-  padding: 13px 50px;
-  border-radius: 4px;
-  font-size: 1.6rem;
+  padding: 10px 50px;
+  border-radius: 5px;
+  font-size: 1.2rem;
   border: none;
   cursor: pointer;
-
+  
   &[disabled] {
-    opacity: .5;
+    background-color: ${(props) => props.theme.colors.gray};
+    cursor: default;
   }
 
   &:not([disabled]) {
-    opacity: 1;
+    background-color: ${(props) => props.theme.colors.primary};
   }
   &:focus {
-    opacity: 0.9;
     outline: none;
   }
-  &:focus,
-  &:hover {
-    background-color: ${(props) => props.theme.primaryText};
-    color: #fff;
+
+  &:focus:enabled,
+  &:hover:enabled {
+    background-color: ${(props) => props.theme.colors.lightBlue};
   }
 
   &:active {
-    color: #fff;
+    color: ${(props) => props.theme.colors.white};
     border-color: none;
     transform: scale(0.96);
   }
@@ -50,10 +48,10 @@ export const StyledButton = styled.button`
 `;
 
 export const LoginHeading = styled.p`
-  font-size: 2.4rem;
+  font-size: 2rem;
   font-weight: 600;
   margin-bottom: 30px;
-  color: ${(props) => props.theme.secondaryText};
+  color: ${(props) => props.theme.colors.secondaryText};
 `;
 
 export const Label = styled.p`
@@ -63,19 +61,19 @@ export const Label = styled.p`
   font-size: 1.5rem;
   font-weight: 600;
   line-height: 1;
-  color: ${(props) => props.theme.secondaryText};
+  color: ${(props) => props.theme.colors.secondaryText};
 `;
 
 export const Input = styled.input`
   background-color: ${(props) => props.theme.inputColor};
   border: none;
-  border-radius: 6px;
+  border-radius: 5px;
   height: 40px;
   padding: 0 8px;
   box-sizing: border-box;
   &:focus {
     outline: none;
-    border: 2px solid ${(props) => props.theme.primaryText};
+    border: 2px solid ${(props) => props.theme.colors.primary};
   }
 `;
 
@@ -88,31 +86,14 @@ export const InputContainer = styled.div`
 export const ErrorMessageContainer = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 4px;
+  padding: 8px;
+  margin-top: 10px;
 `;
 
 export const ErrorMessageHeading = styled.h1`
-  color: ${(props) => props.theme.errorText};
+  color: ${(props) => props.theme.colors.lightDanger};
   font-size: 1.2rem;
-  font-weight: 500;
+  font-weight: 800;
   margin-left: 7px;
 `;
 
-export const RegisterContainer = styled.div`
-  margin-top: 20px;
-  color: ${(props) => props.theme.secondaryText};
-  font-weight: 400;
-  font-size: 1.5rem;
-  align-items: center;
-  display: flex;
-
-  @media only screen and (max-width: 480px) {
-    justify-content: center;
-  }
-`;
-export const RegisterLink = styled.h1`
-  font-weight: 400;
-  font-size: 1.5rem;
-  margin-left: 4px;
-  color: ${(props) => props.theme.primaryText};
-`;

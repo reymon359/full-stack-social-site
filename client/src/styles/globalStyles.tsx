@@ -76,7 +76,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a {
-  color: inherit;
+  cursor: pointer;
+  color: ${theme.colors.primaryText};
   text-decoration: none;
   transition: color ease-in .2s;
 

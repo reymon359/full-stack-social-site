@@ -4,16 +4,6 @@ import { useSignIn } from '../../services/auth.service';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import Loader from 'react-loader-spinner';
 import {
-  // SignForm,
-  // ActualForm,
-  // Legend,
-  Section,
-  TextField,
-  Button,
-  ErrorMessage,
-} from './form-components';
-
-import {
   LoginFormContainer,
   Label,
   Input,
@@ -22,8 +12,6 @@ import {
   LoginHeading,
   ErrorMessageContainer,
   ErrorMessageHeading,
-  RegisterContainer,
-  RegisterLink,
 } from './form-styles';
 
 import { RouteComponentProps } from 'react-router-dom';
@@ -64,10 +52,7 @@ const SignInForm: React.FC<RouteComponentProps<any>> = ({ history }) => {
 
   return (
     <LoginFormContainer>
-      <LoginHeading>Sign in to SocialSite</LoginHeading>
-      {/* <SignForm> */}
-      {/* <ActualForm> */}
-      {/* <Legend>Sign in</Legend> */}
+      <LoginHeading>Sign in to SocialQL</LoginHeading>
       <form>
         <div>
           <InputContainer>
@@ -102,10 +87,10 @@ const SignInForm: React.FC<RouteComponentProps<any>> = ({ history }) => {
             <div
               style={{
                 position: 'absolute',
-                right: '16px',
-                top: '12px',
+                right: '15px',
+                top: '6px',
               }}>
-              <Loader type="Rings" color="#fff" height={20} width={20} />
+              <Loader type="Oval" color="#fff" height={30} width={30} />
             </div>
           )}
         </StyledButton>
@@ -115,16 +100,6 @@ const SignInForm: React.FC<RouteComponentProps<any>> = ({ history }) => {
       </form>
     </LoginFormContainer>
   );
-  // return (
-
-  //     <RegisterContainer>
-  //       Not a member?
-  //       <Link to="/register">
-  //         <RegisterLink>Sign up now</RegisterLink>
-  //       </Link>
-  //     </RegisterContainer>
-  //   </LoginFormContainer>
-  // );
 };
 
 export default SignInForm;
