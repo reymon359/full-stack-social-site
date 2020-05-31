@@ -6,7 +6,7 @@ import SignUpForm from './SignUpForm';
 import { RouteComponentProps } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const Authcontainer = styled.div`
+const Authcontainer = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
@@ -16,7 +16,7 @@ export const Authcontainer = styled.div`
     no-repeat center center;
 `;
 
-export const AuthSide = styled.div`
+const AuthSide = styled.div`
   display: flex;
   width: 85%;
   height: 100%;
@@ -25,7 +25,7 @@ export const AuthSide = styled.div`
  `}
 `;
 
-export const FormContainer = styled.div`
+const FormContainer = styled.div`
   background-color: ${(props) => props.theme.colors.darkBlue + '90'};
   color: ${(props) => props.theme.colors.white};
   font-size: 0.9rem;
@@ -37,7 +37,7 @@ export const FormContainer = styled.div`
   align-items: center;
 `;
 
-export const ActionsContainer = styled.div`
+const ActionsContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -59,7 +59,7 @@ const Alternative = styled.div`
   `}
 `;
 
-export const AlternativeLink = styled.h1`
+const AlternativeLink = styled.h1`
   font-weight: 400;
   font-size: ${(props) => props.theme.fontSizes.medium};
   margin-left: 4px;
@@ -103,7 +103,6 @@ const AuthScreen: React.FC<RouteComponentProps<any>> = ({
 
   return (
     <>
-
       <Authcontainer>
         <AuthSide />
         <ActionsContainer>
