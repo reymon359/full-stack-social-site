@@ -45,7 +45,11 @@ const SignInForm: React.FC<RouteComponentProps<any>> = ({ history }) => {
         setLoading(false);
       })
       .catch((error) => {
-        setError(error.message || error);
+        setError(
+          error.graphQLErrors
+            ? error.graphQLErrors[0].message
+            : error.message || error
+        );
         setLoading(false);
       });
   }, [email, password, history, signIn]);
