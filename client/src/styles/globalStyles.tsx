@@ -63,8 +63,8 @@ html, body {
 }
 
 body {
-  background: ${theme.colors.primaryBackground};
-  color: ${theme.colors.primaryText};
+  background: ${theme.colors.light};
+  color: ${theme.colors.darkest};
   font-family: ${theme.fonts.primary};
   backface-visibility: hidden;
   margin: 0;
@@ -77,12 +77,12 @@ h1, h2, h3, h4, h5, h6 {
 
 a {
   cursor: pointer;
-  color: ${theme.colors.primaryText};
+  color: ${theme.colors.primary};
   text-decoration: none;
   transition: color ease-in .2s;
 
   &:hover {
-    color:  ${theme.colors.primaryText};
+    color:  ${theme.colors.secondary};
   }
 }
 
@@ -96,7 +96,7 @@ a {
 }
 
 ::selection {
-  color: ${theme.colors.lightBlue};
+  color: ${theme.colors.primaryLight};
   background: transparent;
 }
 `;

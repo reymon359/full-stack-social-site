@@ -1,50 +1,40 @@
 import { css } from 'styled-components';
 
-// export const theme = {
-//   primaryText: '#1876f2',
-//   secondaryText: '#050505',
-//   tertiaryText: '#65676b',
-//   errorText: '#D93025',
-//   inputColor: '#f0f2f5',
-//   placeholderColor: '#90949c',
-//   primaryBackground: '#e7f3ff',
-//   secondaryBackground: '#e4e6eb',
-//   secondaryHoverBackground: '#d8dadf',
-//   tertiaryBackground: '#F2F2F2',
-//   boxShadow1: '0 1px 2px 0 rgba(0, 0, 0, 0.1)',
-//   boxShadow2: '0 1px 2px 0 rgba(0, 0, 0, 0.2)',
-// };
-
 export const theme = {
   colors: {
+    // Palette
     primary: '#3f51b5',
-    secondary: '',
-    tertiary: '',
-    primaryText: '#000000',
-    secondaryText: '#ffffff',
-    tertiaryText: '#65676b',
+    primaryLight: '#92a3fe',
+    primaryDark: '#08176c',
+    secondary: '#d893da',
+    secondaryLight: '#edc6da',
+    secondaryDark: '#ae3bb2',
+
+    terciary: '#9266c8',
+    terciaryLight: '#d3bfec',
+
+    info: '#0284fe',
+    warning: '#d6ae3e',
     danger: '#D93025',
-    lightDanger: '#ff9089',
-    white: '#ffffff',
+    dangerLight: '#ff9089',
+    success: '#0ba063',
+    successLight: '#72d5ac',
+
+    // Monochrome
+    lightest: '#FFFFFF',
+    lighter: '#F8F8F8',
+    light: '#F3F3F3',
+    mediumlight: '#EEEEEE',
+    medium: '#DDDDDD',
+    mediumdark: '#999999',
+    dark: '#666666',
+    darker: '#444444',
+    darkest: '#333333',
     black: '#000000',
-    blue: '#3f51b5',
-    darkBlue: '#08176c',
-    lightBlue: '#92a3fe',
-    gray: '#656a73',
-    lightGray: '#d5d8d6',
-    darGray: '#414757',
-    gray500: '#94989E',
-    primaryBackground: '#dad9d9',
-    blue900: '#1e2733',
-    yellow500: '#EBC86E',
-    yellow700: '#6b6349',
 
-    // grey: ''
-
-    // background: '#fffff8',
-    // contrast: '#111',
-    // accent: 'red',
-    // white: '#ffffff'
+    border: 'rgba(0,0,0,.1)',
+    boxShadow1: '0 1px 2px 0 rgba(0, 0, 0, 0.1)',
+    boxShadow2: '0 1px 2px 0 rgba(0, 0, 0, 0.6)',
   },
   fonts: {
     primary:

@@ -39,8 +39,54 @@ const ActionsContainer = styled.div`
 `;
 
 const FormContainer = styled.div`
-  background-color: ${(props) => props.theme.colors.darkBlue + '90'};
-  color: ${(props) => props.theme.colors.white};
+  background: radial-gradient(
+      circle at 25% 54%,
+      rgba(18, 18, 18, 0.06) 0%,
+      rgba(18, 18, 18, 0.06) 22%,
+      transparent 22%,
+      transparent 100%
+    ),
+    radial-gradient(
+      circle at 67% 98%,
+      rgba(223, 223, 223, 0.06) 0%,
+      rgba(223, 223, 223, 0.06) 52%,
+      transparent 52%,
+      transparent 100%
+    ),
+    radial-gradient(
+      circle at 7% 92%,
+      rgba(169, 169, 169, 0.06) 0%,
+      rgba(169, 169, 169, 0.06) 52%,
+      transparent 52%,
+      transparent 100%
+    ),
+    radial-gradient(
+      circle at 46% 37%,
+      rgba(187, 187, 187, 0.06) 0%,
+      rgba(187, 187, 187, 0.06) 47%,
+      transparent 47%,
+      transparent 100%
+    ),
+    radial-gradient(
+      circle at 38% 35%,
+      rgba(57, 57, 57, 0.06) 0%,
+      rgba(57, 57, 57, 0.06) 99%,
+      transparent 99%,
+      transparent 100%
+    ),
+    radial-gradient(
+      circle at 46% 86%,
+      rgba(100, 100, 100, 0.06) 0%,
+      rgba(100, 100, 100, 0.06) 60%,
+      transparent 60%,
+      transparent 100%
+    ),
+    linear-gradient(
+      90deg,
+      ${(props) => props.theme.colors.primary + 'd1'},
+      ${(props) => props.theme.colors.secondary + 'd1'}
+    );
+  color: ${(props) => props.theme.colors.lightest};
   font-size: 0.9rem;
   display: flex;
   flex-flow: column;
@@ -53,7 +99,7 @@ const FormContainer = styled.div`
 
 const Alternative = styled.div`
   margin-top: 20px;
-  color: ${(props) => props.theme.secondaryText};
+  color: ${(props) => props.theme.colors.lightest};
   font-weight: 400;
   font-size: ${(props) => props.theme.fontSizes.medium};
   align-items: center;
@@ -69,10 +115,10 @@ const AlternativeLink = styled.h1`
   font-size: ${(props) => props.theme.fontSizes.medium};
   margin-left: 4px;
   cursor: pointer;
-  color: ${(props) => props.theme.colors.lightBlue};
+  color: ${(props) => props.theme.colors.primary};
 
   &:hover {
-    color: ${(props) => props.theme.colors.blue};
+    color: ${(props) => props.theme.colors.secondary};
   }
 `;
 

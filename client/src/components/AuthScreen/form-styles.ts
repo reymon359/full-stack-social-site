@@ -13,7 +13,7 @@ export const FormHeading = styled.p`
   font-size: ${(props) => props.theme.fontSizes.large};
   font-weight: 600;
   margin-bottom: 30px;
-  color: ${(props) => props.theme.colors.secondaryText};
+  color: ${(props) => props.theme.colors.lightest};
 `;
 
 export const Label = styled.p`
@@ -23,7 +23,7 @@ export const Label = styled.p`
   font-size: ${(props) => props.theme.fontSizes.medium};;
   font-weight: 600;
   line-height: 1;
-  color: ${(props) => props.theme.colors.secondaryText};
+  color: ${(props) => props.theme.colors.lightest};
 `;
 
 export const Input = styled.input`
@@ -46,8 +46,8 @@ export const InputContainer = styled.div`
 `;
 
 export const StyledButton = styled.button`
-  background-color: ${(props) => props.theme.colors.primaryText};
-  color:${(props) => props.theme.colors.white};
+  background-color: ${(props) => props.theme.colors.darkest};
+  color:${(props) => props.theme.colors.lightest};
   position: relative;
   width: 50%;
   height: auto;
@@ -58,7 +58,7 @@ export const StyledButton = styled.button`
   cursor: pointer;
   
   &[disabled] {
-    background-color: ${(props) => props.theme.colors.gray};
+    background-color: ${(props) => props.theme.colors.mediumdark};
     cursor: default;
   }
 
@@ -71,11 +71,11 @@ export const StyledButton = styled.button`
 
   &:focus:enabled,
   &:hover:enabled {
-    background-color: ${(props) => props.theme.colors.lightBlue};
+    background-color: ${(props) => props.theme.colors.primaryLight};
   }
 
   &:active {
-    color: ${(props) => props.theme.colors.white};
+    color: ${(props) => props.theme.colors.lightest};
     border-color: none;
     transform: scale(0.96);
   }
@@ -94,7 +94,7 @@ export const ErrorMessageContainer = styled.div`
 `;
 
 export const ErrorMessageHeading = styled.h1`
-  color: ${(props) => props.theme.colors.lightDanger};
+  color: ${(props) => props.theme.colors.dangerLight};
   font-size: ${(props) => props.theme.fontSizes.medium};;
   font-weight: 800;
   margin-left: 7px;
