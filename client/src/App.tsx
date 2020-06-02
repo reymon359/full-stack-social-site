@@ -12,10 +12,10 @@ import ChatsListScreen from './components/ChatsListScreen';
 // import ChatCreationScreen from './components/ChatCreationScreen';
 
 import { withAuth } from './services/auth.service';
-import HomePage from './pages/HomePage/index';
-import ProfilePage from './pages/ProfilePage/index';
-import PostPage from './pages/PostPage/index';
-import NotfoundPage from './pages/NotfoundPage/index';
+import HomePage from './pages/HomePage';
+import ProfilePage from './pages/ProfilePage';
+import PostPage from './pages/PostPage';
+import NotfoundPage from './pages/NotfoundPage';
 
 const App: React.FC = () => (
   <BrowserRouter>
