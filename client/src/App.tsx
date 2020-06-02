@@ -8,20 +8,22 @@ import {
 import AuthScreen from './components/AuthScreen';
 import ChatRoomScreen from './components/ChatRoomScreen';
 import ChatsListScreen from './components/ChatsListScreen';
-import ChatCreationScreen from './components/ChatCreationScreen';
+// import ChatCreationScreen from './components/ChatCreationScreen';
 
 import { withAuth } from './services/auth.service';
-
-const redirectToHome = () => <Redirect to="/home" />;
+import HomePage from './pages/HomePage';
 
 const App: React.FC = () => (
   <BrowserRouter>
     <Route exact path="/" render={redirectToHome} />
+    {/* <Route exact path="/" render={redirectToChats} /> */}
     <Route exact path="/sign-(in|up)" component={AuthScreen} />
-    <Route exact path="/home" component={withAuth(HomeScreen)} />
-    <Route exact path="/:username" component={withAuth(ProfileScreen)} />
-    <Route exact path="/:postId" component={withAuth(PostScreen)} />
-    <Route exact path="/editProfile" component={withAuth(ChatsListScreen)} />
+    <Route exact path="/home" component={withAuth(HomePage)} />
+    <Route exact path="/chats" component={withAuth(ChatsListScreen)} />
+
+    {/* <Route exact path="/:username" component={withAuth(ProfileScreen)} />
+    <Route exact path="/post/:postId" component={withAuth(PostScreen)} />
+    <Route exact path="/new-post" component={withAuth(PostCreationScreen)} /> */}
 
     <Route
       exact
@@ -33,8 +35,10 @@ const App: React.FC = () => (
       )}
     />
 
-    <Route exact path="/new-chat" component={withAuth(ChatCreationScreen)} />
+    {/* <Route exact path="/new-chat" component={withAuth(ChatCreationScreen)} /> */}
   </BrowserRouter>
 );
+// const redirectToChats = () => <Redirect to="/chats" />;
 
+const redirectToHome = () => <Redirect to="/home" />;
 export default App;
