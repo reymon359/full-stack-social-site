@@ -40,7 +40,7 @@ const SignInForm: React.FC<RouteComponentProps<any>> = ({ history }) => {
       .then(() => {
         setMessage('✅ Sign In succesfull!');
         setTimeout(() => {
-          history.replace('/chats');
+          history.replace('/home');
           setLoading(false);
         }, 2000);
       })

@@ -8,8 +8,7 @@ import {
 } from 'react-router-dom';
 import AuthScreen from './components/AuthScreen';
 import ChatRoomScreen from './components/ChatRoomScreen';
-import ChatsListScreen from './components/ChatsListScreen';
-// import ChatCreationScreen from './components/ChatCreationScreen';
+// import ChatsListScreen from './components/ChatsListScreen';
 
 import { withAuth } from './services/auth.service';
 import HomePage from './pages/HomePage';
@@ -21,7 +20,6 @@ const App: React.FC = () => (
   <BrowserRouter>
     <Switch>
       <Route exact path="/" render={redirectToHome} />
-      {/* <Route exact path="/" render={redirectToChats} /> */}
       <Route exact path="/sign-(in|up)" component={AuthScreen} />
       <Route exact path="/home" component={withAuth(HomePage)} />
       <Route exact path="/:username" component={withAuth(ProfilePage)} />
@@ -45,7 +43,6 @@ const App: React.FC = () => (
     </Switch>
   </BrowserRouter>
 );
-// const redirectToChats = () => <Redirect to="/chats" />;
 
 const redirectToHome = () => <Redirect to="/home" />;
 export default App;

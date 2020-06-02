@@ -105,7 +105,7 @@ describe('SignInForm', () => {
     );
   });
 
-  it('navigates to /chats if everything went right', async () => {
+  it('navigates to /home if everything went right', async () => {
     const history = createMemoryHistory();
 
     const client = mockApolloClient([
@@ -152,7 +152,7 @@ describe('SignInForm', () => {
       fireEvent.click(signInButton);
     });
 
-    await waitFor(() => expect(history.location.pathname).toEqual('/chats'), {
+    await waitFor(() => expect(history.location.pathname).toEqual('/home'), {
       timeout: 3000,
     });
   });
