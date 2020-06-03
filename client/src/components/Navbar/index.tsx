@@ -7,6 +7,7 @@ import { History } from 'history';
 import Logo from '../Shared/Logo';
 import { useContext } from 'react';
 import { ThemeContext } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const NavbarContainer = styled.div`
   background-color: ${(props) => props.theme.colors.lightest};
@@ -22,10 +23,8 @@ const NavbarContainer = styled.div`
 `;
 
 const LogoContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  padding: 1rem;
+  cursor: pointer;
 `;
 
 const NavbarButton = styled.button`
@@ -49,9 +48,11 @@ const Navbar: React.FC<NavbarProps> = ({ history }) => {
 
   return (
     <NavbarContainer>
-      <LogoContainer>
-        <Logo fill={themeContext.colors.primary} width={40} height={40} />
-      </LogoContainer>
+      <Link to="/">
+        <LogoContainer>
+          <Logo fill={themeContext.colors.primary} width={40} height={40} />
+        </LogoContainer>
+      </Link>
       <NavbarButton data-testid="sign-out-button" onClick={handleSignOut}>
         Logout
       </NavbarButton>
