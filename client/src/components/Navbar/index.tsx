@@ -5,6 +5,8 @@ import { useCallback } from 'react';
 import { useSignOut } from '../../services/auth.service';
 import { History } from 'history';
 import Logo from '../Shared/Logo';
+import { useContext } from 'react';
+import { ThemeContext } from 'styled-components';
 
 const NavbarContainer = styled.div`
   background-color: ${(props) => props.theme.colors.lightest};
@@ -35,6 +37,8 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ history }) => {
+  const themeContext = useContext(ThemeContext);
+
   const signOut = useSignOut();
 
   const handleSignOut = useCallback(() => {
@@ -46,7 +50,7 @@ const Navbar: React.FC<NavbarProps> = ({ history }) => {
   return (
     <NavbarContainer>
       <LogoContainer>
-        <Logo fill={'#3f51b5'} width={40} height={60} />
+        <Logo fill={themeContext.colors.primary} width={40} height={40} />
       </LogoContainer>
       <NavbarButton data-testid="sign-out-button" onClick={handleSignOut}>
         Logout
