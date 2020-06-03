@@ -18,7 +18,7 @@ const NavbarContainer = styled.div`
   justify-content: space-between;
   position: sticky;
   top: 0;
-  z-index: 5;
+  z-index: 5;  
   // box-shadow: 0px 1px 0px 1px ${(props) =>
     props.theme.colors.primary + '2b'};
 `;
@@ -29,7 +29,19 @@ const LogoContainer = styled.div`
 `;
 
 const NavbarButton = styled.button`
-  color: ${(props) => props.theme.colors.primary + '2b'};
+  color: ${(props) => props.theme.colors.primary};
+  background-color: ${(props) => props.theme.colors.light};
+  border: none;
+  margin: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.25s;
+
+  &:hover,
+  &:focus {
+    box-shadow: 0px 0px 5px 1px ${(props) => props.theme.colors.medium};
+  }
 `;
 
 interface NavbarProps {
