@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-// import { ReactComponent as Logo } from '../../assets/icons/logo.svg';
 import { useCallback } from 'react';
 import { useSignOut } from '../../services/auth.service';
 import { History } from 'history';
@@ -37,7 +36,7 @@ const NavbarButton = styled.button`
   color: ${(props) => props.theme.colors.primary};
   background-color: ${(props) => props.theme.colors.light};
   border: none;
-  margin: 1rem;
+  margin-right: 1rem;
   padding: 0.5rem 1rem;
   border-radius: 10px;
   cursor: pointer;
@@ -64,6 +63,14 @@ const Navbar: React.FC<NavbarProps> = ({ history }) => {
     });
   }, [history, signOut]);
 
+  const redirectToNewPost = () => {
+    history.push('/new-post');
+  };
+
+  const redirectToProfile = () => {
+    history.push('/:id');
+  };
+
   return (
     <NavbarContainer>
       <Link to="/">
@@ -72,8 +79,12 @@ const Navbar: React.FC<NavbarProps> = ({ history }) => {
         </LogoContainer>
       </Link>
       <NavbarButtonsContainer>
-        <NavbarButton>New Post</NavbarButton>
-        <NavbarButton>Profile</NavbarButton>
+        <NavbarButton data-testid="new-post-button" onClick={redirectToNewPost}>
+          New Post
+        </NavbarButton>
+        <NavbarButton data-testid="profile-button" onClick={redirectToProfile}>
+          Profile
+        </NavbarButton>
         <NavbarButton data-testid="sign-out-button" onClick={handleSignOut}>
           Logout
         </NavbarButton>
