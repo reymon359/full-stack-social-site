@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ReactComponent as Logo } from '../../assets/icons/logo.svg';
+// import { ReactComponent as Logo } from '../../assets/icons/logo.svg';
 import { useCallback } from 'react';
 import { useSignOut } from '../../services/auth.service';
 import { History } from 'history';
+import Logo from '../Shared/Logo';
 
 const NavbarContainer = styled.div`
   background-color: ${(props) => props.theme.colors.lightest};
@@ -45,7 +46,7 @@ const Navbar: React.FC<NavbarProps> = ({ history }) => {
   return (
     <NavbarContainer>
       <LogoContainer>
-        <Logo width={41} height={41} />
+        <Logo fill={'#3f51b5'} width={40} height={60} />
       </LogoContainer>
       <NavbarButton data-testid="sign-out-button" onClick={handleSignOut}>
         Logout
