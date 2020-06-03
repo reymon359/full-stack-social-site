@@ -10,7 +10,7 @@ import { ThemeContext } from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const NavbarContainer = styled.div`
-  background-color: ${(props) => props.theme.colors.lightest};
+  background-color: ${(props) => props.theme.colors.light};
   width: 100%;
   height: 4rem;
   display: flex;
@@ -19,7 +19,8 @@ const NavbarContainer = styled.div`
   position: sticky;
   top: 0;
   z-index: 5;
-  box-shadow: 0px 1px 0px 1px ${(props) => props.theme.colors.primary + '2b'};
+  // box-shadow: 0px 1px 0px 1px ${(props) =>
+    props.theme.colors.primary + '2b'};
 `;
 
 const LogoContainer = styled.div`

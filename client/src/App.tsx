@@ -19,12 +19,12 @@ import { AppRoutes } from './AppRoutes';
 const App: React.FC = () => (
   <BrowserRouter>
     <Switch>
-      <Route path={AppRoutes.All} component={NotfoundPage} />
       <Route exact path={AppRoutes.Root} render={redirectToHome} />
       <Route exact path={AppRoutes.Home} component={withAuth(HomePage)} />
       <Route exact path={AppRoutes.Auth} component={AuthScreen} />
       <Route exact path={AppRoutes.Profile} component={withAuth(ProfilePage)} />
       <Route exact path={AppRoutes.Post} component={withAuth(PostPage)} />
+      <Route path={AppRoutes.All} component={NotfoundPage} />
       {/* <Route exact path={AppRoutes.NewPost} component={withAuth(NewPostPage)} /> */}
       {/* <Route exact path={AppRoutes.About} component={withAuth(AboutPage)} /> */}
 
