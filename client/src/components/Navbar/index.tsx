@@ -28,6 +28,11 @@ const LogoContainer = styled.div`
   cursor: pointer;
 `;
 
+const NavbarButtonsContainer = styled.div`
+  display: flex;
+  align-items: end;
+`;
+
 const NavbarButton = styled.button`
   color: ${(props) => props.theme.colors.primary};
   background-color: ${(props) => props.theme.colors.light};
@@ -66,9 +71,13 @@ const Navbar: React.FC<NavbarProps> = ({ history }) => {
           <Logo fill={themeContext.colors.primary} width={40} height={40} />
         </LogoContainer>
       </Link>
-      <NavbarButton data-testid="sign-out-button" onClick={handleSignOut}>
-        Logout
-      </NavbarButton>
+      <NavbarButtonsContainer>
+        <NavbarButton>New Post</NavbarButton>
+        <NavbarButton>Profile</NavbarButton>
+        <NavbarButton data-testid="sign-out-button" onClick={handleSignOut}>
+          Logout
+        </NavbarButton>
+      </NavbarButtonsContainer>
     </NavbarContainer>
   );
 };
