@@ -6,7 +6,7 @@ import {
   Switch,
   RouteComponentProps,
 } from 'react-router-dom';
-import AuthScreen from './components/AuthScreen';
+import AuthScreen from './pages/AuthPage';
 import ChatRoomScreen from './components/ChatRoomScreen';
 // import ChatsListScreen from './components/ChatsListScreen';
 

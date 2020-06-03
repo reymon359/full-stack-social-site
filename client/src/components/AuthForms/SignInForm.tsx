@@ -9,7 +9,7 @@ import {
   FormHeading,
   MessageContainer,
   MessageHeading,
-} from './form-components';
+} from './AuthForms.styles';
 import { RouteComponentProps } from 'react-router-dom';
 import LoadingSpinner from '../Shared/LoadingSpinner';
 
