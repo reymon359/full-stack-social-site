@@ -22,6 +22,7 @@ server.installSubscriptionHandlers(httpServer);
   httpServer.listen(port, () => {
     console.log(`Server is listening on port ${port}`);
 
+    // To solve some development issues
     setTimeout(() => {
       httpServer.close();
       start();

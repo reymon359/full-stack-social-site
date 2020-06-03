@@ -8,14 +8,14 @@ import { History } from 'history';
 const NavbarContainer = styled.div`
   background-color: ${(props) => props.theme.colors.lightest};
   width: 100%;
-  height: 5rem;
+  height: 4rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: sticky;
   top: 0;
   z-index: 5;
-  box-shadow: ${(props) => props.theme.colors.boxShadow1};
+  box-shadow: 0px 1px 0px 1px ${(props) => props.theme.colors.primary + '2b'};
 `;
 
 const LogoContainer = styled.div`
@@ -25,8 +25,8 @@ const LogoContainer = styled.div`
   padding: 0.5rem 0.5rem 0.5rem 1rem;
 `;
 
-const LogoutButton = styled.button`
-  color: var(--primary-text) !important;
+const NavbarButton = styled.button`
+  color: ${(props) => props.theme.colors.primary + '2b'};
 `;
 
 interface NavbarProps {
@@ -47,9 +47,9 @@ const Navbar: React.FC<NavbarProps> = ({ history }) => {
       <LogoContainer>
         <Logo width={41} height={41} />
       </LogoContainer>
-      <LogoutButton data-testid="sign-out-button" onClick={handleSignOut}>
+      <NavbarButton data-testid="sign-out-button" onClick={handleSignOut}>
         Logout
-      </LogoutButton>
+      </NavbarButton>
     </NavbarContainer>
   );
 };
