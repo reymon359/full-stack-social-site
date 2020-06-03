@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { ReactComponent as Logo } from '../../assets/icons/logo.svg';
 import { useCallback } from 'react';
 import { useSignOut } from '../../services/auth.service';
 import { History } from 'history';
@@ -22,9 +23,6 @@ const LogoContainer = styled.div`
   justify-content: center;
   flex-direction: column;
   padding: 0.5rem 0.5rem 0.5rem 1rem;
-`;
-const Logo = styled.div`
-  flex: 1;
 `;
 
 const LogoutButton = styled.button`

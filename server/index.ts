@@ -15,8 +15,19 @@ const httpServer = http.createServer(app);
 server.installSubscriptionHandlers(httpServer);
 
 
-envResetDb && resetDb();
 
-httpServer.listen(port, () => {
-  console.log(`Server is listening on port ${port}`);
-});
+(function start() {
+  envResetDb && resetDb();
+
+  httpServer.listen(port, () => {
+    console.log(`Server is listening on port ${port}`);
+
+    setTimeout(() => {
+      httpServer.close();
+      start();
+    }, 60000);
+
+  });
+
+})();
+
