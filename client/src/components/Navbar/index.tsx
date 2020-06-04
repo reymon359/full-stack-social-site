@@ -1,12 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useCallback } from 'react';
-import { useSignOut } from '../../services/auth.service';
+import { useMe, useSignOut } from '../../services/auth.service';
 import { History } from 'history';
 import Logo from '../Shared/Logo';
 import { useContext } from 'react';
 import { ThemeContext } from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useQuery } from '@apollo/react-hooks';
+import { useMeQuery } from '../../graphql/types';
+import { AppRoutes } from '../../AppRoutes';
 
 const NavbarContainer = styled.div`
   background-color: ${(props) => props.theme.colors.light};
@@ -54,8 +57,8 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ history }) => {
   const themeContext = useContext(ThemeContext);
-
   const signOut = useSignOut();
+  const user = useMe();
 
   const handleSignOut = useCallback(() => {
     signOut().then(() => {
@@ -63,9 +66,9 @@ const Navbar: React.FC<NavbarProps> = ({ history }) => {
     });
   }, [history, signOut]);
 
-  const redirectToRoot = () => history.push('/');
-  const redirectToNewPost = () => history.push('/new-post');
-  const redirectToProfile = () => history.push('/:id');
+  const redirectToRoot = () => history.push(AppRoutes.Root);
+  const redirectToNewPost = () => history.push(AppRoutes.NewPost);
+  const redirectToProfile = () => history.push(`/${user && user.id}`);
 
   return (
     <NavbarContainer>
