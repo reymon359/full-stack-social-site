@@ -12,7 +12,7 @@ import { isSignedIn } from '../../services/auth.service';
 describe('Navbar', () => {
   afterEach(cleanup);
 
-  it('goes to root when clicking the logo', async () => {
+  it('goes to Root when clicking the logo', async () => {
     const client = mockApolloClient();
     const history = createMemoryHistory();
 
@@ -33,7 +33,7 @@ describe('Navbar', () => {
     }
   });
 
-  it('goes to new post when clicking the new post link', async () => {
+  it('goes to New Post Page when clicking the new post link', async () => {
     const client = mockApolloClient();
     const history = createMemoryHistory();
 
@@ -73,6 +73,27 @@ describe('Navbar', () => {
         expect(history.location.pathname).toEqual('/sign-in');
         expect(isSignedIn()).toEqual(false);
       });
+    }
+  });
+
+  it('goes to Profile when clicking the profile link', async () => {
+    const client = mockApolloClient();
+    const history = createMemoryHistory();
+
+    {
+      const { getByTestId } = render(
+        <ThemeProvider theme={theme}>
+          <ApolloProvider client={client}>
+            <Navbar history={history} />
+          </ApolloProvider>
+        </ThemeProvider>
+      );
+
+      fireEvent.click(getByTestId('profile-button'));
+
+      await waitFor(() =>
+        expect(history.location.pathname).toEqual(AppRoutes.Profile)
+      );
     }
   });
 });
