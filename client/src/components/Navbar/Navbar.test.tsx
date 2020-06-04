@@ -7,6 +7,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import { ThemeProvider } from 'styled-components';
 import { theme } from '../../styles';
 import { AppRoutes } from '../../AppRoutes';
+import { isSignedIn } from '../../services/auth.service';
 
 describe('Navbar', () => {
   afterEach(cleanup);
@@ -16,7 +17,7 @@ describe('Navbar', () => {
     const history = createMemoryHistory();
 
     {
-      const { container, getByTestId } = render(
+      const { getByTestId } = render(
         <ThemeProvider theme={theme}>
           <ApolloProvider client={client}>
             <Navbar history={history} />
@@ -37,7 +38,7 @@ describe('Navbar', () => {
     const history = createMemoryHistory();
 
     {
-      const { container, getByTestId } = render(
+      const { getByTestId } = render(
         <ThemeProvider theme={theme}>
           <ApolloProvider client={client}>
             <Navbar history={history} />
@@ -50,6 +51,28 @@ describe('Navbar', () => {
       await waitFor(() =>
         expect(history.location.pathname).toEqual(AppRoutes.NewPost)
       );
+    }
+  });
+
+  it('goes to Sign In Page and logs out user when clicking the Sign out link', async () => {
+    const client = mockApolloClient();
+    const history = createMemoryHistory();
+
+    {
+      const { getByTestId } = render(
+        <ThemeProvider theme={theme}>
+          <ApolloProvider client={client}>
+            <Navbar history={history} />
+          </ApolloProvider>
+        </ThemeProvider>
+      );
+
+      fireEvent.click(getByTestId('sign-out-button'));
+
+      await waitFor(() => {
+        expect(history.location.pathname).toEqual('/sign-in');
+        expect(isSignedIn()).toEqual(false);
+      });
     }
   });
 });
