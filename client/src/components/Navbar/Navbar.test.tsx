@@ -31,4 +31,25 @@ describe('Navbar', () => {
       );
     }
   });
+
+  it('goes to new post when clicking the new post link', async () => {
+    const client = mockApolloClient();
+    const history = createMemoryHistory();
+
+    {
+      const { container, getByTestId } = render(
+        <ThemeProvider theme={theme}>
+          <ApolloProvider client={client}>
+            <Navbar history={history} />
+          </ApolloProvider>
+        </ThemeProvider>
+      );
+
+      fireEvent.click(getByTestId('new-post-button'));
+
+      await waitFor(() =>
+        expect(history.location.pathname).toEqual(AppRoutes.NewPost)
+      );
+    }
+  });
 });
