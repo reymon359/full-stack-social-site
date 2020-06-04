@@ -63,18 +63,13 @@ const Navbar: React.FC<NavbarProps> = ({ history }) => {
     });
   }, [history, signOut]);
 
-  const redirectToHome = () => history.push('/');
-  const redirectToNewPost = () => {
-    history.push('/new-post');
-  };
-
-  const redirectToProfile = () => {
-    history.push('/:id');
-  };
+  const redirectToRoot = () => history.push('/');
+  const redirectToNewPost = () => history.push('/new-post');
+  const redirectToProfile = () => history.push('/:id');
 
   return (
     <NavbarContainer>
-      <LogoContainer data-testid="home-logo" onClick={redirectToHome}>
+      <LogoContainer data-testid="root-logo" onClick={redirectToRoot}>
         <Logo fill={themeContext.colors.primary} width={40} height={40} />
       </LogoContainer>
       <NavbarButtonsContainer>
