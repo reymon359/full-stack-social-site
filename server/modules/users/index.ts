@@ -45,7 +45,7 @@ const resolvers: Resolvers = {
 
       if (!currentUser) return null;
 
-      return injector.get(Users).findByUsername(username);
+      return injector.get(Users).findUserByUsername(username);
     },
     async users(root, args, { injector }) {
       const currentUser = await injector.get(Auth).currentUser();

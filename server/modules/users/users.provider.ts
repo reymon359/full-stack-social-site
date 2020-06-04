@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 import { Database } from '../common/database.provider';
 import DataLoader from 'dataloader';
 import { QueryResult } from 'pg';
-import { Chat, User } from '../../db';
+import { User } from '../../db';
 
 type UserByUsername = { username: string };
 type UsersKey = UserByUsername;
@@ -44,14 +44,6 @@ export class Users {
     );
 
     return rows;
-  }
-
-  async findByUsername(username: string) {
-    const { rows } = await this.db.query(
-      sql`SELECT * FROM users WHERE username = ${username}`
-    );
-
-    return rows[0] || null;
   }
 
   async findUserByUsername(username: string) {
