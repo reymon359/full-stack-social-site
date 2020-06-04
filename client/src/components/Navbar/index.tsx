@@ -6,9 +6,6 @@ import { History } from 'history';
 import Logo from '../Shared/Logo';
 import { useContext } from 'react';
 import { ThemeContext } from 'styled-components';
-import { Link } from 'react-router-dom';
-import { useApolloClient, useQuery } from '@apollo/react-hooks';
-import { useMeQuery } from '../../graphql/types';
 import { AppRoutes } from '../../AppRoutes';
 
 const NavbarContainer = styled.div`
@@ -56,14 +53,10 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ history }) => {
-  const client = useApolloClient();
-  // console.log(client.cache);
-  // console.log(JSON.stringify(client.cache));
-
   const themeContext = useContext(ThemeContext);
   const signOut = useSignOut();
   const user = useMe();
-  console.log('user', user);
+
   const handleSignOut = useCallback(() => {
     signOut().then(() => {
       history.replace('/sign-in');
