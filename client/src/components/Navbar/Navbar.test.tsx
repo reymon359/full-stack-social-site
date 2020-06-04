@@ -6,6 +6,7 @@ import { mockApolloClient } from '../../test-helpers';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { ThemeProvider } from 'styled-components';
 import { theme } from '../../styles';
+import { AppRoutes } from '../../AppRoutes';
 
 describe('Navbar', () => {
   afterEach(cleanup);
@@ -25,7 +26,9 @@ describe('Navbar', () => {
 
       fireEvent.click(getByTestId('root-logo'));
 
-      await waitFor(() => expect(history.location.pathname).toEqual('/'));
+      await waitFor(() =>
+        expect(history.location.pathname).toEqual(AppRoutes.Root)
+      );
     }
   });
 });
