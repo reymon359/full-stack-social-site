@@ -32,9 +32,10 @@ export const theme = {
     darkest: '#333333',
     black: '#000000',
 
-    border: 'rgba(0,0,0,.1)',
-    boxShadow1: '0 1px 2px 0 rgba(0, 0, 0, 0.1)',
-    boxShadow2: '0 1px 2px 0 rgba(0, 0, 0, 0.6)',
+    // border: 'rgba(0,0,0,.1)',
+    // boxShadowsmall: '0 1px 2px 0 rgba(0, 0, 0, 0.1)',
+    // boxShadowmedium: '0 1px 2px 0 rgba(0, 0, 0, 0.6)',
+    // boxShadowlarge: '0 1px 2px 0 rgba(0, 0, 0, 0.6)',
   },
   fonts: {
     primary:

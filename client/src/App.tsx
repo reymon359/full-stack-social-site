@@ -6,28 +6,32 @@ import {
   Switch,
   RouteComponentProps,
 } from 'react-router-dom';
-import AuthScreen from './components/AuthScreen';
+import AuthScreen from './pages/AuthPage';
 import ChatRoomScreen from './components/ChatRoomScreen';
 // import ChatsListScreen from './components/ChatsListScreen';
 
+import { AppRoutes } from './AppRoutes';
 import { withAuth } from './services/auth.service';
 import HomePage from './pages/HomePage';
 import ProfilePage from './pages/ProfilePage';
 import PostPage from './pages/PostPage';
 import NotfoundPage from './pages/NotfoundPage';
+import NewPostPage from './pages/NewPostPage';
+import AboutPage from './pages/AboutPage';
 
 const App: React.FC = () => (
   <BrowserRouter>
     <Switch>
-      <Route exact path="/" render={redirectToHome} />
-      <Route exact path="/sign-(in|up)" component={AuthScreen} />
-      <Route exact path="/home" component={withAuth(HomePage)} />
-      <Route exact path="/:username" component={withAuth(ProfilePage)} />
-      <Route exact path="/post/:postId" component={withAuth(PostPage)} />
-      {/* <Route exact path="/new-post" component={withAuth(PostCreationScreen)} /> */}
+      <Route exact path={AppRoutes.Root} render={redirectToHome} />
+      <Route exact path={AppRoutes.Home} component={withAuth(HomePage)} />
+      <Route exact path={AppRoutes.Auth} component={AuthScreen} />
+      <Route exact path={AppRoutes.Post} component={withAuth(PostPage)} />
+      <Route exact path={AppRoutes.NewPost} component={withAuth(NewPostPage)} />
+      <Route exact path={AppRoutes.About} component={withAuth(AboutPage)} />
+      <Route exact path={AppRoutes.Profile} component={withAuth(ProfilePage)} />
+      <Route path={AppRoutes.All} component={NotfoundPage} />
 
       {/* <Route exact path="/chats" component={withAuth(ChatsListScreen)} /> */}
-
       <Route
         exact
         path="/chats/:chatId"
@@ -37,9 +41,7 @@ const App: React.FC = () => (
           )
         )}
       />
-
       {/* <Route exact path="/new-chat" component={withAuth(ChatCreationScreen)} /> */}
-      <Route path="*" component={NotfoundPage} />
     </Switch>
   </BrowserRouter>
 );

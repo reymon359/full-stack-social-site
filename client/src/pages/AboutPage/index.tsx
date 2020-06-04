@@ -2,17 +2,17 @@ import React from 'react';
 import { History } from 'history';
 import Navbar from '../../components/Navbar/index';
 
-interface HomePageProps {
+interface AboutPageProps {
   history: History;
 }
 
-const HomePage: React.FC<HomePageProps> = ({ history }) => {
+const AboutPage: React.FC<AboutPageProps> = ({ history }) => {
   return (
     <>
       <Navbar history={history} />
-      <h1>Home</h1>
+      <h1>About</h1>
     </>
   );
 };
 
-export default HomePage;
+export default AboutPage;
