@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const FormContainer = styled.form`
   width: 400px;
@@ -7,7 +7,6 @@ export const FormContainer = styled.form`
     width: 90%;
   `}
 `;
-
 
 export const FormHeading = styled.p`
   font-size: ${(props) => props.theme.fontSizes.large};
@@ -20,7 +19,7 @@ export const Label = styled.p`
   display: inline-block;
   margin: 0;
   margin-bottom: 7px;
-  font-size: ${(props) => props.theme.fontSizes.medium};;
+  font-size: ${(props) => props.theme.fontSizes.medium};
   font-weight: 600;
   line-height: 1;
   color: ${(props) => props.theme.colors.lightest};
@@ -47,16 +46,16 @@ export const InputContainer = styled.div`
 
 export const StyledButton = styled.button`
   background-color: ${(props) => props.theme.colors.darkest};
-  color:${(props) => props.theme.colors.lightest};
+  color: ${(props) => props.theme.colors.lightest};
   position: relative;
   width: 50%;
   height: auto;
   padding: 10px 50px;
   border-radius: 5px;
-  font-size: ${(props) => props.theme.fontSizes.medium};;
+  font-size: ${(props) => props.theme.fontSizes.medium};
   border: none;
   cursor: pointer;
-  
+
   &[disabled] {
     background-color: ${(props) => props.theme.colors.mediumdark};
     cursor: default;
@@ -85,7 +84,6 @@ export const StyledButton = styled.button`
   `}
 `;
 
-
 export const MessageContainer = styled.div`
   display: flex;
   align-items: center;
@@ -99,4 +97,3 @@ export const MessageHeading = styled.h1`
   font-weight: 800;
   margin-left: 7px;
 `;
-

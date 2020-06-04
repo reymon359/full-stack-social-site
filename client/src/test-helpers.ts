@@ -8,3 +8,13 @@ export const mockApolloClient = (mocks: any) => {
     link: new MockLink(mocks),
   });
 };
+
+export const mockApolloClientCacheData = (cacheData: any) => {
+  const mockCache = new InMemoryCache();
+  mockCache.writeData(cacheData);
+
+  return new ApolloClient({
+    cache: mockCache,
+    link: new MockLink([]),
+  });
+};

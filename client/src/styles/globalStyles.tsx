@@ -86,6 +86,10 @@ a {
   }
 }
 
+button:focus {
+  outline:0;
+}
+
 * {
   box-sizing: border-box;
   line-height: 1.4em;
