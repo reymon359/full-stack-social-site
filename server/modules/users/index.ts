@@ -9,7 +9,7 @@ const typeDefs = gql`
   type User {
     id: ID!
     name: String!
-    username: String! 
+    username: String!
     email: String!
     bio: String
     followers: Int!
@@ -19,6 +19,7 @@ const typeDefs = gql`
 
   extend type Query {
     me: User
+    user(username: String!): User
     users: [User!]!
   }
 
@@ -38,6 +39,13 @@ const resolvers: Resolvers = {
   Query: {
     me(root, args, { injector }) {
       return injector.get(Auth).currentUser();
+    },
+    async user(root, { username }, { injector }) {
+      const currentUser = await injector.get(Auth).currentUser();
+
+      if (!currentUser) return null;
+
+      return injector.get(Users).findByUsername(username);
     },
     async users(root, args, { injector }) {
       const currentUser = await injector.get(Auth).currentUser();

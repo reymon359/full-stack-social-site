@@ -3,8 +3,13 @@ import sql from 'sql-template-strings';
 import faker from 'faker';
 import addMinutes from 'date-fns/addMinutes';
 import {
-  resetDb as envResetDb, postgresHost, postgresPort,
-  postgresUser, postgresPassword, postgresDb, fakedDb
+  resetDb as envResetDb,
+  postgresHost,
+  postgresPort,
+  postgresUser,
+  postgresPassword,
+  postgresDb,
+  fakedDb,
 } from './env';
 
 export type User = {
@@ -86,7 +91,7 @@ export async function initDb(): Promise<void> {
 
 export const resetDb = async () => {
   await initDb();
-  console.log(`Reseting database`)
+  console.log(`Reseting database`);
 
   const sampleUsers = [
     {
@@ -95,10 +100,11 @@ export const resetDb = async () => {
       username: 'uri',
       password: '$2a$08$NO9tkFLCoSqX1c5wk3s7z.JfxaVMKA.m7zUDdDwEquo4rvzimQeJm', // 111
       email: 'uri@uri.com',
-      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
+      bio:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
       followers: 35,
       following: 33,
-      picture: 'https://randomuser.me/api/portraits/thumb/lego/1.jpg',
+      picture: 'https://robohash.org/uri?set=set5',
     },
     {
       id: '2',
@@ -106,10 +112,11 @@ export const resetDb = async () => {
       username: 'ethan',
       password: '$2a$08$xE4FuCi/ifxjL2S8CzKAmuKLwv18ktksSN.F3XYEnpmcKtpbpeZgO', // 222
       email: 'ethan@ethan.com',
-      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      bio:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       followers: 2,
       following: 21,
-      picture: 'https://randomuser.me/api/portraits/thumb/men/1.jpg',
+      picture: 'https://robohash.org/ethan?set=set5',
     },
     {
       id: '3',
@@ -117,10 +124,11 @@ export const resetDb = async () => {
       username: 'bryan',
       password: '$2a$08$UHgH7J8G6z1mGQn2qx2kdeWv0jvgHItyAsL9hpEUI3KJmhVW5Q1d.', // 333
       email: 'bryan@bryan.com',
-      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      bio:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       followers: 3,
       following: 31,
-      picture: 'https://randomuser.me/api/portraits/thumb/men/2.jpg',
+      picture: 'https://robohash.org/bryan?set=set5',
     },
     {
       id: '4',
@@ -128,10 +136,11 @@ export const resetDb = async () => {
       username: 'avery',
       password: '$2a$08$wR1k5Q3T9FC7fUgB7Gdb9Os/GV7dGBBf4PLlWT7HERMFhmFDt47xi', // 444
       email: 'avery@avery.com',
-      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      bio:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       followers: 4,
       following: 41,
-      picture: 'https://randomuser.me/api/portraits/thumb/women/1.jpg',
+      picture: 'https://robohash.org/avery?set=set5',
     },
     {
       id: '5',
@@ -139,10 +148,11 @@ export const resetDb = async () => {
       username: 'katie',
       password: '$2a$08$6.mbXqsDX82ZZ7q5d8Osb..JrGSsNp4R3IKj7mxgF6YGT0OmMw242', // 555
       email: 'katie@katie.com',
-      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      bio:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       followers: 5,
       following: 51,
-      picture: 'https://randomuser.me/api/portraits/thumb/women/2.jpg',
+      picture: 'https://robohash.org/katie?set=set5',
     },
   ];
 
