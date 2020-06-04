@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useCallback } from 'react';
-import { useSignOut } from '../../services/auth.service';
+import { useMe, useSignOut } from '../../services/auth.service';
 import { History } from 'history';
 import Logo from '../Shared/Logo';
 import { useContext } from 'react';
 import { ThemeContext } from 'styled-components';
-import { Link } from 'react-router-dom';
+import { AppRoutes } from '../../AppRoutes';
 
 const NavbarContainer = styled.div`
   background-color: ${(props) => props.theme.colors.light};
@@ -54,8 +54,8 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ history }) => {
   const themeContext = useContext(ThemeContext);
-
   const signOut = useSignOut();
+  const user = useMe();
 
   const handleSignOut = useCallback(() => {
     signOut().then(() => {
@@ -63,21 +63,15 @@ const Navbar: React.FC<NavbarProps> = ({ history }) => {
     });
   }, [history, signOut]);
 
-  const redirectToNewPost = () => {
-    history.push('/new-post');
-  };
-
-  const redirectToProfile = () => {
-    history.push('/:id');
-  };
+  const redirectToRoot = () => history.push(AppRoutes.Root);
+  const redirectToNewPost = () => history.push(AppRoutes.NewPost);
+  const redirectToProfile = () => history.push(`/${user && user.username}`);
 
   return (
     <NavbarContainer>
-      <Link to="/">
-        <LogoContainer>
-          <Logo fill={themeContext.colors.primary} width={40} height={40} />
-        </LogoContainer>
-      </Link>
+      <LogoContainer data-testid="root-logo" onClick={redirectToRoot}>
+        <Logo fill={themeContext.colors.primary} width={40} height={40} />
+      </LogoContainer>
       <NavbarButtonsContainer>
         <NavbarButton data-testid="new-post-button" onClick={redirectToNewPost}>
           New Post
