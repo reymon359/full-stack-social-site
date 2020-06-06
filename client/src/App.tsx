@@ -7,8 +7,6 @@ import {
   RouteComponentProps,
 } from 'react-router-dom';
 import AuthScreen from './pages/AuthPage';
-import ChatRoomScreen from './components/ChatRoomScreen';
-// import ChatsListScreen from './components/ChatsListScreen';
 
 import { AppRoutes } from './AppRoutes';
 import { withAuth } from './services/auth.service';

@@ -1,12 +1,12 @@
-import React, { Suspense } from 'react';
+import React, { useCallback } from 'react';
 import { History } from 'history';
 import Navbar from '../../components/Navbar';
 import gql from 'graphql-tag';
 import * as fragments from '../../graphql/fragments';
 import { useGetUserQuery } from '../../graphql/types';
-import { Redirect } from 'react-router-dom';
 import ProfileDetails from '../../components/ProfileDetails';
-import { AppRoutes } from '../../AppRoutes';
+import NotfoundPage from '../NotfoundPage';
+import NotFoundContainer from '../../components/NotFoundContainer';
 
 // eslint-disable-next-line
 const getUserQuery = gql`
@@ -35,7 +35,7 @@ const ProfilePage: React.FC<ProfilePageParams> = ({ history, username }) => {
       ) : data && data.user ? (
         <ProfileDetails user={data.user} />
       ) : (
-        <Redirect to={AppRoutes.NotFound} />
+        <NotFoundContainer />
       )}
     </>
   );
