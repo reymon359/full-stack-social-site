@@ -4,7 +4,11 @@ import { Response } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { secret, expiration } from '../../env';
-import { validateLength, validateEmail, validatePassword } from '../../validators';
+import {
+  validateLength,
+  validateEmail,
+  validatePassword,
+} from '../../validators';
 import { Users } from './users.provider';
 import { User } from '../../db';
 
@@ -66,7 +70,9 @@ export class Auth {
       throw Error("❌ Password and Confirm Password don't match");
     }
 
-    const existingUserWithUsername = await this.users.findByUsername(username);
+    const existingUserWithUsername = await this.users.findUserByUsername(
+      username
+    );
 
     if (existingUserWithUsername) {
       throw Error('❌ That username already exists');
@@ -95,7 +101,7 @@ export class Auth {
       const username = jwt.verify(this.req.cookies.authToken, secret) as string;
 
       if (username) {
-        this._currentUser = await this.users.findByUsername(username);
+        this._currentUser = await this.users.findUserByUsername(username);
         return this._currentUser;
       }
     }
