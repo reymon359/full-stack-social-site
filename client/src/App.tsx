@@ -28,6 +28,7 @@ const App: React.FC = () => (
       <Route exact path={AppRoutes.Post} component={withAuth(PostPage)} />
       <Route exact path={AppRoutes.NewPost} component={withAuth(NewPostPage)} />
       <Route exact path={AppRoutes.About} component={withAuth(AboutPage)} />
+      <Route exact path={AppRoutes.NotFound} component={NotfoundPage} />
       <Route
         exact
         path="/:username"

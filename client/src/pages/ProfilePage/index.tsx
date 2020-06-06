@@ -6,6 +6,7 @@ import * as fragments from '../../graphql/fragments';
 import { useGetUserQuery } from '../../graphql/types';
 import { Redirect } from 'react-router-dom';
 import ProfileDetails from '../../components/ProfileDetails';
+import { AppRoutes } from '../../AppRoutes';
 
 // eslint-disable-next-line
 const getUserQuery = gql`
@@ -22,32 +23,20 @@ interface ProfilePageParams {
   username: string;
 }
 const ProfilePage: React.FC<ProfilePageParams> = ({ history, username }) => {
-  const { data, loading, fetchMore } = useGetUserQuery({
+  const { loading, data } = useGetUserQuery({
     variables: { username },
   });
-
-  if (data === undefined) {
-    return null;
-  }
-  const user = data.user;
-  const loadingUser = loading;
-
-  if (loadingUser) return null;
-  if (user === null) return null;
-
-  console.log(user);
-
-  // User was probably removed from cache by the subscription handler
-  if (!user) {
-    return <Redirect to="/" />;
-  }
 
   return (
     <>
       <Navbar history={history} />
-      <Suspense fallback={<h1>Loading profile...</h1>}>
-        <ProfileDetails user={user} />
-      </Suspense>
+      {loading ? (
+        <h1>Loading profile...</h1>
+      ) : data && data.user ? (
+        <ProfileDetails user={data.user} />
+      ) : (
+        <Redirect to={AppRoutes.NotFound} />
+      )}
     </>
   );
 };

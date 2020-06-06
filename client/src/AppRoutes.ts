@@ -7,4 +7,5 @@ export const AppRoutes = {
   About: '/about',
   Profile: '/:username',
   All: '*',
+  NotFound: '/not-found',
 };
