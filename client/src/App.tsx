@@ -28,9 +28,16 @@ const App: React.FC = () => (
       <Route exact path={AppRoutes.Post} component={withAuth(PostPage)} />
       <Route exact path={AppRoutes.NewPost} component={withAuth(NewPostPage)} />
       <Route exact path={AppRoutes.About} component={withAuth(AboutPage)} />
-      <Route exact path={AppRoutes.Profile} component={withAuth(ProfilePage)} />
+      <Route
+        exact
+        path="/:username"
+        component={withAuth(
+          ({ match, history }: RouteComponentProps<{ username: string }>) => (
+            <ProfilePage username={match.params.username} history={history} />
+          )
+        )}
+      />
       <Route path={AppRoutes.All} component={NotfoundPage} />
-
       {/* <Route exact path="/chats" component={withAuth(ChatsListScreen)} /> */}
       <Route
         exact
