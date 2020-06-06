@@ -69,8 +69,6 @@ const Navbar: React.FC<NavbarProps> = ({ history }) => {
     history.push(`/${user && user.username}`);
   }, [history]);
 
-  // const redirectToProfile = () => history.push(`/${user && user.username}`);
-
   return (
     <NavbarContainer>
       <LogoContainer data-testid="root-logo" onClick={redirectToRoot}>
