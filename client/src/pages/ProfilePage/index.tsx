@@ -1,13 +1,11 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { History } from 'history';
 import Navbar from '../../components/Navbar';
 import gql from 'graphql-tag';
 import * as fragments from '../../graphql/fragments';
 import { useGetUserQuery } from '../../graphql/types';
 import { Redirect } from 'react-router-dom';
-import ChatNavbar from '../../components/ChatRoomScreen/ChatNavbar';
-import MessagesList from '../../components/ChatRoomScreen/MessagesList';
-import MessageInput from '../../components/ChatRoomScreen/MessageInput';
+import ProfileDetails from '../../components/ProfileDetails';
 
 // eslint-disable-next-line
 const getUserQuery = gql`
@@ -47,63 +45,11 @@ const ProfilePage: React.FC<ProfilePageParams> = ({ history, username }) => {
   return (
     <>
       <Navbar history={history} />
-      {user?.id && <h1>Profile from {user.username}</h1>}
+      <Suspense fallback={<h1>Loading profile...</h1>}>
+        <ProfileDetails user={user} />
+      </Suspense>
     </>
   );
 };
 
 export default ProfilePage;
-//
-// interface ChatRoomScreenParams {
-//   chatId: string;
-//   history: History;
-// }
-//
-// export interface ChatQueryMessage {
-//   id: string;
-//   content: string;
-//   createdAt: Date;
-// }
-//
-// export interface ChatQueryResult {
-//   id: string;
-//   name: string;
-//   picture: string;
-//   messages: Array<ChatQueryMessage>;
-// }
-//
-// type OptionalChatQueryResult = ChatQueryResult | null;
-//
-// const ChatRoomScreen: React.FC<ChatRoomScreenParams> = ({
-//   history,
-//   chatId,
-// }) => {
-//   const [chat, setChat] = useState<OptionalChatQueryResult>(null);
-//
-//   useMemo(async () => {
-//     const body = await fetch(`${process.env.REACT_APP_SERVER_URL}/graphql`, {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify({
-//         query: getChatQuery,
-//         variables: { chatId },
-//       }),
-//     });
-//     const {
-//       data: { chat },
-//     } = await body.json();
-//     setChat(chat);
-//   }, [chatId]);
-//
-//   if (!chat) return null;
-//
-//   return (
-//     <Container>
-//       <ChatNavbar chat={chat} history={history} />
-//       {chat.messages && <MessagesList messages={chat.messages} />}
-//       <MessageInput />
-//     </Container>
-//   );
-// };
