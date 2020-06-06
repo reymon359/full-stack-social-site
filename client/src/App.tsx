@@ -38,17 +38,6 @@ const App: React.FC = () => (
         )}
       />
       <Route path={AppRoutes.All} component={NotfoundPage} />
-      {/* <Route exact path="/chats" component={withAuth(ChatsListScreen)} /> */}
-      <Route
-        exact
-        path="/chats/:chatId"
-        component={withAuth(
-          ({ match, history }: RouteComponentProps<{ chatId: string }>) => (
-            <ChatRoomScreen chatId={match.params.chatId} history={history} />
-          )
-        )}
-      />
-      {/* <Route exact path="/new-chat" component={withAuth(ChatCreationScreen)} /> */}
     </Switch>
   </BrowserRouter>
 );
