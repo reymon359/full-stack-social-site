@@ -101,7 +101,7 @@ export const resetDb = async () => {
       password: '$2a$08$NO9tkFLCoSqX1c5wk3s7z.JfxaVMKA.m7zUDdDwEquo4rvzimQeJm', // 111
       email: 'uri@uri.com',
       bio:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       followers: 35,
       following: 33,
       picture: 'https://robohash.org/uri?set=set5',
