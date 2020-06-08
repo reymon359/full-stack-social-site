@@ -20,6 +20,26 @@ const UserPicture = styled.img`
   border: 2px solid ${(props) => props.theme.colors.primary};
 `;
 
+const UserName = styled.h1`
+  padding: 0.5rem 0;
+  font-size: ${(props) => props.theme.fontSizes.xLarge};
+  font-weight: ${(props) => props.theme.fontWeights.bold};
+
+  ${(props) => props.theme.media.sm`
+    font-size: ${props.theme.fontSizes.mediumLarge};
+ `}
+`;
+
+const UserUsername = styled.h3`
+  padding: 0.2rem 0;
+  font-size: ${(props) => props.theme.fontSizes.medium};
+  font-weight: ${(props) => props.theme.fontWeights.regular};
+
+  ${(props) => props.theme.media.sm`
+    font-size: ${props.theme.fontSizes.normal};
+ `}
+`;
+
 interface ProfileDetailsProps {
   user: User;
 }
@@ -28,7 +48,8 @@ const ProfileDetails: React.FC<ProfileDetailsProps> = ({ user }): any => {
   return (
     <ProfileDetailsContainer>
       <UserPicture src={user.picture} />
-      {user.username}
+      <UserName> {user.name}</UserName>
+      <UserUsername>{user.username}</UserUsername>
     </ProfileDetailsContainer>
   );
 };
