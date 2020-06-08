@@ -40,16 +40,28 @@ const UserUsername = styled.h3`
  `}
 `;
 
+const UserBio = styled.p`
+  padding: 0.2rem 0;
+  font-size: ${(props) => props.theme.fontSizes.medium};
+  font-weight: ${(props) => props.theme.fontWeights.regular};
+
+  ${(props) => props.theme.media.sm`
+    font-size: ${props.theme.fontSizes.normal};
+ `}
+`;
+
 interface ProfileDetailsProps {
   user: User;
 }
 
 const ProfileDetails: React.FC<ProfileDetailsProps> = ({ user }): any => {
+  console.log(user);
   return (
     <ProfileDetailsContainer>
       <UserPicture src={user.picture} />
       <UserName> {user.name}</UserName>
       <UserUsername>{user.username}</UserUsername>
+      <UserBio>{user.bio}</UserBio>
     </ProfileDetailsContainer>
   );
 };
