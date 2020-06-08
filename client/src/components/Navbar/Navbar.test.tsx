@@ -2,16 +2,12 @@ import React, { useContext } from 'react';
 import { createMemoryHistory } from 'history';
 import { cleanup, render, fireEvent, waitFor } from '@testing-library/react';
 import Navbar from './index';
-import {
-  mockApolloClient,
-  mockApolloClientCacheData,
-} from '../../test-helpers';
+import { mockApolloClient } from '../../test-helpers';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { ThemeProvider } from 'styled-components';
 import { theme } from '../../styles';
 import { AppRoutes } from '../../AppRoutes';
 import { isSignedIn, useMe } from '../../services/auth.service';
-import { User } from '../../graphql/types';
 
 describe('Navbar', () => {
   afterEach(cleanup);

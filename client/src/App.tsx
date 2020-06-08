@@ -15,7 +15,7 @@ import { ProfileContainer } from './components/Profile/ProfileContainer';
 import PostPage from './pages/PostPage';
 import NotfoundPage from './pages/NotfoundPage';
 import NewPostPage from './pages/NewPostPage';
-import AboutPage from './pages/AboutPage';
+import { AboutContainer } from './About/AboutContainer';
 
 const App: React.FC = () => (
   <BrowserRouter>
@@ -25,7 +25,11 @@ const App: React.FC = () => (
       <Route exact path={AppRoutes.Auth} component={AuthScreen} />
       <Route exact path={AppRoutes.Post} component={withAuth(PostPage)} />
       <Route exact path={AppRoutes.NewPost} component={withAuth(NewPostPage)} />
-      <Route exact path={AppRoutes.About} component={withAuth(AboutPage)} />
+      <Route
+        exact
+        path={AppRoutes.About}
+        component={withAuth(AboutContainer)}
+      />
       <Route exact path={AppRoutes.NotFound} component={NotfoundPage} />
       <Route
         exact

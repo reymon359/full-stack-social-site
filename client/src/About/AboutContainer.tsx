@@ -1,12 +1,12 @@
 import React from 'react';
 import { History } from 'history';
-import Navbar from '../../components/Navbar/index';
+import Navbar from '../components/Navbar';
 
-interface AboutPageProps {
+interface AboutContainerProps {
   history: History;
 }
 
-const AboutPage: React.FC<AboutPageProps> = ({ history }) => {
+export const AboutContainer: React.FC<AboutContainerProps> = ({ history }) => {
   return (
     <>
       <Navbar history={history} />
@@ -14,5 +14,3 @@ const AboutPage: React.FC<AboutPageProps> = ({ history }) => {
     </>
   );
 };
-
-export default AboutPage;
