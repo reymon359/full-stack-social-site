@@ -52,7 +52,7 @@ interface NavbarProps {
   history: History;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ history }) => {
+export const Navbar: React.FC<NavbarProps> = ({ history }) => {
   const themeContext = useContext(ThemeContext);
   const signOut = useSignOut();
   const user = useMe();
@@ -88,5 +88,3 @@ const Navbar: React.FC<NavbarProps> = ({ history }) => {
     </NavbarContainer>
   );
 };
-
-export default Navbar;

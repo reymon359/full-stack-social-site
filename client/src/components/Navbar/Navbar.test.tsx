@@ -1,17 +1,13 @@
 import React, { useContext } from 'react';
 import { createMemoryHistory } from 'history';
 import { cleanup, render, fireEvent, waitFor } from '@testing-library/react';
-import Navbar from './index';
-import {
-  mockApolloClient,
-  mockApolloClientCacheData,
-} from '../../test-helpers';
+import { Navbar } from './Navbar';
+import { mockApolloClient } from '../../test-helpers';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { ThemeProvider } from 'styled-components';
 import { theme } from '../../styles';
 import { AppRoutes } from '../../AppRoutes';
 import { isSignedIn, useMe } from '../../services/auth.service';
-import { User } from '../../graphql/types';
 
 describe('Navbar', () => {
   afterEach(cleanup);
@@ -37,7 +33,7 @@ describe('Navbar', () => {
     }
   });
 
-  it('goes to New Post Page when clicking the new post link', async () => {
+  it('goes to New Post Container when clicking the new post link', async () => {
     const client = mockApolloClient();
     const history = createMemoryHistory();
 
@@ -58,7 +54,7 @@ describe('Navbar', () => {
     }
   });
 
-  it('goes to Sign In Page and logs out user when clicking the Sign out link', async () => {
+  it('goes to Sign In Container and logs out user when clicking the Sign out link', async () => {
     const client = mockApolloClient();
     const history = createMemoryHistory();
 

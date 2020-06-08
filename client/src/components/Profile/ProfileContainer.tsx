@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react';
 import { History } from 'history';
-import Navbar from '../Navbar';
+import { Navbar } from '../Navbar';
 import gql from 'graphql-tag';
 import * as fragments from '../../graphql/fragments';
 import { useGetUserQuery } from '../../graphql/types';
 import ProfileDetails from './ProfileDetails';
-import NotFoundContainer from '../NotFoundContainer';
+import { NotFoundContent } from '../NotFound';
 
 // eslint-disable-next-line
 const getUserQuery = gql`
@@ -17,11 +17,11 @@ const getUserQuery = gql`
   ${fragments.user}
 `;
 
-interface ProfilePageParams {
+interface ProfileContainerParams {
   history: History;
   username: string;
 }
-export const ProfileContainer: React.FC<ProfilePageParams> = ({
+export const ProfileContainer: React.FC<ProfileContainerParams> = ({
   history,
   username,
 }) => {
@@ -37,7 +37,7 @@ export const ProfileContainer: React.FC<ProfilePageParams> = ({
       ) : data && data.user ? (
         <ProfileDetails user={data.user} />
       ) : (
-        <NotFoundContainer />
+        <NotFoundContent />
       )}
     </>
   );

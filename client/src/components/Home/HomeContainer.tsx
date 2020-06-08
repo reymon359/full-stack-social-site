@@ -1,12 +1,12 @@
 import React from 'react';
 import { History } from 'history';
-import Navbar from '../../components/Navbar/index';
+import { Navbar } from '../Navbar';
 
-interface HomePageProps {
+interface HomeContainerProps {
   history: History;
 }
 
-const HomePage: React.FC<HomePageProps> = ({ history }) => {
+export const HomeContainer: React.FC<HomeContainerProps> = ({ history }) => {
   return (
     <>
       <Navbar history={history} />
@@ -14,5 +14,3 @@ const HomePage: React.FC<HomePageProps> = ({ history }) => {
     </>
   );
 };
-
-export default HomePage;

@@ -6,27 +6,35 @@ import {
   Switch,
   RouteComponentProps,
 } from 'react-router-dom';
-import AuthScreen from './pages/AuthPage';
 
 import { AppRoutes } from './AppRoutes';
 import { withAuth } from './services/auth.service';
-import HomePage from './pages/HomePage';
-import { ProfileContainer } from './components/Profile/ProfileContainer';
-import PostPage from './pages/PostPage';
-import NotfoundPage from './pages/NotfoundPage';
-import NewPostPage from './pages/NewPostPage';
-import AboutPage from './pages/AboutPage';
+import { ProfileContainer } from './components/Profile';
+import { AboutContainer } from './components/About/AboutContainer';
+import { AuthContainer } from './components/Auth';
+import { HomeContainer } from './components/Home';
+import { PostContainer } from './components/Post';
+import { NewPostContainer } from './components/NewPost';
+import { NotFoundContainer } from './components/NotFound';
 
 const App: React.FC = () => (
   <BrowserRouter>
     <Switch>
       <Route exact path={AppRoutes.Root} render={redirectToHome} />
-      <Route exact path={AppRoutes.Home} component={withAuth(HomePage)} />
-      <Route exact path={AppRoutes.Auth} component={AuthScreen} />
-      <Route exact path={AppRoutes.Post} component={withAuth(PostPage)} />
-      <Route exact path={AppRoutes.NewPost} component={withAuth(NewPostPage)} />
-      <Route exact path={AppRoutes.About} component={withAuth(AboutPage)} />
-      <Route exact path={AppRoutes.NotFound} component={NotfoundPage} />
+      <Route exact path={AppRoutes.Home} component={withAuth(HomeContainer)} />
+      <Route exact path={AppRoutes.Auth} component={AuthContainer} />
+      <Route exact path={AppRoutes.Post} component={withAuth(PostContainer)} />
+      <Route
+        exact
+        path={AppRoutes.NewPost}
+        component={withAuth(NewPostContainer)}
+      />
+      <Route
+        exact
+        path={AppRoutes.About}
+        component={withAuth(AboutContainer)}
+      />
+      {/*<Route exact path={AppRoutes.NotFound} component={NotFoundContainer} />*/}
       <Route
         exact
         path="/:username"
@@ -39,7 +47,7 @@ const App: React.FC = () => (
           )
         )}
       />
-      <Route path={AppRoutes.All} component={NotfoundPage} />
+      <Route path={AppRoutes.All} component={NotFoundContainer} />
     </Switch>
   </BrowserRouter>
 );
