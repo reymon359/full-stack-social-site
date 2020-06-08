@@ -11,7 +11,7 @@ import AuthScreen from './pages/AuthPage';
 import { AppRoutes } from './AppRoutes';
 import { withAuth } from './services/auth.service';
 import HomePage from './pages/HomePage';
-import ProfilePage from './pages/ProfilePage';
+import { ProfileContainer } from './components/Profile/ProfileContainer';
 import PostPage from './pages/PostPage';
 import NotfoundPage from './pages/NotfoundPage';
 import NewPostPage from './pages/NewPostPage';
@@ -32,7 +32,10 @@ const App: React.FC = () => (
         path="/:username"
         component={withAuth(
           ({ match, history }: RouteComponentProps<{ username: string }>) => (
-            <ProfilePage username={match.params.username} history={history} />
+            <ProfileContainer
+              username={match.params.username}
+              history={history}
+            />
           )
         )}
       />

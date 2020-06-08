@@ -1,7 +1,7 @@
 import React from 'react';
-import { User } from '../graphql/types';
+import { User } from '../../graphql/types';
 import styled from 'styled-components';
-import { useMe } from '../services/auth.service';
+import { useMe } from '../../services/auth.service';
 
 const ProfileDetailsContainer = styled.div`
   display: flex;
