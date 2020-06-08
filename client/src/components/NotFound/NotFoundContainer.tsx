@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { History } from 'history';
-import Navbar from '../Navbar';
+import { Navbar } from '../Navbar';
 import { NotFoundContent } from './NotFoundContent';
+import { useMe } from '../../services/auth.service';
 
 interface NotFoundContainerProps {
   history: History;
@@ -9,9 +10,11 @@ interface NotFoundContainerProps {
 
 export const NotFoundContainer: React.FC<NotFoundContainerProps> = ({
   history,
-}) => (
-  <>
-    <Navbar history={history} />
-    <NotFoundContent />
-  </>
-);
+}) => {
+  return (
+    <>
+      <Navbar history={history} />
+      <NotFoundContent />
+    </>
+  );
+};

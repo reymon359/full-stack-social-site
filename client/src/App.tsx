@@ -34,7 +34,7 @@ const App: React.FC = () => (
         path={AppRoutes.About}
         component={withAuth(AboutContainer)}
       />
-      <Route exact path={AppRoutes.NotFound} component={NotFoundContainer} />
+      {/*<Route exact path={AppRoutes.NotFound} component={NotFoundContainer} />*/}
       <Route
         exact
         path="/:username"

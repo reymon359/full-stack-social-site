@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { createMemoryHistory } from 'history';
 import { cleanup, render, fireEvent, waitFor } from '@testing-library/react';
-import Navbar from './index';
+import { Navbar } from './Navbar';
 import { mockApolloClient } from '../../test-helpers';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { ThemeProvider } from 'styled-components';

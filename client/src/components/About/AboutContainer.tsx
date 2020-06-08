@@ -1,6 +1,6 @@
 import React from 'react';
 import { History } from 'history';
-import Navbar from '../Navbar';
+import { Navbar } from '../Navbar';
 
 interface AboutContainerProps {
   history: History;

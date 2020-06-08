@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { History } from 'history';
-import Navbar from '../Navbar';
+import { Navbar } from '../Navbar';
 import gql from 'graphql-tag';
 import * as fragments from '../../graphql/fragments';
 import { useGetUserQuery } from '../../graphql/types';
