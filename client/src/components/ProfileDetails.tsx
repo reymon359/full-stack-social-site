@@ -1,6 +1,7 @@
 import React from 'react';
 import { User } from '../graphql/types';
 import styled from 'styled-components';
+import { useMe } from '../services/auth.service';
 
 const ProfileDetailsContainer = styled.div`
   display: flex;
@@ -56,7 +57,7 @@ const UserBio = styled.p`
 `;
 
 const FollowsContainer = styled.div`
-  padding: 0.3rem 0;
+  padding: 0.4rem 0;
   font-size: ${(props) => props.theme.fontSizes.medium};
   font-weight: ${(props) => props.theme.fontWeights.regular};
   display: flex;
@@ -69,6 +70,7 @@ const FollowsContainer = styled.div`
  `}
 
   p {
+    padding: 0.3rem 0;
     margin: 0 0.2rem;
     font-weight: ${(props) => props.theme.fontWeights.bold};
   }
@@ -98,14 +100,21 @@ const FollowButton = styled.button`
   &:focus {
     box-shadow: 0px 0px 5px 1px ${(props) => props.theme.colors.medium};
   }
+
+  ${(props) => props.theme.media.sm`
+    font-size: ${props.theme.fontSizes.normal};
+ `}
 `;
 
 interface ProfileDetailsProps {
   user: User;
 }
 
-const ProfileDetails: React.FC<ProfileDetailsProps> = ({ user }): any => {
+const ProfileDetails: React.FC<ProfileDetailsProps> = ({ user }) => {
   console.log(user);
+  const currentUser = useMe();
+  const isCurrentUserProfile = currentUser && user.id === currentUser.id;
+
   return (
     <ProfileDetailsContainer>
       <UserPicture src={user.picture} />
@@ -117,7 +126,7 @@ const ProfileDetails: React.FC<ProfileDetailsProps> = ({ user }): any => {
         <a href="#">Followers</a>
         <p>{user.following}</p>
         <a href="#">Following</a>
-        <FollowButton>Follow</FollowButton>
+        {!isCurrentUserProfile && <FollowButton>Follow</FollowButton>}
       </FollowsContainer>
     </ProfileDetailsContainer>
   );
