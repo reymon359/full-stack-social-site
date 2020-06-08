@@ -10,10 +10,10 @@ import {
 } from '../graphql/types';
 import { useCacheService } from './cache.service';
 
-const MyContext = React.createContext<User | null>(null);
+export const AuthContext = React.createContext<User | null>(null);
 
 export const useMe = () => {
-  return useContext(MyContext);
+  return useContext(AuthContext);
 };
 
 export const withAuth = <P extends object>(
@@ -44,9 +44,9 @@ export const withAuth = <P extends object>(
     }
 
     return (
-      <MyContext.Provider value={data.me}>
+      <AuthContext.Provider value={data.me}>
         <Component {...(props as P)} />
-      </MyContext.Provider>
+      </AuthContext.Provider>
     );
   };
 };

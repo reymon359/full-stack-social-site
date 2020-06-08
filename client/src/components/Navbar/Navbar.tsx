@@ -52,11 +52,12 @@ interface NavbarProps {
   history: History;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ history }) => {
+export const Navbar: React.FC<NavbarProps> = ({ history }, props) => {
   const themeContext = useContext(ThemeContext);
   const signOut = useSignOut();
-  const user = useMe();
 
+  const user = useMe();
+  console.log(user);
   const handleSignOut = useCallback(() => {
     signOut().then(() => {
       history.replace('/sign-in');
