@@ -6,23 +6,23 @@ import {
   Switch,
   RouteComponentProps,
 } from 'react-router-dom';
-import AuthScreen from './pages/AuthContainer';
 
 import { AppRoutes } from './AppRoutes';
 import { withAuth } from './services/auth.service';
-import HomeContainer from './pages/Home/HomeContainer';
 import { ProfileContainer } from './components/Profile';
-import PostContainer from './pages/PostContainer';
-import NotfoundContainer from './pages/NotfoundContainer';
-import NewPostContainer from './pages/NewPostContainer';
 import { AboutContainer } from './components/About/AboutContainer';
+import { AuthContainer } from './components/Auth';
+import { HomeContainer } from './components/Home';
+import { PostContainer } from './components/Post';
+import { NewPostContainer } from './components/NewPost';
+import { NotFoundContainer } from './components/NotFound';
 
 const App: React.FC = () => (
   <BrowserRouter>
     <Switch>
       <Route exact path={AppRoutes.Root} render={redirectToHome} />
       <Route exact path={AppRoutes.Home} component={withAuth(HomeContainer)} />
-      <Route exact path={AppRoutes.Auth} component={AuthScreen} />
+      <Route exact path={AppRoutes.Auth} component={AuthContainer} />
       <Route exact path={AppRoutes.Post} component={withAuth(PostContainer)} />
       <Route
         exact
@@ -34,7 +34,7 @@ const App: React.FC = () => (
         path={AppRoutes.About}
         component={withAuth(AboutContainer)}
       />
-      <Route exact path={AppRoutes.NotFound} component={NotfoundContainer} />
+      <Route exact path={AppRoutes.NotFound} component={NotFoundContainer} />
       <Route
         exact
         path="/:username"
@@ -47,7 +47,7 @@ const App: React.FC = () => (
           )
         )}
       />
-      <Route path={AppRoutes.All} component={NotfoundContainer} />
+      <Route path={AppRoutes.All} component={NotFoundContainer} />
     </Switch>
   </BrowserRouter>
 );

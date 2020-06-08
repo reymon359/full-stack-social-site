@@ -5,7 +5,7 @@ import gql from 'graphql-tag';
 import * as fragments from '../../graphql/fragments';
 import { useGetUserQuery } from '../../graphql/types';
 import ProfileDetails from './ProfileDetails';
-import NotFoundContainer from '../NotFoundContainer';
+import { NotFoundContent } from '../NotFound';
 
 // eslint-disable-next-line
 const getUserQuery = gql`
@@ -37,7 +37,7 @@ export const ProfileContainer: React.FC<ProfileContainerParams> = ({
       ) : data && data.user ? (
         <ProfileDetails user={data.user} />
       ) : (
-        <NotFoundContainer />
+        <NotFoundContent />
       )}
     </>
   );

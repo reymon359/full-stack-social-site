@@ -1,12 +1,12 @@
 import React from 'react';
 import { History } from 'history';
-import Navbar from '../../components/Navbar';
+import Navbar from '../Navbar';
 
 interface PostContainerProps {
   history: History;
 }
 
-const PostContainer: React.FC<PostContainerProps> = ({ history }) => {
+export const PostContainer: React.FC<PostContainerProps> = ({ history }) => {
   return (
     <>
       <Navbar history={history} />
@@ -14,5 +14,3 @@ const PostContainer: React.FC<PostContainerProps> = ({ history }) => {
     </>
   );
 };
-
-export default PostContainer;
