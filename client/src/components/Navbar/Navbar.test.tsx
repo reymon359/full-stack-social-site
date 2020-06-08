@@ -33,7 +33,7 @@ describe('Navbar', () => {
     }
   });
 
-  it('goes to New Post Page when clicking the new post link', async () => {
+  it('goes to New Post Container when clicking the new post link', async () => {
     const client = mockApolloClient();
     const history = createMemoryHistory();
 
@@ -54,7 +54,7 @@ describe('Navbar', () => {
     }
   });
 
-  it('goes to Sign In Page and logs out user when clicking the Sign out link', async () => {
+  it('goes to Sign In Container and logs out user when clicking the Sign out link', async () => {
     const client = mockApolloClient();
     const history = createMemoryHistory();
 

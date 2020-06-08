@@ -3,15 +3,15 @@ import { History } from 'history';
 import Navbar from '../../components/Navbar';
 import NotFoundContainer from '../../components/NotFoundContainer';
 
-interface NotfoundPageProps {
+interface NotfoundContainerProps {
   history: History;
 }
 
-const NotfoundPage: React.FC<NotfoundPageProps> = ({ history }) => (
+export const NotfoundContainer: React.FC<NotfoundContainerProps> = ({
+  history,
+}) => (
   <>
     <Navbar history={history} />
     <NotFoundContainer />
   </>
 );
-
-export default NotfoundPage;

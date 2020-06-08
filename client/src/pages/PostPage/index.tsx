@@ -2,11 +2,11 @@ import React from 'react';
 import { History } from 'history';
 import Navbar from '../../components/Navbar';
 
-interface PostPageProps {
+interface PostContainerProps {
   history: History;
 }
 
-const PostPage: React.FC<PostPageProps> = ({ history }) => {
+const PostContainer: React.FC<PostContainerProps> = ({ history }) => {
   return (
     <>
       <Navbar history={history} />
@@ -15,4 +15,4 @@ const PostPage: React.FC<PostPageProps> = ({ history }) => {
   );
 };
 
-export default PostPage;
+export default PostContainer;

@@ -2,17 +2,15 @@ import React from 'react';
 import { History } from 'history';
 import Navbar from '../../components/Navbar/index';
 
-interface NewPostPageProps {
+interface HomeContainerProps {
   history: History;
 }
 
-const NewPostPage: React.FC<NewPostPageProps> = ({ history }) => {
+export const HomeContainer: React.FC<HomeContainerProps> = ({ history }) => {
   return (
     <>
       <Navbar history={history} />
-      <h1>NewPost</h1>
+      <h1>Home</h1>
     </>
   );
 };
-
-export default NewPostPage;

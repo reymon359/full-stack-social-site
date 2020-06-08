@@ -7,11 +7,11 @@ const Main = styled.div`
   padding: 2rem;
 `;
 
-interface LayoutPageProps {
+interface LayoutContainerProps {
   history: History;
   children: React.ReactNode;
 }
-export const LayoutPage: React.FC<LayoutPageProps> = ({
+export const LayoutContainer: React.FC<LayoutContainerProps> = ({
   history,
   children,
 }) => (

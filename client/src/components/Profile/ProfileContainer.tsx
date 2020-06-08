@@ -17,11 +17,11 @@ const getUserQuery = gql`
   ${fragments.user}
 `;
 
-interface ProfilePageParams {
+interface ProfileContainerParams {
   history: History;
   username: string;
 }
-export const ProfileContainer: React.FC<ProfilePageParams> = ({
+export const ProfileContainer: React.FC<ProfileContainerParams> = ({
   history,
   username,
 }) => {
