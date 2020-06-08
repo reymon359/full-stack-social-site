@@ -1,6 +1,12 @@
 import React, { useContext } from 'react';
 import { createMemoryHistory } from 'history';
-import { cleanup, render, fireEvent, waitFor } from '@testing-library/react';
+import {
+  cleanup,
+  render,
+  fireEvent,
+  waitFor,
+  screen,
+} from '@testing-library/react';
 import { Navbar } from './Navbar';
 import { mockApolloClient } from '../../test-helpers';
 import { ApolloProvider } from '@apollo/react-hooks';
@@ -8,6 +14,10 @@ import { ThemeProvider } from 'styled-components';
 import { theme } from '../../styles';
 import { AppRoutes } from '../../AppRoutes';
 import { isSignedIn, useMe } from '../../services/auth.service';
+import { MockedProvider, wait } from '@apollo/react-testing';
+import * as queries from '../../graphql/queries';
+import TestRenderer from 'react-test-renderer';
+import { ProfileContainer } from '../Profile';
 
 describe('Navbar', () => {
   afterEach(cleanup);
@@ -76,6 +86,90 @@ describe('Navbar', () => {
     }
   });
 });
+
+// Another try :(
+//   it('goes to Profile when clicking the profile link', async () => {
+//     const history = createMemoryHistory();
+//
+//     delete window.location;
+//     window = Object.create(window);
+//     Object.defineProperty(window, 'location', {
+//       value: {
+//         href: '/uri',
+//       },
+//       writable: true,
+//     });
+//
+//     const navbarMock = [
+//       {
+//         request: {
+//           query: queries.me,
+//         },
+//         result: {
+//           data: {
+//             user: {
+//               bio:
+//                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+//               email: 'uri@uri.com',
+//               followers: 35,
+//               following: 33,
+//               id: '1',
+//               name: 'Uri Goldshtein',
+//               picture: 'https://robohash.org/uri?set=set5',
+//               username: 'uri',
+//               __typename: 'User',
+//             },
+//           },
+//         },
+//       },
+//       {
+//         request: { query: queries.getUser },
+//         result: {
+//           data: {
+//             user: {
+//               bio:
+//                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+//               email: 'uri@uri.com',
+//               followers: 35,
+//               following: 33,
+//               id: '1',
+//               name: 'Uri Goldshtein',
+//               picture: 'https://robohash.org/uri?set=set5',
+//               username: 'uri',
+//               __typename: 'User',
+//             },
+//           },
+//         },
+//       },
+//     ];
+//     const { getByTestId } = render(
+//       <MockedProvider mocks={navbarMock} addTypename={false}>
+//         <ThemeProvider theme={theme}>
+//           <ProfileContainer history={history} />
+//         </ThemeProvider>
+//       </MockedProvider>
+//     );
+//     // const component = TestRenderer.create(
+//     //   <MockedProvider mocks={navbarMock} addTypename={false}>
+//     //     <ThemeProvider theme={theme}>
+//     //       <Navbar history={history} />
+//     //     </ThemeProvider>
+//     //   </MockedProvider>
+//     // );
+//     console.log(history);
+//     await wait(0); // wait for response
+//
+//     // fireEvent.click(screen.getByTestId('profile-button'));
+//     console.log(history);
+//
+//     await waitFor(() => screen.getByTestId('user-name'));
+//
+//     expect(getByTestId('user-picture')).toHaveAttribute(
+//       'src',
+//       'https://robohash.org/uri?set=set5'
+//     );
+//   });
+// });
 
 // Lost all evening trying to write this test 😢
 // it('goes to Profile when clicking the profile link', async () => {
