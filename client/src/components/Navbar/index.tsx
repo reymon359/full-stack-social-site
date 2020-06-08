@@ -65,7 +65,9 @@ const Navbar: React.FC<NavbarProps> = ({ history }) => {
 
   const redirectToRoot = () => history.push(AppRoutes.Root);
   const redirectToNewPost = () => history.push(AppRoutes.NewPost);
-  const redirectToProfile = () => history.push(`/${user && user.username}`);
+  const redirectToProfile = useCallback(() => {
+    history.push(`/${user && user.username}`);
+  }, [history]);
 
   return (
     <NavbarContainer>

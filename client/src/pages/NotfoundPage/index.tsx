@@ -1,6 +1,7 @@
 import React from 'react';
 import { History } from 'history';
 import Navbar from '../../components/Navbar';
+import NotFoundContainer from '../../components/NotFoundContainer';
 
 interface NotfoundPageProps {
   history: History;
@@ -9,7 +10,7 @@ interface NotfoundPageProps {
 const NotfoundPage: React.FC<NotfoundPageProps> = ({ history }) => (
   <>
     <Navbar history={history} />
-    <h1>404</h1>
+    <NotFoundContainer />
   </>
 );
 

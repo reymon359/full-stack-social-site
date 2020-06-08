@@ -7,13 +7,11 @@ import {
   RouteComponentProps,
 } from 'react-router-dom';
 import AuthScreen from './pages/AuthPage';
-import ChatRoomScreen from './components/ChatRoomScreen';
-// import ChatsListScreen from './components/ChatsListScreen';
 
 import { AppRoutes } from './AppRoutes';
 import { withAuth } from './services/auth.service';
 import HomePage from './pages/HomePage';
-import ProfilePage from './pages/ProfilePage';
+import { ProfileContainer } from './components/Profile/ProfileContainer';
 import PostPage from './pages/PostPage';
 import NotfoundPage from './pages/NotfoundPage';
 import NewPostPage from './pages/NewPostPage';
@@ -28,20 +26,20 @@ const App: React.FC = () => (
       <Route exact path={AppRoutes.Post} component={withAuth(PostPage)} />
       <Route exact path={AppRoutes.NewPost} component={withAuth(NewPostPage)} />
       <Route exact path={AppRoutes.About} component={withAuth(AboutPage)} />
-      <Route exact path={AppRoutes.Profile} component={withAuth(ProfilePage)} />
-      <Route path={AppRoutes.All} component={NotfoundPage} />
-
-      {/* <Route exact path="/chats" component={withAuth(ChatsListScreen)} /> */}
+      <Route exact path={AppRoutes.NotFound} component={NotfoundPage} />
       <Route
         exact
-        path="/chats/:chatId"
+        path="/:username"
         component={withAuth(
-          ({ match, history }: RouteComponentProps<{ chatId: string }>) => (
-            <ChatRoomScreen chatId={match.params.chatId} history={history} />
+          ({ match, history }: RouteComponentProps<{ username: string }>) => (
+            <ProfileContainer
+              username={match.params.username}
+              history={history}
+            />
           )
         )}
       />
-      {/* <Route exact path="/new-chat" component={withAuth(ChatCreationScreen)} /> */}
+      <Route path={AppRoutes.All} component={NotfoundPage} />
     </Switch>
   </BrowserRouter>
 );

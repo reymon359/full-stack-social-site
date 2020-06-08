@@ -5,6 +5,7 @@ export default gql`
     id
     name
     username
+    bio
     email
     followers
     following
