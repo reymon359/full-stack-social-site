@@ -62,6 +62,8 @@ const FollowsContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: baseline;
+
   ${(props) => props.theme.media.sm`
     font-size: ${props.theme.fontSizes.normal};
  `}
@@ -72,7 +74,29 @@ const FollowsContainer = styled.div`
   }
   a {
     margin: 0 0.2rem;
-    // color: ${(props) => props.theme.colors.dark}; 
+    color: ${(props) => props.theme.colors.dark};
+  }
+  a:hover,
+  a:focus {
+    color: ${(props) => props.theme.colors.primary};
+  }
+`;
+
+const FollowButton = styled.button`
+  color: ${(props) => props.theme.colors.primary};
+  background-color: ${(props) => props.theme.colors.light};
+  font-size: ${(props) => props.theme.fontSizes.medium};
+  font-weight: ${(props) => props.theme.fontWeights.regular};
+  border: none;
+  margin-left: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.25s;
+
+  &:hover,
+  &:focus {
+    box-shadow: 0px 0px 5px 1px ${(props) => props.theme.colors.medium};
   }
 `;
 
@@ -93,6 +117,7 @@ const ProfileDetails: React.FC<ProfileDetailsProps> = ({ user }): any => {
         <a href="#">Followers</a>
         <p>{user.following}</p>
         <a href="#">Following</a>
+        <FollowButton>Follow</FollowButton>
       </FollowsContainer>
     </ProfileDetailsContainer>
   );
