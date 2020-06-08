@@ -1,6 +1,6 @@
 import React from 'react';
 import { useCallback, useState } from 'react';
-import { useSignUp } from '../../services/auth.service';
+import { useSignUp } from '../../../services/auth.service';
 import {
   FormContainer,
   Label,
@@ -11,7 +11,7 @@ import {
   MessageContainer,
   MessageHeading,
 } from './AuthForms.styles';
-import LoadingSpinner from '../Shared/LoadingSpinner';
+import LoadingSpinner from '../../Shared/LoadingSpinner';
 import { RouteComponentProps } from 'react-router-dom';
 
 const SignUpForm: React.FC<RouteComponentProps<any>> = ({ history }) => {

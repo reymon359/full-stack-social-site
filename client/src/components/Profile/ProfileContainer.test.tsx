@@ -10,8 +10,9 @@ import {
 } from '@testing-library/react';
 import { createBrowserHistory } from 'history';
 import { mockApolloClient } from '../../test-helpers';
-import ChatsList, { getChatsQuery } from './ChatsList';
 import * as queries from '../../graphql/queries';
+import {ThemeProvider} from "styled-components";
+import {theme} from "../../styles";
 
 describe('ProfileContainer', () => {
 	afterEach(() => {
@@ -30,29 +31,20 @@ describe('ProfileContainer', () => {
 	it('renders fetched user data', async () => {
 		const client = mockApolloClient([
 			{
-				request: { query: queries. },
+				request: { query: queries.getUser },
 				result: {
 					data: {
-						chats: [
-							{
-								__typename: 'Chat',
-								id: 1,
-								name: 'Foo Bar',
-								picture: 'https://localhost:4000/picture.jpg',
-								lastMessage: {
-									__typename: 'Message',
-									id: 1,
-									content: 'Hello',
-									createdAt: new Date('1 Jan 2019 GMT'),
-									isMine: true,
-									chat: {
-										__typename: 'Chat',
-										id: 1,
-									},
-								},
-							},
-						],
-					},
+						user: {
+							id: "1",
+							name: "Uri Goldshtein",
+							username: "uri",
+							picture: "https://robohash.org/uri?set=set5",
+							email: "uri@uri.com",
+							bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
+							followers: 35,
+							following: 33
+						}
+					}
 				},
 			},
 		]);
@@ -61,9 +53,11 @@ describe('ProfileContainer', () => {
 
 		{
 			const { container, getByTestId } = render(
-				<ApolloProvider client={client}>
-					<ChatsList history={history} />
-				</ApolloProvider>
+				<ThemeProvider theme={theme}>
+					<ApolloProvider client={client}>
+						<ChatsList history={history} />
+					</ApolloProvider>
+				</ThemeProvider>
 			);
 
 			await waitFor(() => screen.getByTestId('name'));
