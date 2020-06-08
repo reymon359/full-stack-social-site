@@ -112,7 +112,6 @@ interface ProfileDetailsProps {
 }
 
 const ProfileDetails: React.FC<ProfileDetailsProps> = ({ user }) => {
-  console.log(user);
   const currentUser = useMe();
   const isCurrentUserProfile = currentUser && user.id === currentUser.id;
 

@@ -28,7 +28,7 @@ export const ProfileContainer: React.FC<ProfileContainerParams> = ({
   const { loading, data } = useGetUserQuery({
     variables: { username },
   });
-
+  console.log(data);
   return (
     <>
       <Navbar history={history} />
