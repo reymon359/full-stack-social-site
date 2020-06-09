@@ -111,20 +111,19 @@ interface ProfileDetailsProps {
 }
 
 const ProfileDetails: React.FC<ProfileDetailsProps> = ({ user }) => {
-  console.log(user);
   const currentUser = useMe();
   const isCurrentUserProfile = currentUser && user.id === currentUser.id;
 
   return (
     <ProfileDetailsContainer>
-      <UserPicture src={user.picture} />
-      <UserName> {user.name}</UserName>
-      <UserUsername>@{user.username}</UserUsername>
-      <UserBio>{user.bio}</UserBio>
+      <UserPicture data-testid="user-picture" src={user.picture} />
+      <UserName data-testid="user-name">{user.name}</UserName>
+      <UserUsername data-testid="user-username">@{user.username}</UserUsername>
+      <UserBio data-testid="user-bio">{user.bio}</UserBio>
       <FollowsContainer>
-        <p>{user.followers}</p>
+        <p data-testid="user-followers">{user.followers}</p>
         <a href="#">Followers</a>
-        <p>{user.following}</p>
+        <p data-testid="user-following">{user.following}</p>
         <a href="#">Following</a>
         {!isCurrentUserProfile && <FollowButton>Follow</FollowButton>}
       </FollowsContainer>
