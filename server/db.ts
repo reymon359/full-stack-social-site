@@ -61,12 +61,11 @@ export async function initDb(): Promise<void> {
   console.log('initDB');
 
   // Clear tables
-  await pool.query(sql`DROP TABLE IF EXISTS users;`);
-  await pool.query(sql`DROP TABLE IF EXISTS posts_users;`);
-  await pool.query(sql`DROP TABLE IF EXISTS posts;`);
-
   await pool.query(sql`DROP TABLE IF EXISTS messages;`);
   await pool.query(sql`DROP TABLE IF EXISTS chats_users;`);
+  await pool.query(sql`DROP TABLE IF EXISTS posts_liked_users;`);
+  await pool.query(sql`DROP TABLE IF EXISTS posts;`);
+  await pool.query(sql`DROP TABLE IF EXISTS users;`);
   await pool.query(sql`DROP TABLE IF EXISTS chats;`);
 
   // Create tables
@@ -90,11 +89,6 @@ export async function initDb(): Promise<void> {
     content TEXT NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     likes INTEGER NOT NULL,
-    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE
-  );`);
-
-  await pool.query(sql`CREATE TABLE posts_users(
-    post_id INTEGER NOT NULL REFERENCES posts(id) ON DELETE CASCADE,
     user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE
   );`);
 
@@ -129,6 +123,8 @@ export const resetDb = async () => {
   await initDb();
   console.log(`Reseting database`);
 
+  // Users
+  await pool.query(sql`DELETE FROM users`);
   const sampleUsers = [
     {
       id: '1',
@@ -191,18 +187,18 @@ export const resetDb = async () => {
       picture: 'https://robohash.org/katie?set=set5',
     },
   ];
-
   for (const sampleUser of sampleUsers) {
     await pool.query(sql`
       INSERT INTO users(id, name, username, password, email, bio, followers, following, picture)
       VALUES(${sampleUser.id}, ${sampleUser.name}, ${sampleUser.username}, ${sampleUser.password}, ${sampleUser.email},
              ${sampleUser.bio}, ${sampleUser.followers}, ${sampleUser.following}, ${sampleUser.picture})`);
   }
-
   await pool.query(
     sql`SELECT setval('users_id_seq', (SELECT max(id) FROM users))`
   );
 
+  // Posts
+  await pool.query(sql`DELETE FROM posts`);
   const samplePosts = [
     {
       id: '1',
@@ -277,16 +273,60 @@ export const resetDb = async () => {
       user_id: '5',
     },
   ];
-
   for (const samplePost of samplePosts) {
     await pool.query(sql`
-      INSERT INTO users(id, name, username, password, email, bio, followers, following, picture)
-      VALUES(${sampleUser.id}, ${sampleUser.name}, ${sampleUser.username}, ${sampleUser.password}, ${sampleUser.email},
-             ${sampleUser.bio}, ${sampleUser.followers}, ${sampleUser.following}, ${sampleUser.picture})`);
+      INSERT INTO users(id, title, picture, description, content, created_at, likes, user_id)
+      VALUES(${samplePost.id}, ${samplePost.title}, ${samplePost.picture}, ${samplePost.description}, ${samplePost.content},
+             ${samplePost.created_at}, ${samplePost.likes}, ${samplePost.user_id})`);
+  }
+  await pool.query(
+    sql`SELECT setval('post_id_seq', (SELECT max(id) FROM posts))`
+  );
+
+  // Posts_liked_users
+  await pool.query(sql`DELETE FROM posts_liked_users`);
+  const samplePostsUsers = [
+    {
+      post_id: '1',
+      user_id: '1',
+    },
+    {
+      post_id: '1',
+      user_id: '2',
+    },
+    {
+      post_id: '2',
+      user_id: '1',
+    },
+    {
+      post_id: '2',
+      user_id: '3',
+    },
+    {
+      post_id: '3',
+      user_id: '1',
+    },
+    {
+      post_id: '3',
+      user_id: '4',
+    },
+    {
+      post_id: '4',
+      user_id: '1',
+    },
+    {
+      post_id: '4',
+      user_id: '5',
+    },
+  ];
+  for (const samplePostUser of samplePostsUsers) {
+    await pool.query(sql`
+      INSERT INTO posts_liked_users(post_id, user_id)
+      VALUES(${samplePostUser.post_id}, ${samplePostUser.user_id})
+    `);
   }
 
   await pool.query(sql`DELETE FROM chats`);
-
   const sampleChats = [
     {
       id: '1',
@@ -301,20 +341,17 @@ export const resetDb = async () => {
       id: '4',
     },
   ];
-
   for (const sampleChat of sampleChats) {
     await pool.query(sql`
       INSERT INTO chats(id)
       VALUES(${sampleChat.id})
     `);
   }
-
   await pool.query(
     sql`SELECT setval('chats_id_seq', (SELECT max(id) FROM chats))`
   );
 
   await pool.query(sql`DELETE FROM chats_users`);
-
   const sampleChatsUsers = [
     {
       chat_id: '1',
@@ -349,7 +386,6 @@ export const resetDb = async () => {
       user_id: '5',
     },
   ];
-
   for (const sampleChatUser of sampleChatsUsers) {
     await pool.query(sql`
       INSERT INTO chats_users(chat_id, user_id)
@@ -358,7 +394,6 @@ export const resetDb = async () => {
   }
 
   await pool.query(sql`DELETE FROM messages`);
-
   const baseTime = new Date('1 Jan 2019 GMT').getTime();
 
   const sampleMessages = [
