@@ -19,85 +19,55 @@ const typeDefs = gql`
   }
 
   extend type Query {
+    post(postId: ID!): Post
     posts: [Post!]!
-    post(postID: ID!): Post
-    postsLiked(userID: ID!): [Post!]!
+    userPosts(userId: ID!): [Post!]!
+    userLikedPosts(userId: ID!): [Post!]!
   }
 
   extend type Mutation {
-    addPost(userId: ID!): Post
+    addPost(
+      title: String!
+      picture: String!
+      description: String!
+      content: String!
+    ): Post
     removePost(postId: ID!): ID
   }
 `;
 
 const resolvers: Resolvers = {
-  Post: {
-    async title(post, args, { injector }) {
-      return injector.get(Posts).id(post.id);
-    },
-
-    async title2(post, args, { injector }) {
-      const currentUser = await injector.get(Auth).currentUser();
-
-      if (!currentUser) return null;
-
-      const participant = await injector.get(Posts).firstRecipient({
-        postId: post.id,
-        userId: currentUser.id,
-      });
-
-      return participant ? participant.name : null;
-    },
-
-    async picture(post, args, { injector }) {
-      const currentUser = await injector.get(Auth).currentUser();
-
-      if (!currentUser) return null;
-
-      const participant = await injector.get(Posts).firstRecipient({
-        postId: post.id,
-        userId: currentUser.id,
-      });
-
-      return participant && participant.picture
-        ? participant.picture
-        : injector.get(UnsplashApi).getRandomPhoto();
-    },
-
-    async messages(post, args, { injector }) {
-      return injector.get(Posts).findMessagesByPost({
-        postId: post.id,
-        limit: args.limit,
-        after: args.after,
-      });
-    },
-
-    async lastMessage(post, args, { injector }) {
-      return injector.get(Posts).lastMessage(post.id);
-    },
-
-    async participants(post, args, { injector }) {
-      return injector.get(Posts).participants(post.id);
-    },
-  },
-
   Query: {
-    async posts(root, args, { injector }) {
-      const currentUser = await injector.get(Auth).currentUser();
-
-      if (!currentUser) return [];
-
-      return injector.get(Posts).findPostsByUser(currentUser.id);
-    },
-
     async post(root, { postId }, { injector }) {
       const currentUser = await injector.get(Auth).currentUser();
 
       if (!currentUser) return null;
 
-      return injector
-        .get(Posts)
-        .findPostByUser({ postId, userId: currentUser.id });
+      return injector.get(Posts).findPostById(postId);
+    },
+
+    async posts(root, args, { injector }) {
+      const currentUser = await injector.get(Auth).currentUser();
+
+      if (!currentUser) return [];
+
+      return injector.get(Posts).lastPosts();
+    },
+
+    async userPosts(root, { userId }, { injector }) {
+      const currentUser = await injector.get(Auth).currentUser();
+
+      if (!currentUser) return null;
+
+      return injector.get(Posts).findPostsByUser(userId);
+    },
+
+    async userLikedPosts(root, { userId }, { injector }) {
+      const currentUser = await injector.get(Auth).currentUser();
+
+      if (!currentUser) return null;
+
+      return injector.get(Posts).findPostsLikedByUser(userId);
     },
   },
 
@@ -125,7 +95,7 @@ const resolvers: Resolvers = {
 
       if (!currentUser) return null;
 
-      return injector.get(Posts).removePost({ postId, userId: currentUser.id });
+      return injector.get(Posts).removePost(postId);
     },
   },
 };

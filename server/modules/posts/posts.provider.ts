@@ -35,7 +35,7 @@ export class Posts {
     return rows || null;
   }
 
-  private async findPostsLikedByUser(userId: string) {
+  async findPostsLikedByUser(userId: string) {
     const { rows } = await this.db.query(sql`
       SELECT posts.* FROM posts, posts_liked_users
       WHERE posts_liked_users.user_id = ${userId}
