@@ -1,11 +1,8 @@
 import { GraphQLModule } from '@graphql-modules/core';
-import { gql, withFilter } from 'apollo-server-express';
+import { gql } from 'apollo-server-express';
 import commonModule from '../common';
 import usersModule from '../users';
-import { Message, Post } from '../../db';
 import { Resolvers } from '../../types/graphql';
-import { UnsplashApi } from './unsplash.api';
-import { Users } from './../users/users.provider';
 import { Auth } from './../users/auth.provider';
 import { Posts } from './posts.provider';
 
@@ -24,6 +21,7 @@ const typeDefs = gql`
   extend type Query {
     posts: [Post!]!
     post(postID: ID!): Post
+    postsLiked(userID: ID!): [Post!]!
   }
 
   extend type Mutation {
@@ -35,7 +33,7 @@ const typeDefs = gql`
 const resolvers: Resolvers = {
   Post: {
     async title(post, args, { injector }) {
-      return injector.get(Posts).title(post.id);
+      return injector.get(Posts).id(post.id);
     },
 
     async title2(post, args, { injector }) {
