@@ -23,7 +23,7 @@ export class Posts {
       SELECT * FROM posts WHERE id = ${postId}
     `);
 
-    return rows[0] || null;
+    return rows[0];
   }
 
   async findPostsByUser(userId: string) {
@@ -32,7 +32,7 @@ export class Posts {
       WHERE posts.user_id = ${userId}
     `);
 
-    return rows || null;
+    return rows;
   }
 
   async findPostsLikedByUser(userId: string) {
@@ -42,7 +42,7 @@ export class Posts {
       AND posts.user_id = ${userId}
     `);
 
-    return rows || null;
+    return rows;
   }
 
   async addPost({
