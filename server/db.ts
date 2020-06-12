@@ -82,7 +82,7 @@ export async function initDb(): Promise<void> {
   );`);
 
   await pool.query(sql`CREATE TABLE posts(
-    id SERIAL PRIMARY KEY
+    id SERIAL PRIMARY KEY,
     title VARCHAR (255) NOT NULL,
     picture VARCHAR (255) NOT NULL,
     description VARCHAR (255) NOT NULL,
@@ -275,13 +275,13 @@ export const resetDb = async () => {
   ];
   for (const samplePost of samplePosts) {
     await pool.query(sql`
-      INSERT INTO users(id, title, picture, description, content, created_at, likes, user_id)
+      INSERT INTO posts(id, title, picture, description, content, created_at, likes, user_id)
       VALUES(${samplePost.id}, ${samplePost.title}, ${samplePost.picture}, ${samplePost.description}, ${samplePost.content},
              ${samplePost.created_at}, ${samplePost.likes}, ${samplePost.user_id})`);
   }
-  await pool.query(
-    sql`SELECT setval('post_id_seq', (SELECT max(id) FROM posts))`
-  );
+  // await pool.query(
+  //   sql`SELECT setval('post_id_seq', (SELECT max(id) FROM posts))`
+  // );
 
   // Posts_liked_users
   await pool.query(sql`DELETE FROM posts_liked_users`);
