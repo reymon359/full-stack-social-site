@@ -20,8 +20,6 @@ export type User = {
   picture: string;
   email: string;
   bio: string;
-  followers: number;
-  following: number;
 };
 
 export type Post = {
@@ -31,7 +29,6 @@ export type Post = {
   description: string;
   content: string;
   created_at: Date;
-  likes: number;
   user_id: string;
 };
 
@@ -71,24 +68,21 @@ export async function initDb(): Promise<void> {
   // Create tables
   await pool.query(sql`CREATE TABLE users(
     id SERIAL PRIMARY KEY,
-    name VARCHAR (50) NOT NULL,
-    username VARCHAR (50) UNIQUE NOT NULL,
-    password VARCHAR (255) NOT NULL,
-    email VARCHAR (255) NOT NULL,
-    bio VARCHAR (255) NOT NULL,
-    followers INTEGER NOT NULL,
-    following INTEGER NOT NULL,
-    picture VARCHAR (255) NOT NULL
+    name TEXT NOT NULL,
+    username TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL,
+    email TEXT NOT NULL,
+    bio TEXT NOT NULL,
+    picture TEXT NOT NULL
   );`);
 
   await pool.query(sql`CREATE TABLE posts(
     id SERIAL PRIMARY KEY,
-    title VARCHAR (255) NOT NULL,
-    picture VARCHAR (255) NOT NULL,
-    description VARCHAR (255) NOT NULL,
+    title TEXT NOT NULL,
+    picture TEXT NOT NULL,
+    description TEXT NOT NULL,
     content TEXT NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-    likes INTEGER NOT NULL,
     user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE
   );`);
 
@@ -126,7 +120,7 @@ export async function initDb(): Promise<void> {
 
 export const resetDb = async () => {
   await initDb();
-  console.log(`Reseting database`);
+  console.log(`Resetting database`);
 
   // Users
   await pool.query(sql`DELETE FROM users`);
@@ -139,8 +133,6 @@ export const resetDb = async () => {
       email: 'uri@uri.com',
       bio:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
-      followers: 35,
-      following: 33,
       picture: 'https://robohash.org/uri?set=set5',
     },
     {
@@ -151,8 +143,6 @@ export const resetDb = async () => {
       email: 'ethan@ethan.com',
       bio:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      followers: 2,
-      following: 21,
       picture: 'https://robohash.org/ethan?set=set5',
     },
     {
@@ -163,8 +153,6 @@ export const resetDb = async () => {
       email: 'bryan@bryan.com',
       bio:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      followers: 3,
-      following: 31,
       picture: 'https://robohash.org/bryan?set=set5',
     },
     {
@@ -175,8 +163,6 @@ export const resetDb = async () => {
       email: 'avery@avery.com',
       bio:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      followers: 4,
-      following: 41,
       picture: 'https://robohash.org/avery?set=set5',
     },
     {
@@ -187,16 +173,14 @@ export const resetDb = async () => {
       email: 'katie@katie.com',
       bio:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      followers: 5,
-      following: 51,
       picture: 'https://robohash.org/katie?set=set5',
     },
   ];
   for (const sampleUser of sampleUsers) {
     await pool.query(sql`
-      INSERT INTO users(id, name, username, password, email, bio, followers, following, picture)
-      VALUES(${sampleUser.id}, ${sampleUser.name}, ${sampleUser.username}, ${sampleUser.password}, ${sampleUser.email},
-             ${sampleUser.bio}, ${sampleUser.followers}, ${sampleUser.following}, ${sampleUser.picture})`);
+      INSERT INTO users(id, name, username, password, email, bio,  picture)
+      VALUES(${sampleUser.id}, ${sampleUser.name}, ${sampleUser.username}, ${sampleUser.password}, 
+             ${sampleUser.email}, ${sampleUser.bio}, ${sampleUser.picture})`);
   }
   await pool.query(
     sql`SELECT setval('users_id_seq', (SELECT max(id) FROM users))`
@@ -214,7 +198,6 @@ export const resetDb = async () => {
       content:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet volutpat consequat mauris nunc. A diam maecenas sed enim ut sem. In tellus integer feugiat scelerisque. Scelerisque varius morbi enim nunc faucibus a pellentesque. Placerat orci nulla pellentesque dignissim enim sit amet venenatis. Neque volutpat ac tincidunt vitae. Non tellus orci ac auctor augue mauris augue neque gravida. Viverra nibh cras pulvinar mattis nunc. Lacus viverra vitae congue eu. Diam donec adipiscing tristique risus nec feugiat. Vitae sapien pellentesque habitant mo id cursus metus aliquam eleifend mi. Eget nunc lobortis mattis aliquam faucibus.',
       created_at: new Date(new Date().getTime() - 60 * 1000 * 1000),
-      likes: 10,
       user_id: '1',
     },
     {
@@ -226,7 +209,6 @@ export const resetDb = async () => {
       content:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet volutpat consequat mauris nunc. A diam maecenas sed enim ut sem. In tellus integer feugiat scelerisque. Scelerisque varius morbi enim nunc faucibus a pellentesque. Placerat orci nulla pellentesque dignissim enim sit amet venenatis. Neque volutpat ac tincidunt vitae. Non tellus orci ac auctor augue mauris augue neque gravida. Viverra nibh cras pulvinar mattis nunc. Lacus viverra vitae congue eu. Diam donec adipiscing tristique risus nec feugiat. Vitae sapien pellentesque habitant morbi tristique. Magna sit amet purus gravida quis blandit. Aliquam sem fringilla ut morbi tincidunt augue. Suspendisse in est ante in nibh. Nulla aliquet porttitor lacus luctus accumsan tortor. Risus ultricies tristique nulla aliquet enim. Ornare aenean euismod elementum nisi quis. Auctor urna nunc id cursus metus aliquam eleifend mi. Eget nunc lobortis mattis aliquam faucibus.',
       created_at: new Date(new Date().getTime() - 2 * 60 * 1000 * 1000),
-      likes: 5,
       user_id: '1',
     },
     {
@@ -238,7 +220,6 @@ export const resetDb = async () => {
       content:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet volutpat consequat mauris nunc. A diam maecenas sed enim ut sem. In tellus integer feugiat scelerisque. Scelerisque varius morbi enim nunc faucibus a pellentesque. Placerat orci nulla pellentesque dignissim enim sit amet venenatis. Neque volutpat ac tincidunt vitae. Non tellus orci ac auctor augue mauris augue neque gravida. Viverra nibh cras pulvinar mattis nunc. Lacus viverra vitae congue eu. Diam donec adipiscing tristique risus nec feugiat. Vitae sapien pellentesque habitant morbi tristique. Magna sit amet purus gravida quis blandit. Aliquam sem fringilla ut morbi tincidunt augue. Suspendisse in est ante in nibh. Nulla aliquet porttitor lacus luctus accumsan tortor. Risus ultricies tristique nulla aliquet enim. Ornare aenean euismod elementum nisi quis. Auctor urna nunc id cursus metus aliquam eleifend mi. Eget nunc lobortis mattis aliquam faucibus.',
       created_at: new Date(new Date().getTime() - 4 * 60 * 1000 * 1000),
-      likes: 7,
       user_id: '2',
     },
     {
@@ -250,7 +231,6 @@ export const resetDb = async () => {
       content:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet volutpat consequat mauris nunc. A diam maecenas sed enim ut sem. In tellus integer feugiat scelerisque. Scelerisque varius morbi enim nunc faucibus a pellentesque. Placerat orci nique. Magna sit amet purus gravida quis blandit. Aliquam sem fringilla ut morbi tincidunt augue. Suspendisse in est ante in nibh. Nulla aliquet porttitor lacus luctus accumsan tortor. Risus ultricies tristique nulla aliquet enim. Ornare aenean euismod elementum nisi quis. Auctor urna nunc id cursus metus aliquam eleifend mi. Eget nunc lobortis mattis aliquam faucibus.',
       created_at: new Date(new Date().getTime() - 5 * 60 * 1000 * 1000),
-      likes: 20,
       user_id: '3',
     },
     {
@@ -262,7 +242,6 @@ export const resetDb = async () => {
       content:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet volutpat consequat mauris nunc. A diam maecenas sed enim ut sem. In tellus integer feugiat scelerisque. Scelerisque varius morbi enim nunc faucibus a pellentesque. Placerat orci nique. Magna sit amet purus gravida quis blandit. Aliquam sem fringilla ut morbi tincidunt augue. Suspendisse in est ante in nibh. Nulla aliquet porttitor lacus luctus accumsan tortor. Risus ultricies tristique nulla aliquet enim. Ornare aenean euismod elementum nisi quis. Auctor urna nunc id cursus metus aliquam eleifend mi. Eget nunc lobortis mattis aliquam faucibus.',
       created_at: new Date(new Date().getTime() - 6 * 60 * 1000 * 1000),
-      likes: 30,
       user_id: '4',
     },
     {
@@ -274,15 +253,14 @@ export const resetDb = async () => {
       content:
         'Lorem ipsum doloPlacerat orci nique. Magna sit amet purus gravida quis blandit. Aliquam sem fringilla ut morbi tincidunt augue. Suspendisse in est ante in nibh. Nulla aliquet porttitor lacus luctus accumsan tortor. Risus ultricies tristique nulla aliquet enim. Ornare aenean euismod elementum nisi quis. Auctor urna nunc id cursus metus aliquam eleifend mi. Eget nunc lobortis mattis aliquam faucibus.',
       created_at: new Date(new Date().getTime() - 3 * 60 * 1000 * 1000),
-      likes: 30,
       user_id: '5',
     },
   ];
   for (const samplePost of samplePosts) {
     await pool.query(sql`
-      INSERT INTO posts(id, title, picture, description, content, created_at, likes, user_id)
-      VALUES(${samplePost.id}, ${samplePost.title}, ${samplePost.picture}, ${samplePost.description}, ${samplePost.content},
-             ${samplePost.created_at}, ${samplePost.likes}, ${samplePost.user_id})`);
+      INSERT INTO posts(id, title, picture, description, content, created_at, user_id)
+      VALUES(${samplePost.id}, ${samplePost.title}, ${samplePost.picture}, ${samplePost.description}, 
+            ${samplePost.content}, ${samplePost.created_at}, ${samplePost.user_id})`);
   }
   // await pool.query(
   //   sql`SELECT setval('post_id_seq', (SELECT max(id) FROM posts))`

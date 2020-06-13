@@ -55,7 +55,8 @@ const typeDefs = gql`
 const resolvers: Resolvers = {
   Post: {
     createdAt(post) {
-      return new Date(post.created_at);
+      // return new Date(post.created_at);
+      return new Date();
     },
     // async chat(message, args, { injector }) {
     //   return injector.get(Chats).findChatById(message.chat_id);
