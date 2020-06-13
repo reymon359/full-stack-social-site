@@ -1,8 +1,8 @@
 import React from 'react';
 import { useMemo } from 'react';
 import { Route } from 'react-router-dom';
-import SignInForm from '../AuthForms/SignInForm';
-import SignUpForm from '../AuthForms/SignUpForm';
+import SignInForm from './AuthForms/SignInForm';
+import SignUpForm from './AuthForms/SignUpForm';
 import { RouteComponentProps } from 'react-router-dom';
 import styled from 'styled-components';
 

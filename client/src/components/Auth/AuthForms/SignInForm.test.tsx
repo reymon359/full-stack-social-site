@@ -9,10 +9,10 @@ import {
   waitFor,
 } from '@testing-library/react';
 import SignInForm from './SignInForm';
-import { SignInDocument } from '../../graphql/types';
-import { mockApolloClient } from '../../test-helpers';
+import { SignInDocument } from '../../../graphql/types';
+import { mockApolloClient } from '../../../test-helpers';
 import { ThemeProvider } from 'styled-components';
-import { theme } from '../../styles';
+import { theme } from '../../../styles';
 
 describe('SignInForm', () => {
   afterEach(cleanup);
