@@ -61,6 +61,7 @@ export async function initDb(): Promise<void> {
   await pool.query(sql`DROP TABLE IF EXISTS messages;`);
   await pool.query(sql`DROP TABLE IF EXISTS chats_users;`);
   await pool.query(sql`DROP TABLE IF EXISTS posts_liked_users;`);
+  await pool.query(sql`DROP TABLE IF EXISTS follows;`);
   await pool.query(sql`DROP TABLE IF EXISTS posts;`);
   await pool.query(sql`DROP TABLE IF EXISTS users;`);
   await pool.query(sql`DROP TABLE IF EXISTS chats;`);
