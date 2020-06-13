@@ -18,14 +18,14 @@ const typeDefs = gql`
     content: String!
     createdAt: DateTime!
     likes: Int!
-    #    user: User
+    user: User
   }
 
   extend type Query {
     post(postId: ID!): Post
     posts: [Post!]!
-    #    userPosts(userId: ID!): [Post!]!
-    #    userLikedPosts(userId: ID!): [Post!]!
+    userPosts(userId: ID!): [Post!]!
+    userLikedPosts(userId: ID!): [Post!]!
   }
 
   extend type Mutation {
@@ -35,15 +35,28 @@ const typeDefs = gql`
       description: String!
       content: String!
     ): Post
-    removePost(postId: ID!): ID
+    editPost(
+      title: String!
+      picture: String!
+      description: String!
+      content: String!
+    ): Post
+    removePost(postId: ID!): String
+    likePost(postId: ID!): Post
+  }
+
+  extend type Subscription {
+    postLiked: Post!
+    postAdded: Post!
+    postRemoved: ID!
   }
 `;
 
 const resolvers: Resolvers = {
   Post: {
-    // createdAt(post) {
-    //   return new Date(post.created_at);
-    // },
+    createdAt(post) {
+      return new Date(post.created_at);
+    },
     // async chat(message, args, { injector }) {
     //   return injector.get(Chats).findChatById(message.chat_id);
     // },

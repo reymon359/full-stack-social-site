@@ -97,6 +97,11 @@ export async function initDb(): Promise<void> {
     user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE
   );`);
 
+  await pool.query(sql`CREATE TABLE follows(
+    following_user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    followed_user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE
+  );`);
+
   await pool.query(sql`CREATE TABLE chats(
     id SERIAL PRIMARY KEY
   );`);

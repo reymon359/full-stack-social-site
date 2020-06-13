@@ -1,6 +1,12 @@
 import { Injectable, Inject, ProviderScope } from '@graphql-modules/di';
 import sql from 'sql-template-strings';
 import { Database } from '../common/database.provider';
+import { Post } from '../../db';
+import DataLoader from 'dataloader';
+import { QueryResult } from 'pg';
+
+type PostById = { postId: string };
+type PostsKey = PostById;
 
 @Injectable({
   scope: ProviderScope.Session,
@@ -8,6 +14,20 @@ import { Database } from '../common/database.provider';
 export class Posts {
   @Inject() private db: Database;
 
+  private postsCache = new Map<string, Post>();
+  private loaders = {
+    posts: new DataLoader<PostsKey, QueryResult['rows']>((keys) => {
+      return Promise.all(
+        keys.map(async (query) => {
+          if (this.postsCache.has(query.postId)) {
+            return [this._readPostFromCache(query.postId)];
+          }
+
+          return this._findPostById(query.postId);
+        })
+      );
+    }),
+  };
   async lastPosts() {
     const { rows } = await this.db.query(sql`
       SELECT * FROM posts 
@@ -18,12 +38,26 @@ export class Posts {
     return rows[0] || null;
   }
 
+  // async findPostById(postId: string) {
+  //   const { rows } = await this.db.query(sql`
+  //     SELECT * FROM posts WHERE id = ${postId}
+  //   `);
+  //
+  //   return rows[0];
+  // }
   async findPostById(postId: string) {
+    const rows = await this.loaders.posts.load({ postId });
+    return rows[0] || null;
+  }
+
+  private async _findPostById(postId: string) {
     const { rows } = await this.db.query(sql`
       SELECT * FROM posts WHERE id = ${postId}
     `);
 
-    return rows[0];
+    this._writePostToCache(rows[0]);
+
+    return rows;
   }
 
   async findPostsByUser(userId: string) {
@@ -88,6 +122,16 @@ export class Posts {
     } catch (e) {
       await this.db.query('ROLLBACK');
       throw e;
+    }
+  }
+
+  private _readPostFromCache(postId: string) {
+    return this.postsCache.get(postId);
+  }
+
+  private _writePostToCache(post?: Post) {
+    if (post) {
+      this.postsCache.set(post.id, post);
     }
   }
 }
