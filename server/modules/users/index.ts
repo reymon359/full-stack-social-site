@@ -4,6 +4,7 @@ import commonModule from '../common';
 import { Resolvers } from '../../types/graphql';
 import { Users } from './users.provider';
 import { Auth } from './auth.provider';
+import { Chats } from '../chats/chats.provider';
 
 const typeDefs = gql`
   type User {
@@ -53,6 +54,16 @@ const typeDefs = gql`
 `;
 
 const resolvers: Resolvers = {
+  User: {
+    async followers(user, args, { injector }) {
+      return Math.floor(Math.random() * Math.floor(10));
+    },
+
+    async following(user, args, { injector }) {
+      return Math.floor(Math.random() * Math.floor(10));
+    },
+  },
+
   Query: {
     me(root, args, { injector }) {
       return injector.get(Auth).currentUser();

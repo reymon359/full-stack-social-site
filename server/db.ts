@@ -76,8 +76,6 @@ export async function initDb(): Promise<void> {
     password TEXT NOT NULL,
     email TEXT NOT NULL,
     bio TEXT NOT NULL,
-    followers INTEGER NOT NULL,
-    following INTEGER NOT NULL,
     picture TEXT NOT NULL
   );`);
 
@@ -138,8 +136,6 @@ export const resetDb = async () => {
       email: 'uri@uri.com',
       bio:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
-      followers: 35,
-      following: 33,
       picture: 'https://robohash.org/uri?set=set5',
     },
     {
@@ -150,8 +146,6 @@ export const resetDb = async () => {
       email: 'ethan@ethan.com',
       bio:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      followers: 2,
-      following: 21,
       picture: 'https://robohash.org/ethan?set=set5',
     },
     {
@@ -162,8 +156,6 @@ export const resetDb = async () => {
       email: 'bryan@bryan.com',
       bio:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      followers: 3,
-      following: 31,
       picture: 'https://robohash.org/bryan?set=set5',
     },
     {
@@ -174,8 +166,6 @@ export const resetDb = async () => {
       email: 'avery@avery.com',
       bio:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      followers: 4,
-      following: 41,
       picture: 'https://robohash.org/avery?set=set5',
     },
     {
@@ -186,17 +176,15 @@ export const resetDb = async () => {
       email: 'katie@katie.com',
       bio:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      followers: 5,
-      following: 51,
       picture: 'https://robohash.org/katie?set=set5',
     },
   ];
 
   for (const sampleUser of sampleUsers) {
     await pool.query(sql`
-      INSERT INTO users(id, name, username, password, email, bio, followers, following, picture)
-      VALUES(${sampleUser.id}, ${sampleUser.name}, ${sampleUser.username}, ${sampleUser.password}, ${sampleUser.email},
-             ${sampleUser.bio}, ${sampleUser.followers}, ${sampleUser.following}, ${sampleUser.picture})`);
+      INSERT INTO users(id, name, username, password, email, bio, picture)
+      VALUES(${sampleUser.id}, ${sampleUser.name}, ${sampleUser.username}, ${sampleUser.password}, 
+             ${sampleUser.email}, ${sampleUser.bio}, ${sampleUser.picture})`);
   }
   await pool.query(
     sql`SELECT setval('users_id_seq', (SELECT max(id) FROM users))`
@@ -322,6 +310,49 @@ export const resetDb = async () => {
     await pool.query(sql`
       INSERT INTO posts_liked_users(post_id, user_id)
       VALUES(${samplePostUser.post_id}, ${samplePostUser.user_id})
+    `);
+  }
+
+  // follows
+  await pool.query(sql`DELETE FROM follows`);
+  const sampleFollows = [
+    {
+      following_user_id: '1',
+      followed_user_id: '1',
+    },
+    {
+      following_user_id: '1',
+      followed_user_id: '2',
+    },
+    {
+      following_user_id: '2',
+      followed_user_id: '1',
+    },
+    {
+      following_user_id: '2',
+      followed_user_id: '3',
+    },
+    {
+      following_user_id: '3',
+      followed_user_id: '1',
+    },
+    {
+      following_user_id: '3',
+      followed_user_id: '4',
+    },
+    {
+      following_user_id: '4',
+      followed_user_id: '1',
+    },
+    {
+      following_user_id: '4',
+      followed_user_id: '5',
+    },
+  ];
+  for (const sampleFollow of sampleFollows) {
+    await pool.query(sql`
+      INSERT INTO follows(following_user_id, followed_user_id)
+      VALUES(${sampleFollow.following_user_id}, ${sampleFollow.followed_user_id})
     `);
   }
 

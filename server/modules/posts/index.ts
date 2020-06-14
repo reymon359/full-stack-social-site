@@ -59,6 +59,9 @@ const resolvers: Resolvers = {
       // return new Date(post.created_at);
       return new Date();
     },
+    async likes(post, args, { injector }) {
+      return Math.floor(Math.random() * Math.floor(10));
+    },
     // async chat(message, args, { injector }) {
     //   return injector.get(Chats).findChatById(message.chat_id);
     // },
