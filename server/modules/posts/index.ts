@@ -5,9 +5,7 @@ import usersModule from '../users';
 import { Resolvers } from '../../types/graphql';
 import { Auth } from './../users/auth.provider';
 import { Posts } from './posts.provider';
-import { Chats } from '../chats/chats.provider';
 import { Users } from '../users/users.provider';
-import { Post } from '../../db';
 
 const typeDefs = gql`
   type Post {
@@ -56,28 +54,16 @@ const typeDefs = gql`
 const resolvers: Resolvers = {
   Post: {
     createdAt(post) {
-      // return new Date(post.created_at);
-      return new Date();
+      return new Date(post.created_at);
     },
     async likes(post, args, { injector }) {
+      // TODO: implement provider method
       return Math.floor(Math.random() * Math.floor(10));
     },
-    // async chat(message, args, { injector }) {
-    //   return injector.get(Chats).findChatById(message.chat_id);
-    // },
-    // async user(post, args, { injector }) {
-    //   return injector.get(Users).findById(post.user_id);
-    // },
-    // async recipient(message, args, { injector }) {
-    //   return injector.get(Chats).firstRecipient({
-    //     chatId: message.chat_id,
-    //     userId: message.sender_user_id,
-    //   });
-    // },
-    // async isMine(message, args, { injector }) {
-    //   const currentUser = await injector.get(Auth).currentUser();
-    //   return message.sender_user_id === currentUser!.id;
-    // },
+
+    async user(post, args, { injector }) {
+      return injector.get(Users).findById(post.user_id);
+    },
   },
 
   Query: {

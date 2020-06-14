@@ -14,6 +14,7 @@ generates:
         User: ../db#User
         Message: ../db#Message
         Chat: ../db#Chat
+        Post: ../db#Post
       scalars:
         # e.g. Message.createdAt will be of type Date
         Date: Date
