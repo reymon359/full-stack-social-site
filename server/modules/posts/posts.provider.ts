@@ -38,13 +38,6 @@ export class Posts {
     return rows || null;
   }
 
-  // async findPostById(postId: string) {
-  //   const { rows } = await this.db.query(sql`
-  //     SELECT * FROM posts WHERE id = ${postId}
-  //   `);
-  //
-  //   return rows[0];
-  // }
   async findPostById(postId: string) {
     const rows = await this.loaders.posts.load({ postId });
     return rows[0] || null;
@@ -79,6 +72,15 @@ export class Posts {
     return rows;
   }
 
+  async getPostLikes(postId: string) {
+    const { rows } = await this.db.query(sql`
+      SELECT COUNT(*) FROM posts_liked_users
+      WHERE posts_liked_users.post_id = ${postId}
+    `);
+
+    return Number(rows[0].count);
+  }
+
   async addPost({
     title,
     picture,
@@ -104,16 +106,6 @@ export class Posts {
   async removePost(postId: string) {
     try {
       await this.db.query('BEGIN');
-      // const { rows } = await this.db.query(sql`
-      //   SELECT posts.* FROM posts, posts_liked_users
-      //   WHERE post_id = ${postId}
-      //   AND user.id = posts_liked_users.post_id
-      // `);
-      // const post = rows[0];
-      // if (!post) {
-      //   await this.db.query('ROLLBACK');
-      //   return null;
-      // }
       await this.db.query(sql`
         DELETE FROM posts WHERE posts.id = ${postId}
       `);

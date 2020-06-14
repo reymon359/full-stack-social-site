@@ -57,8 +57,7 @@ const resolvers: Resolvers = {
       return new Date(post.created_at);
     },
     async likes(post, args, { injector }) {
-      // TODO: implement provider method
-      return Math.floor(Math.random() * Math.floor(10));
+      return injector.get(Posts).getPostLikes(post.id);
     },
 
     async user(post, args, { injector }) {
