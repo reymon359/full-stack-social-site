@@ -35,7 +35,7 @@ export class Posts {
       LIMIT 50
     `);
 
-    return rows[0] || null;
+    return rows || null;
   }
 
   // async findPostById(postId: string) {

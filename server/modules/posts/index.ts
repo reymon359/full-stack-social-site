@@ -23,7 +23,7 @@ const typeDefs = gql`
 
   extend type Query {
     post(postId: ID!): Post
-    posts: [Post!]!
+    lastPosts: [Post!]!
     userPosts(userId: ID!): [Post!]!
     userLikedPosts(userId: ID!): [Post!]!
   }
@@ -89,7 +89,7 @@ const resolvers: Resolvers = {
       return injector.get(Posts).findPostById(postId);
     },
 
-    async posts(root, args, { injector }) {
+    async lastPosts(root, args, { injector }) {
       const currentUser = await injector.get(Auth).currentUser();
 
       if (!currentUser) return [];
