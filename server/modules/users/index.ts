@@ -56,13 +56,11 @@ const typeDefs = gql`
 const resolvers: Resolvers = {
   User: {
     async followers(user, args, { injector }) {
-      // TODO: implement provider method
-      return Math.floor(Math.random() * Math.floor(10));
+      return injector.get(Users).getUserFollowersCount(user.id);
     },
 
     async following(user, args, { injector }) {
-      // TODO: implement provider method
-      return Math.floor(Math.random() * Math.floor(10));
+      return injector.get(Users).getUserFollowingCount(user.id);
     },
   },
 

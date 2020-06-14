@@ -69,6 +69,24 @@ export class Users {
     return rows[0] || null;
   }
 
+  async getUserFollowersCount(userId: string) {
+    const { rows } = await this.db.query(sql`
+      SELECT COUNT(*) FROM follows
+      WHERE follows.followed_user_id = ${userId}
+    `);
+
+    return Number(rows[0].count);
+  }
+
+  async getUserFollowingCount(userId: string) {
+    const { rows } = await this.db.query(sql`
+      SELECT COUNT(*) FROM follows
+      WHERE follows.following_user_id = ${userId}
+    `);
+
+    return Number(rows[0].count);
+  }
+
   async newUser({
     name,
     username,
