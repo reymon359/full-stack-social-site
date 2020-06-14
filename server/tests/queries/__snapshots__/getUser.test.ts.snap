@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Query.user should fetch specified user 1`] = `
+exports[`Query.user should fetch specified user by username 1`] = `
 Object {
   "user": Object {
     "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
     "email": "uri@uri.com",
-    "followers": 35,
-    "following": 33,
+    "followers": 0,
+    "following": 9,
     "id": "1",
     "name": "Uri Goldshtein",
     "picture": "https://robohash.org/uri?set=set5",

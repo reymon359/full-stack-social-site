@@ -13,6 +13,7 @@
     "prod": "node dist/index.js",
     "build": "tsc",
     "test": "jest --runInBand --forceExit",
+    "test:update": "jest --runInBand --forceExit --updateSnapshot",
     "codegen": "graphql-codegen",
     "format": "prettier \"**/*.ts\" --write",
     "loadtest": "yarn artillery run artillery.yml > loadtest.log",
