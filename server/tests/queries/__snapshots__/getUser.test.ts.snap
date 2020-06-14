@@ -5,8 +5,8 @@ Object {
   "user": Object {
     "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
     "email": "uri@uri.com",
-    "followers": 0,
-    "following": 9,
+    "followers": 4,
+    "following": 2,
     "id": "1",
     "name": "Uri Goldshtein",
     "picture": "https://robohash.org/uri?set=set5",

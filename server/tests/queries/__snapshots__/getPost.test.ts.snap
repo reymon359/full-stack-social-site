@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Query.post should fetch specified post 1`] = `
+Object {
+  "post": Object {
+    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet volutpat consequat mauris nunc. A diam maecenas sed enim ut sem. In tellus integer feugiat scelerisque. Scelerisque varius morbi enim nunc faucibus a pellentesque. Placerat orci nulla pellentesque dignissim enim sit amet venenatis. Neque volutpat ac tincidunt vitae. Non tellus orci ac auctor augue mauris augue neque gravida. Viverra nibh cras pulvinar mattis nunc. Lacus viverra vitae congue eu. Diam donec adipiscing tristique risus nec feugiat. Vitae sapien pellentesque habitant mo id cursus metus aliquam eleifend mi. Eget nunc lobortis mattis aliquam faucibus.",
+    "createdAt": "2020-06-14T07:20:00.000Z",
+    "description": "Lorem ipsum dolor sit ameo eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "likes": 2,
+    "picture": "https://source.unsplash.com/1600x900/?react",
+    "title": "React is the best",
+    "user": Object {
+      "id": "1",
+      "username": "uri",
+    },
+  },
+}
+`;
