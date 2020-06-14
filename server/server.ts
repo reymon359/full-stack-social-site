@@ -4,12 +4,11 @@ import { GraphQLModule } from '@graphql-modules/core';
 import cookie from 'cookie';
 
 import usersModule from './modules/users';
-import postsModule from './modules/posts';
 import chatsModule from './modules/chats';
 
 export const rootModule = new GraphQLModule({
   name: 'root',
-  imports: [usersModule, chatsModule, postsModule],
+  imports: [usersModule, chatsModule],
 });
 
 export const server = new ApolloServer({

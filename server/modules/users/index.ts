@@ -21,8 +21,6 @@ const typeDefs = gql`
     me: User
     user(username: String!): User
     users: [User!]!
-    followers(userId: String!): [User!]!
-    following(userId: String!): [User!]!
   }
 
   extend type Mutation {
@@ -34,21 +32,6 @@ const typeDefs = gql`
       password: String!
       passwordConfirm: String!
     ): User
-    editUser(
-      name: String!
-      username: String!
-      email: String!
-      bio: String!
-      password: String!
-      passwordNew: String!
-      passwordNewConfirm: String!
-    ): User
-    follow(userId: String!): User
-    unfollow(userId: String!): User
-  }
-
-  extend type Subscription {
-    userFollowed: User!
   }
 `;
 
