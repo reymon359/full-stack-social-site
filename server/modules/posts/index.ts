@@ -43,6 +43,7 @@ const typeDefs = gql`
     ): Post
     removePost(postId: ID!): String
     likePost(postId: ID!): Post
+    unlikePost(postId: ID!): Post
   }
 
   extend type Subscription {
