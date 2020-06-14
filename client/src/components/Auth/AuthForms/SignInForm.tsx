@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { useSignIn } from '../../services/auth.service';
+import { useSignIn } from '../../../services/auth.service';
 import {
   FormContainer,
   Label,
@@ -11,7 +11,7 @@ import {
   MessageHeading,
 } from './AuthForms.styles';
 import { RouteComponentProps } from 'react-router-dom';
-import LoadingSpinner from '../Shared/LoadingSpinner';
+import LoadingSpinner from '../../Shared/LoadingSpinner';
 
 const SignInForm: React.FC<RouteComponentProps<any>> = ({ history }) => {
   const [email, setEmail] = useState('');

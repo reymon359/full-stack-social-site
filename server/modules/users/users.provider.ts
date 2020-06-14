@@ -69,6 +69,24 @@ export class Users {
     return rows[0] || null;
   }
 
+  async getUserFollowersCount(userId: string) {
+    const { rows } = await this.db.query(sql`
+      SELECT COUNT(*) FROM follows
+      WHERE follows.followed_user_id = ${userId}
+    `);
+
+    return Number(rows[0].count);
+  }
+
+  async getUserFollowingCount(userId: string) {
+    const { rows } = await this.db.query(sql`
+      SELECT COUNT(*) FROM follows
+      WHERE follows.following_user_id = ${userId}
+    `);
+
+    return Number(rows[0].count);
+  }
+
   async newUser({
     name,
     username,
@@ -87,9 +105,9 @@ export class Users {
     const defaultUserPicture = `https://robohash.org/${username}?set=set5`;
 
     const createdUserQuery = await this.db.query(sql`
-        INSERT INTO users(name, username, email, password, bio, followers, following, picture)
+        INSERT INTO users(name, username, email, password, bio, picture)
         VALUES(${name}, ${username}, ${email}, ${passwordHash}, ${defaultUserBio}, 
-        0, 0, ${defaultUserPicture})
+        ${defaultUserPicture})
         RETURNING *
       `);
     const user = createdUserQuery.rows[0];

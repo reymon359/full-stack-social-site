@@ -6,11 +6,11 @@ Object {
     "id": "1",
     "lastMessage": Object {
       "content": "You on your way?",
-      "createdAt": "2018-12-31T07:20:00.000Z",
+      "createdAt": "2020-06-14T07:20:00.000Z",
       "id": "1",
     },
     "name": "Ethan Gonzalez",
-    "picture": "https://randomuser.me/api/portraits/thumb/men/1.jpg",
+    "picture": "https://robohash.org/ethan?set=set5",
   },
 }
 `;

@@ -1,8 +1,7 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { History } from 'history';
 import { Navbar } from '../Navbar';
 import { NotFoundContent } from './NotFoundContent';
-import { useMe } from '../../services/auth.service';
 
 interface NotFoundContainerProps {
   history: History;

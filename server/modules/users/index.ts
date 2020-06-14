@@ -4,6 +4,7 @@ import commonModule from '../common';
 import { Resolvers } from '../../types/graphql';
 import { Users } from './users.provider';
 import { Auth } from './auth.provider';
+import { Chats } from '../chats/chats.provider';
 
 const typeDefs = gql`
   type User {
@@ -21,6 +22,8 @@ const typeDefs = gql`
     me: User
     user(username: String!): User
     users: [User!]!
+    followers(userId: String!): [User!]!
+    following(userId: String!): [User!]!
   }
 
   extend type Mutation {
@@ -32,10 +35,35 @@ const typeDefs = gql`
       password: String!
       passwordConfirm: String!
     ): User
+    editUser(
+      name: String!
+      username: String!
+      email: String!
+      bio: String!
+      password: String!
+      passwordNew: String!
+      passwordNewConfirm: String!
+    ): User
+    follow(userId: String!): User
+    unfollow(userId: String!): User
+  }
+
+  extend type Subscription {
+    userFollowed: User!
   }
 `;
 
 const resolvers: Resolvers = {
+  User: {
+    async followers(user, args, { injector }) {
+      return injector.get(Users).getUserFollowersCount(user.id);
+    },
+
+    async following(user, args, { injector }) {
+      return injector.get(Users).getUserFollowingCount(user.id);
+    },
+  },
+
   Query: {
     me(root, args, { injector }) {
       return injector.get(Auth).currentUser();

@@ -122,9 +122,9 @@ const ProfileDetails: React.FC<ProfileDetailsProps> = ({ user }) => {
       <UserBio data-testid="user-bio">{user.bio}</UserBio>
       <FollowsContainer>
         <p data-testid="user-followers">{user.followers}</p>
-        <a href="#">Followers</a>
+        <a href="/">Followers</a>
         <p data-testid="user-following">{user.following}</p>
-        <a href="#">Following</a>
+        <a href="/">Following</a>
         {!isCurrentUserProfile && <FollowButton>Follow</FollowButton>}
       </FollowsContainer>
     </ProfileDetailsContainer>

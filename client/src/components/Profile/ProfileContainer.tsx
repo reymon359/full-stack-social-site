@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { History } from 'history';
 import { Navbar } from '../Navbar';
 import gql from 'graphql-tag';

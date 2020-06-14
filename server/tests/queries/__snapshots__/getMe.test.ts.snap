@@ -5,7 +5,7 @@ Object {
   "me": Object {
     "id": "1",
     "name": "Uri Goldshtein",
-    "picture": "https://randomuser.me/api/portraits/thumb/lego/1.jpg",
+    "picture": "https://robohash.org/uri?set=set5",
   },
 }
 `;

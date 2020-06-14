@@ -1,8 +1,8 @@
 import React from 'react';
 import { useMemo } from 'react';
 import { Route } from 'react-router-dom';
-import SignInForm from '../AuthForms/SignInForm';
-import SignUpForm from '../AuthForms/SignUpForm';
+import SignInForm from './AuthForms/SignInForm';
+import SignUpForm from './AuthForms/SignUpForm';
 import { RouteComponentProps } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -10,7 +10,7 @@ const AuthBackCoverImage = styled.div`
   background-size: cover;
   width: 100%;
   height: 100%;
-  background-image: url('https://source.unsplash.com/1600x900/?happy,people');
+  background-image: url('https://source.unsplash.com/900x600/?happy,people');
 `;
 
 const Authcontainer = styled.div`
