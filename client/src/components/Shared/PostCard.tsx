@@ -5,8 +5,16 @@ import styled from 'styled-components';
 const PostCardContainer = styled.div`
   margin: 1.6rem 0;
   max-width: 600px;
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 1rem;
+  box-shadow: 0px 0px 5px 1px ${(props) => props.theme.colors.medium};
+  cursor: pointer;
+  transition: 0.5s;
+
+  &:hover,
+  &:focus {
+    box-shadow: 0px 0px 15px 2px ${(props) => props.theme.colors.medium};
+  }
 `;
 
 const PostCardHeader = styled.div``;
@@ -17,7 +25,9 @@ const PostUserUsername = styled.div``;
 const PostCreatedAt = styled.div``;
 
 const PostCardBody = styled.div``;
-const PostPicture = styled.img``;
+const PostPicture = styled.img`
+  width: 90%;
+`;
 
 const PostTitle = styled.h1``;
 
