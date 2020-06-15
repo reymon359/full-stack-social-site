@@ -17,12 +17,31 @@ const PostCardContainer = styled.div`
   }
 `;
 
-const PostCardHeader = styled.div``;
+const PostCardHeader = styled.div`
+  display: flex;
+  margin-bottom: 0;
+  padding: 10px;
+`;
 
-const PostUserPicture = styled.img``;
+const PostUserPicture = styled.img`
+  border-radius: 100%;
+  border: 3px solid ${(props) => props.theme.colors.primaryDark};
 
-const PostUserUsername = styled.div``;
-const PostCreatedAt = styled.div``;
+  height: 50px;
+  width: 50px;
+`;
+
+const UsernameAndCreatedAtWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+`;
+
+const PostUserUsername = styled.h2`
+  font-size: ${(props) => props.theme.fontSizes.mediumLarge};
+  font-weight: ${(props) => props.theme.fontWeights.regular};
+`;
+const PostCreatedAt = styled.p``;
 
 const PostCardBody = styled.div``;
 const PostPicture = styled.img`
@@ -45,12 +64,14 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
           data-testid="post-user-picture"
           src={post.user?.picture}
         />
-        <PostUserUsername data-testid="post-user-username">
-          {post.user?.username}
-        </PostUserUsername>
-        <PostCreatedAt data-testid="post-created-at">
-          {post.createdAt}
-        </PostCreatedAt>
+        <UsernameAndCreatedAtWrapper>
+          <PostUserUsername data-testid="post-user-username">
+            {post.user?.username}
+          </PostUserUsername>
+          <PostCreatedAt data-testid="post-created-at">
+            {new Date(post.createdAt).toTimeString()}
+          </PostCreatedAt>
+        </UsernameAndCreatedAtWrapper>
       </PostCardHeader>
       <PostCardBody>
         <PostPicture data-testid="post-picture" src={post.picture} />
