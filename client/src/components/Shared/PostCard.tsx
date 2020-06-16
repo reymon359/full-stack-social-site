@@ -2,6 +2,7 @@ import React from 'react';
 import { Post } from '../../graphql/types';
 import styled from 'styled-components';
 import { timeFromNow } from '../../utils/timeFromNow';
+import { log } from 'util';
 
 const PostCardContainer = styled.div`
   margin: 1.6rem 0;
@@ -45,13 +46,30 @@ const PostUserUsername = styled.h2`
 const PostCreatedAt = styled.p``;
 
 const PostCardBody = styled.div``;
-const PostPicture = styled.img`
-  width: 90%;
+
+type PostPictureProps = {
+  url: string;
+};
+
+const PostPicture = styled.div<PostPictureProps>`
+  background-size: cover;
+  width: 100%;
+  min-height: 250px;
+  border-radius: 5px;
+  background-image: url('${(props) => props.url}');
 `;
 
-const PostTitle = styled.h1``;
+const PostTitle = styled.h1`
+  padding: 1rem 0.5rem 0.5rem;
+  font-size: ${(props) => props.theme.fontSizes.large};
+  font-weight: ${(props) => props.theme.fontWeights.regular};
+`;
 
-const PostDescription = styled.p``;
+const PostDescription = styled.p`
+  padding: 0.5rem;
+  font-size: ${(props) => props.theme.fontSizes.medium};
+  font-weight: ${(props) => props.theme.fontWeights.regular};
+`;
 
 interface PostCardProps {
   post: Post;
@@ -75,7 +93,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
         </UsernameAndCreatedAtWrapper>
       </PostCardHeader>
       <PostCardBody>
-        <PostPicture data-testid="post-picture" src={post.picture} />
+        <PostPicture data-testid="post-picture" url={post.picture} />
         <PostTitle data-testid="post-title">{post.title}</PostTitle>
         <PostDescription data-testid="post-description">
           {post.description}

@@ -197,8 +197,7 @@ export const resetDb = async () => {
     {
       id: '1',
       title: 'React is the best',
-      picture:
-        'https://memegenerator.net/img/instances/32269437/efwewe-fwefwe.jpg',
+      picture: 'https://source.unsplash.com/1600x900/?tech',
       description:
         'Lorem ipsum dolor sit ameo eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       content:
@@ -209,7 +208,7 @@ export const resetDb = async () => {
     {
       id: '2',
       title: 'GraphQL is the best',
-      picture: 'https://source.unsplash.com/1600x900/?graphql',
+      picture: 'https://source.unsplash.com/1600x900/?computer',
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       content:
