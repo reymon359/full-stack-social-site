@@ -23,7 +23,7 @@ describe('ProfileDetails', () => {
     const client = mockApolloClient();
 
     {
-      const { container, getByTestId } = render(
+      const { getByTestId } = render(
         <ThemeProvider theme={theme}>
           <ApolloProvider client={client}>
             <ProfileDetails user={mockUser} />
