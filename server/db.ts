@@ -197,7 +197,8 @@ export const resetDb = async () => {
     {
       id: '1',
       title: 'React is the best',
-      picture: 'https://source.unsplash.com/1600x900/?react',
+      picture:
+        'https://memegenerator.net/img/instances/32269437/efwewe-fwefwe.jpg',
       description:
         'Lorem ipsum dolor sit ameo eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       content:

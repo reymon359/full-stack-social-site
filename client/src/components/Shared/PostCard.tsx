@@ -1,6 +1,7 @@
 import React from 'react';
 import { Post } from '../../graphql/types';
 import styled from 'styled-components';
+import { timeFromNow } from '../../utils/timeFromNow';
 
 const PostCardContainer = styled.div`
   margin: 1.6rem 0;
@@ -57,6 +58,8 @@ interface PostCardProps {
 }
 
 const PostCard: React.FC<PostCardProps> = ({ post }) => {
+  const createdAtTfn = timeFromNow(new Date(post.createdAt));
+
   return (
     <PostCardContainer>
       <PostCardHeader>
@@ -68,9 +71,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
           <PostUserUsername data-testid="post-user-username">
             {post.user?.username}
           </PostUserUsername>
-          <PostCreatedAt data-testid="post-created-at">
-            {new Date(post.createdAt).toTimeString()}
-          </PostCreatedAt>
+          <PostCreatedAt data-testid="post-created-at">{`${createdAtTfn?.time} ${createdAtTfn?.unitOfTime} ago`}</PostCreatedAt>
         </UsernameAndCreatedAtWrapper>
       </PostCardHeader>
       <PostCardBody>
