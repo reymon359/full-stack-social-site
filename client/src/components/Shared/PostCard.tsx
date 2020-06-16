@@ -12,6 +12,7 @@ const PostCardContainer = styled.div`
   box-shadow: 0px 0px 5px 1px ${(props) => props.theme.colors.medium};
   cursor: pointer;
   transition: 0.5s;
+  color: ${(props) => props.theme.colors.darker};
 
   &:hover,
   &:focus {
@@ -43,7 +44,9 @@ const PostUserUsername = styled.h2`
   font-size: ${(props) => props.theme.fontSizes.mediumLarge};
   font-weight: ${(props) => props.theme.fontWeights.regular};
 `;
-const PostCreatedAt = styled.p``;
+const PostCreatedAt = styled.p`
+  margin-top: 10px;
+`;
 
 const PostCardBody = styled.div``;
 
