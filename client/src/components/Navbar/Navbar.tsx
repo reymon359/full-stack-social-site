@@ -9,7 +9,7 @@ import { ThemeContext } from 'styled-components';
 import { AppRoutes } from '../../AppRoutes';
 
 const NavbarContainer = styled.div`
-  background-color: ${(props) => props.theme.colors.light};
+  background-color: ${(props) => props.theme.colors.lightest};
   width: 100%;
   height: 4rem;
   display: flex;
@@ -34,7 +34,7 @@ const NavbarButtonsContainer = styled.div`
 
 const NavbarButton = styled.button`
   color: ${(props) => props.theme.colors.primary};
-  background-color: ${(props) => props.theme.colors.light};
+  background-color: ${(props) => props.theme.colors.lightest};
   border: none;
   margin-right: 1rem;
   padding: 0.5rem 1rem;

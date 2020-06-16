@@ -63,7 +63,7 @@ html, body {
 }
 
 body {
-  background: ${theme.colors.light};
+  background: ${theme.colors.lightest};
   color: ${theme.colors.darkest};
   font-family: ${theme.fonts.primary};
   backface-visibility: hidden;
