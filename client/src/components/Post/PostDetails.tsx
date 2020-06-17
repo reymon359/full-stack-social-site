@@ -1,5 +1,5 @@
 import React from 'react';
-import { Post, User } from '../../graphql/types';
+import { Post } from '../../graphql/types';
 import styled from 'styled-components';
 import { useMe } from '../../services/auth.service';
 import { Link } from 'react-router-dom';
@@ -182,10 +182,10 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post }) => {
           </PostLikesNumber>
           {isCurrentUserPost ? (
             <>
-              <PostButton color="primary" data-testid="post-like-button">
+              <PostButton color="primary" data-testid="post-edit-button">
                 Edit
               </PostButton>
-              <PostButton color="danger" data-testid="post-like-button">
+              <PostButton color="danger" data-testid="post-delete-button">
                 Delete
               </PostButton>
             </>

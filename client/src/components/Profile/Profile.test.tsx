@@ -20,7 +20,7 @@ describe('ProfileDetails', () => {
   };
 
   it('renders the user data', async () => {
-    const client = mockApolloClient();
+    const client = mockApolloClient([]);
 
     {
       const { getByTestId } = render(

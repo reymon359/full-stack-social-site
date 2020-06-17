@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { Post } from '../../graphql/types';
 import styled from 'styled-components';
 import { timeFromNow } from '../../utils/timeFromNow';

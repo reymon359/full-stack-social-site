@@ -4,10 +4,10 @@ import { render, waitFor, screen } from '@testing-library/react';
 import { mockApolloClient } from '../../test-helpers';
 import { ThemeProvider } from 'styled-components';
 import { theme } from '../../styles';
-import PostCard from './PostCard';
-import { timeFromNow } from '../../utils/timeFromNow';
+import PostDetails from './PostDetails';
 import { BrowserRouter as Router } from 'react-router-dom';
-describe('PostCard', () => {
+
+describe('PostDetails', () => {
   const mockPost = {
     id: '4',
     title: 'Alicante is the best',
@@ -31,8 +31,6 @@ describe('PostCard', () => {
     },
   };
 
-  const createdAtTfn = timeFromNow(new Date(mockPost.createdAt));
-
   it('renders the post data', async () => {
     const client = mockApolloClient([]);
 
@@ -41,7 +39,7 @@ describe('PostCard', () => {
         <ThemeProvider theme={theme}>
           <ApolloProvider client={client}>
             <Router>
-              <PostCard post={mockPost} />
+              <PostDetails post={mockPost} />
             </Router>
           </ApolloProvider>
         </ThemeProvider>
@@ -58,15 +56,21 @@ describe('PostCard', () => {
       );
 
       expect(getByTestId('post-created-at')).toHaveTextContent(
-        `${createdAtTfn?.time} ${createdAtTfn?.unitOfTime} ago`
+        `${mockPost.createdAt.slice(0, 10)}`
+      );
+
+      expect(getByTestId('post-likes-number')).toHaveTextContent(
+        `${mockPost.likes} Likes`
+      );
+      expect(getByTestId('post-title')).toHaveTextContent(mockPost.title);
+
+      expect(getByTestId('post-description')).toHaveTextContent(
+        mockPost.description
       );
       expect(getByTestId('post-picture')).toHaveStyle(
         `background-image: url('${mockPost.picture}')`
       );
-      expect(getByTestId('post-title')).toHaveTextContent(mockPost.title);
-      expect(getByTestId('post-description')).toHaveTextContent(
-        mockPost.description
-      );
+      expect(getByTestId('post-content')).toHaveTextContent(mockPost.content);
     }
   });
 });
