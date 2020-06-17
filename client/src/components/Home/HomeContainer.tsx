@@ -31,7 +31,7 @@ interface HomeContainerProps {
 
 export const HomeContainer: React.FC<HomeContainerProps> = ({ history }) => {
   const { data, loading: loadingPosts } = useGetLastPostsQuery();
-
+  console.log(data);
   return (
     <>
       <Navbar history={history} />
