@@ -23,7 +23,7 @@ const App: React.FC = () => (
       <Route exact path={AppRoutes.Root} render={redirectToHome} />
       <Route exact path={AppRoutes.Home} component={withAuth(HomeContainer)} />
       <Route exact path={AppRoutes.Auth} component={AuthContainer} />
-      <Route exact path={AppRoutes.Post} component={withAuth(PostContainer)} />
+
       <Route
         exact
         path={AppRoutes.NewPost}
@@ -35,6 +35,15 @@ const App: React.FC = () => (
         component={withAuth(AboutContainer)}
       />
       {/*<Route exact path={AppRoutes.NotFound} component={NotFoundContainer} />*/}
+      <Route
+        exact
+        path="/post/:postId"
+        component={withAuth(
+          ({ match, history }: RouteComponentProps<{ postId: string }>) => (
+            <PostContainer postId={match.params.postId} history={history} />
+          )
+        )}
+      />
       <Route
         exact
         path="/:username"
