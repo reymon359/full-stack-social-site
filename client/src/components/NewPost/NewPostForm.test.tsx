@@ -46,12 +46,12 @@ describe('NewPostForm', () => {
     expect(addPostButton.disabled).toEqual(true);
 
     act(() => {
-      fireEvent.change(titleInput, { target: { value: 'User Name' } });
+      fireEvent.change(titleInput, { target: { value: 'title' } });
       fireEvent.change(descriptionInput, { target: { value: 'description' } });
       fireEvent.change(contentInput, { target: { value: 'content' } });
     });
 
-    await waitFor(() => expect(titleInput.value).toEqual('User Name'));
+    await waitFor(() => expect(titleInput.value).toEqual('title'));
     await waitFor(() => expect(descriptionInput.value).toEqual('description'));
     await waitFor(() => expect(contentInput.value).toEqual('content'));
     await waitFor(() => expect(addPostButton.disabled).toEqual(false));
@@ -120,6 +120,78 @@ describe('NewPostForm', () => {
 
     await waitFor(() =>
       expect(errorMessage.innerHTML).toContain('add-post failed')
+    );
+  });
+
+  it('navigates to /post if everything went right', async () => {
+    const history = createMemoryHistory();
+    const mockedIdResponse = '9';
+    const client = mockApolloClient([
+      {
+        request: {
+          query: AddPostDocument,
+          variables: {
+            title: 'title',
+            picture: 'picture',
+            description: 'description',
+            content: 'content',
+          },
+        },
+        result: {
+          data: {
+            addPost: {
+              id: mockedIdResponse,
+            },
+          },
+        },
+      },
+    ]);
+
+    let getByTestId: any = null;
+
+    act(() => {
+      getByTestId = render(
+        <ThemeProvider theme={theme}>
+          <ApolloProvider client={client}>
+            <NewPostForm history={history} />
+          </ApolloProvider>
+        </ThemeProvider>
+      ).getByTestId;
+    });
+
+    const titleInput = await waitFor(() => getByTestId('title-input'));
+    const descriptionInput = await waitFor(() =>
+      getByTestId('description-input')
+    );
+    const pictureInput = await waitFor(() => getByTestId('picture-input'));
+    const contentInput = await waitFor(() => getByTestId('content-input'));
+
+    const addPostButton = await waitFor(
+      () => getByTestId('add-post-button') as HTMLButtonElement
+    );
+
+    act(() => {
+      fireEvent.change(titleInput, { target: { value: 'title' } });
+      fireEvent.change(descriptionInput, { target: { value: 'description' } });
+      fireEvent.change(pictureInput, { target: { value: 'picture' } });
+      fireEvent.change(contentInput, { target: { value: 'content' } });
+    });
+
+    await waitFor(() => expect(titleInput.value).toEqual('title'));
+    await waitFor(() => expect(descriptionInput.value).toEqual('description'));
+    await waitFor(() => expect(pictureInput.value).toEqual('picture'));
+    await waitFor(() => expect(contentInput.value).toEqual('content'));
+
+    act(() => {
+      fireEvent.click(addPostButton);
+    });
+
+    await waitFor(
+      () =>
+        expect(history.location.pathname).toEqual(`/post/${mockedIdResponse}`),
+      {
+        timeout: 3000,
+      }
     );
   });
 });
