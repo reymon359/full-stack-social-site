@@ -2,6 +2,7 @@ import React from 'react';
 import { Post, User } from '../../graphql/types';
 import styled from 'styled-components';
 import { useMe } from '../../services/auth.service';
+import { Link } from 'react-router-dom';
 
 const PostDetailsContainer = styled.div`
   display: flex;
@@ -19,7 +20,8 @@ const PostDetailsHeader = styled.div`
   padding: 10px;
   justify-content: space-between;
 `;
-const PostUserInfo = styled.div`
+const PostUserInfo = styled(Link)`
+  cursor: pointer;
   display: flex;
   margin-bottom: 0;
   padding: 10px;
@@ -79,7 +81,7 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post }) => {
   return (
     <PostDetailsContainer>
       <PostDetailsHeader>
-        <PostUserInfo>
+        <PostUserInfo to={`/${post?.user?.username}`}>
           <PostUserPicture
             data-testid="post-user-picture"
             src={post.user?.picture}
