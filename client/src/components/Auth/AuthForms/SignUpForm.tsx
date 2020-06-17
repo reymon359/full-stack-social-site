@@ -69,7 +69,7 @@ const SignUpForm: React.FC<RouteComponentProps<any>> = ({ history }) => {
         }, 2000);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
 
         setMessage(
           error.graphQLErrors

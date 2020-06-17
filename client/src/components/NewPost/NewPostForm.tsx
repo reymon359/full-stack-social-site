@@ -44,8 +44,7 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ history }) => {
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
-  // const [signUp] = useSignUp();
-  const [addMessage] = useAddPostMutation();
+  const [addPost] = useAddPostMutation();
 
   const updateTile = useCallback(({ target }) => {
     setMessage('');
@@ -72,9 +71,8 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ history }) => {
   }, [title, description, picture, content]);
 
   const handleAddPost = useCallback(() => {
-    addMessage({ variables: { title, description, picture, content } })
+    addPost({ variables: { title, description, picture, content } })
       .then((data: any) => {
-        console.log(data);
         setMessage('🎉 New Post Created!');
         setTimeout(() => {
           history.replace(`/post/${data.data.addPost.id}`);
@@ -82,7 +80,7 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ history }) => {
         }, 2000);
       })
       .catch((error: any) => {
-        console.log(error);
+        console.error(error);
 
         setMessage(
           error.graphQLErrors
@@ -91,7 +89,7 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ history }) => {
         );
         setLoading(false);
       });
-  }, [title, description, picture, content, history, addMessage]);
+  }, [title, description, picture, content, history, addPost]);
 
   return (
     <FormContainer>
