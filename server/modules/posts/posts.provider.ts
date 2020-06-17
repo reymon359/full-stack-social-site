@@ -4,6 +4,12 @@ import { Database } from '../common/database.provider';
 import { Post } from '../../db';
 import DataLoader from 'dataloader';
 import { QueryResult } from 'pg';
+import bcrypt from 'bcrypt';
+import {
+  validateEmail,
+  validateLength,
+  validatePassword,
+} from '../../validators';
 
 type PostById = { postId: string };
 type PostsKey = PostById;
@@ -89,23 +95,44 @@ export class Posts {
     userId,
   }: {
     title: string;
-    picture: string;
+    picture?: string | null | undefined;
     description: string;
     content: string;
     userId: string;
   }) {
-    const createdPostQuery = await this.db.query(sql`
-        INSERT INTO users( title, picture, description, content, likes, userId)
-        VALUES(${title}, ${picture}, ${description}, ${content}, 0, ${userId});
+    validateLength('Title', title, 5, 150);
+    validateLength('Description', description, 10, 500);
+    validateLength('Content', content, 10, 30000);
+
+    if (picture) {
+      validateLength('Picture', picture, 5, 1000);
+    } else {
+      picture = `https://source.unsplash.com/1600x900/?${title.charAt(0)}`;
+    }
+
+    const { rows } = await this.db.query(sql`
+        INSERT INTO posts( title, picture, description, content, user_id)
+        VALUES(${title}, ${picture}, ${description}, ${content}, ${userId})
         RETURNING *
       `);
-    const postAdded = createdPostQuery.rows[0];
-    return postAdded;
+    return rows[0];
   }
 
   async removePost(postId: string) {
     try {
       await this.db.query('BEGIN');
+
+      const { rows } = await this.db.query(sql`
+        SELECT * FROM posts WHERE id = ${postId}
+      `);
+
+      const post = rows[0];
+
+      if (!post) {
+        await this.db.query('ROLLBACK');
+        return null;
+      }
+
       await this.db.query(sql`
         DELETE FROM posts WHERE posts.id = ${postId}
       `);

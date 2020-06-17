@@ -1,6 +1,7 @@
 import React from 'react';
 import { History } from 'history';
 import { Navbar } from '../Navbar';
+import NewPostForm from './NewPostForm';
 
 interface NewPostContainerProps {
   history: History;
@@ -12,7 +13,7 @@ export const NewPostContainer: React.FC<NewPostContainerProps> = ({
   return (
     <>
       <Navbar history={history} />
-      <h1>NewPost</h1>
+      <NewPostForm history={history} />
     </>
   );
 };

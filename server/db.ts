@@ -197,18 +197,20 @@ export const resetDb = async () => {
     {
       id: '1',
       title: 'React is the best',
-      picture: 'https://source.unsplash.com/1600x900/?tech',
+      picture:
+        'https://images.unsplash.com/photo-1581276879432-15e50529f34b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
       description:
         'Lorem ipsum dolor sit ameo eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       content:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet volutpat consequat mauris nunc. A diam maecenas sed enim ut sem. In tellus integer feugiat scelerisque. Scelerisque varius morbi enim nunc faucibus a pellentesque. Placerat orci nulla pellentesque dignissim enim sit amet venenatis. Neque volutpat ac tincidunt vitae. Non tellus orci ac auctor augue mauris augue neque gravida. Viverra nibh cras pulvinar mattis nunc. Lacus viverra vitae congue eu. Diam donec adipiscing tristique risus nec feugiat. Vitae sapien pellentesque habitant mo id cursus metus aliquam eleifend mi. Eget nunc lobortis mattis aliquam faucibus.',
       created_at: new Date(baseTime - 60 * 1000 * 1000),
-      user_id: '1',
+      user_id: '2',
     },
     {
       id: '2',
       title: 'GraphQL is the best',
-      picture: 'https://source.unsplash.com/1600x900/?computer',
+      picture:
+        'https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1007&q=80',
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       content:
@@ -219,7 +221,8 @@ export const resetDb = async () => {
     {
       id: '3',
       title: 'Typescript is the best',
-      picture: 'https://source.unsplash.com/1600x900/?typescript',
+      picture:
+        'https://images.unsplash.com/photo-1483058712412-4245e9b90334?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       content:
@@ -230,7 +233,8 @@ export const resetDb = async () => {
     {
       id: '4',
       title: 'Alicante is the best',
-      picture: 'https://source.unsplash.com/1600x900/?alicante',
+      picture:
+        'https://images.unsplash.com/photo-1587410342415-e9a5764cbab7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1377&q=80',
       description:
         'consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet volutpat consequat mauris nunc. A diam maece',
       content:
@@ -241,7 +245,8 @@ export const resetDb = async () => {
     {
       id: '5',
       title: 'Madrid is the best',
-      picture: 'https://source.unsplash.com/1600x900/?madrid',
+      picture:
+        'https://images.unsplash.com/photo-1543783207-ec64e4d95325?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
       description:
         'consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet volutpat consequat mauris nunc. A diam maece',
       content:
@@ -252,7 +257,8 @@ export const resetDb = async () => {
     {
       id: '6',
       title: 'Fruit is the best',
-      picture: 'https://source.unsplash.com/1600x900/?fruit',
+      picture:
+        'https://images.unsplash.com/photo-1548016190-db560c8558bf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80',
       description:
         'consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet volutpat consequat mauris nunc. A diam maece',
       content:
@@ -267,9 +273,9 @@ export const resetDb = async () => {
       VALUES(${samplePost.id}, ${samplePost.title}, ${samplePost.picture}, ${samplePost.description}, 
             ${samplePost.content}, ${samplePost.created_at}, ${samplePost.user_id})`);
   }
-  // await pool.query(
-  //   sql`SELECT setval('post_id_seq', (SELECT max(id) FROM posts))`
-  // );
+  await pool.query(
+    sql`SELECT setval('posts_id_seq', (SELECT max(id) FROM posts))`
+  );
 
   // Posts_liked_users
   await pool.query(sql`DELETE FROM posts_liked_users`);

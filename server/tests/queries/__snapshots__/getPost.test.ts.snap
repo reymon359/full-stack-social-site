@@ -7,11 +7,11 @@ Object {
     "createdAt": "2020-06-14T07:20:00.000Z",
     "description": "Lorem ipsum dolor sit ameo eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     "likes": 2,
-    "picture": "https://source.unsplash.com/1600x900/?react",
+    "picture": "https://images.unsplash.com/photo-1581276879432-15e50529f34b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
     "title": "React is the best",
     "user": Object {
-      "id": "1",
-      "username": "uri",
+      "id": "2",
+      "username": "ethan",
     },
   },
 }

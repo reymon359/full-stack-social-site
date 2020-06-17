@@ -11,7 +11,7 @@ const typeDefs = gql`
   type Post {
     id: ID!
     title: String!
-    picture: URL
+    picture: String!
     description: String!
     content: String!
     createdAt: DateTime!
@@ -29,7 +29,7 @@ const typeDefs = gql`
   extend type Mutation {
     addPost(
       title: String!
-      picture: String!
+      picture: String
       description: String!
       content: String!
     ): Post
@@ -39,7 +39,7 @@ const typeDefs = gql`
       description: String!
       content: String!
     ): Post
-    removePost(postId: ID!): String
+    removePost(postId: ID!): ID
     likePost(postId: ID!): Post
     unlikePost(postId: ID!): Post
   }
