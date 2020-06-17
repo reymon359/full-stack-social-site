@@ -113,7 +113,7 @@ const PostTitle = styled.h1`
 const PostDescription = styled.p`
   font-size: ${(props) => props.theme.fontSizes.mediumLarge};
   font-weight: ${(props) => props.theme.fontWeights.regular};
-  color: ${(props) => props.theme.colors.mediumdark};
+  color: ${(props) => props.theme.colors.dark};
 `;
 type PostPictureProps = {
   url: string;
