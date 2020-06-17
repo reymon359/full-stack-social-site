@@ -94,13 +94,17 @@ export class Posts {
     content: string;
     userId: string;
   }) {
-    const createdPostQuery = await this.db.query(sql`
-        INSERT INTO users( title, picture, description, content, likes, userId)
-        VALUES(${title}, ${picture}, ${description}, ${content}, 0, ${userId});
+    // console.log(title);
+    // console.log(picture);
+    // console.log(description);
+    // console.log(content);
+    // console.log(userId);
+    const { rows } = await this.db.query(sql`
+        INSERT INTO posts( title, picture, description, content, user_id)
+        VALUES(${title}, ${picture}, ${description}, ${content}, ${userId})
         RETURNING *
       `);
-    const postAdded = createdPostQuery.rows[0];
-    return postAdded;
+    return rows[0];
   }
 
   async removePost(postId: string) {

@@ -273,9 +273,9 @@ export const resetDb = async () => {
       VALUES(${samplePost.id}, ${samplePost.title}, ${samplePost.picture}, ${samplePost.description}, 
             ${samplePost.content}, ${samplePost.created_at}, ${samplePost.user_id})`);
   }
-  // await pool.query(
-  //   sql`SELECT setval('post_id_seq', (SELECT max(id) FROM posts))`
-  // );
+  await pool.query(
+    sql`SELECT setval('posts_id_seq', (SELECT max(id) FROM posts))`
+  );
 
   // Posts_liked_users
   await pool.query(sql`DELETE FROM posts_liked_users`);
