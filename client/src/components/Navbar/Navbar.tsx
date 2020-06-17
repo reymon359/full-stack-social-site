@@ -35,6 +35,7 @@ const NavbarButtonsContainer = styled.div`
 const NavbarButton = styled.button`
   color: ${(props) => props.theme.colors.primary};
   background-color: ${(props) => props.theme.colors.lightest};
+  font-size: ${(props) => props.theme.fontSizes.medium};
   border: none;
   margin-right: 1rem;
   padding: 0.5rem 1rem;
