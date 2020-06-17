@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const PostCardContainer = styled.div`
   margin: 1.6rem 0;
-  max-width: 600px;
+  width: 600px;
   border-radius: 10px;
   padding: 1rem;
   box-shadow: 0px 0px 5px 1px ${(props) => props.theme.colors.medium};
@@ -18,6 +18,10 @@ const PostCardContainer = styled.div`
   &:focus {
     box-shadow: 0px 0px 15px 2px ${(props) => props.theme.colors.medium};
   }
+
+  ${(props) => props.theme.media.md`
+     width: 80vw;
+ `}
 `;
 
 const PostCardHeader = styled.div`
@@ -48,7 +52,9 @@ const PostCreatedAt = styled.p`
   margin-top: 10px;
 `;
 
-const PostCardBody = styled.div``;
+const PostCardBody = styled.div`
+  width: 100%;
+`;
 
 type PostPictureProps = {
   url: string;

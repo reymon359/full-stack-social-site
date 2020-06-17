@@ -91,6 +91,7 @@ const PostButton = styled.button<PostButtonProps>`
 
 const PostDetailsBody = styled.div`
   padding: 10px;
+  width: 100%;
 `;
 const PostIntro = styled.div`
   display: flex;
