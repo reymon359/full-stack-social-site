@@ -99,9 +99,16 @@ const PostIntro = styled.div`
   padding: 10px;
 `;
 const PostTitle = styled.h1`
-  font-size: ${(props) => props.theme.fontSizes.xLarge};
-  font-weight: ${(props) => props.theme.fontWeights.bold};
+  font-size: ${(props) => props.theme.fontSizes.xxLarge};
+  font-weight: ${(props) => props.theme.fontWeights.regular};
   margin-bottom: 0.5rem;
+  text-rendering: optimizeLegibility;
+  word-break: break-word;
+  box-sizing: inherit;
+  font-style: normal;
+  letter-spacing: 0;
+  margin-top: 0.72em;
+  line-height: 40px;
 `;
 const PostDescription = styled.p`
   font-size: ${(props) => props.theme.fontSizes.mediumLarge};
@@ -116,11 +123,33 @@ const PostPicture = styled.div<PostPictureProps>`
   background-size: cover;
   width: 100%;
   min-height: 250px;
+  height: 50vh;
   border-radius: 5px;
   background-image: url('${(props) => props.url}');
+  margin: 1rem 0;
+  
+  ${(props) => props.theme.media.sm`
+    height: 30vh;
+ `}
 `;
 
-const PostContent = styled.div``;
+const PostContent = styled.div`
+  padding: 10px;
+  text-align: justify;
+  letter-spacing: -0.003em;
+  line-height: 32px;
+  font-size: ${(props) => props.theme.fontSizes.large};
+  font-weight: ${(props) => props.theme.fontWeights.regular};
+  text-rendering: optimizeLegibility;
+  box-sizing: inherit;
+  font-style: normal;
+  word-break: break-word;
+
+  ${(props) => props.theme.media.sm`
+    font-size: ${props.theme.fontSizes.mediumLarge};
+    line-height: 28px;
+ `}
+`;
 
 interface PostDetailsProps {
   post: Post;
