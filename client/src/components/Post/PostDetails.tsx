@@ -24,7 +24,7 @@ const PostUserInfo = styled(Link)`
   cursor: pointer;
   display: flex;
   margin-bottom: 0;
-  padding: 10px;
+  //padding: 10px;
 `;
 
 const PostUserPicture = styled.img`
@@ -52,28 +52,36 @@ const PostLikesContainer = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 0;
-  padding: 10px;
+  //padding: 10px;
 `;
 const PostLikesNumber = styled.div`
   margin-right: 10px;
   font-size: ${(props) => props.theme.fontSizes.medium};
   font-weight: ${(props) => props.theme.fontWeights.regular};
+  ${(props) => props.theme.media.sm`
+    font-size: ${props.theme.fontSizes.normal};
+ `}
 `;
-const PostLikeButton = styled.button`
-  color: ${(props) => props.theme.colors.primary};
+type PostButtonProps = {
+  color: string;
+};
+const PostButton = styled.button<PostButtonProps>`
+  color: ${(props) => props.theme.colors[props.color]};
   background-color: ${(props) => props.theme.colors.lightest};
   font-size: ${(props) => props.theme.fontSizes.medium};
   font-weight: ${(props) => props.theme.fontWeights.regular};
   border: none;
-  margin-left: 1rem;
+  margin-left: 0.5rem;
   padding: 0.5rem 1rem;
   border-radius: 10px;
   cursor: pointer;
   transition: 0.25s;
 
-  &:hover,
-  &:focus {
+  &:hover {
     box-shadow: 0px 0px 5px 1px ${(props) => props.theme.colors.medium};
+  }
+  &:active {
+    transform: scale(1.1);
   }
 
   ${(props) => props.theme.media.sm`
@@ -128,7 +136,20 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post }) => {
           <PostLikesNumber data-testid="post-likes-number">
             {post.likes} Likes
           </PostLikesNumber>
-          <PostLikeButton data-testid="post-like-button">Like</PostLikeButton>
+          {isCurrentUserPost ? (
+            <>
+              <PostButton color="primary" data-testid="post-like-button">
+                Edit
+              </PostButton>
+              <PostButton color="danger" data-testid="post-like-button">
+                Delete
+              </PostButton>
+            </>
+          ) : (
+            <PostButton color="primary" data-testid="post-like-button">
+              Like
+            </PostButton>
+          )}
         </PostLikesContainer>
       </PostDetailsHeader>
       <PostDetailsBody>

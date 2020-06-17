@@ -42,9 +42,11 @@ const NavbarButton = styled.button`
   cursor: pointer;
   transition: 0.25s;
 
-  &:hover,
-  &:focus {
+  &:hover {
     box-shadow: 0px 0px 5px 1px ${(props) => props.theme.colors.medium};
+  }
+  &:active {
+    transform: scale(1.1);
   }
 `;
 
