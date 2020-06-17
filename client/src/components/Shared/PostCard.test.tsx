@@ -6,7 +6,7 @@ import { ThemeProvider } from 'styled-components';
 import { theme } from '../../styles';
 import PostCard from './PostCard';
 import { timeFromNow } from '../../utils/timeFromNow';
-
+import { BrowserRouter as Router } from 'react-router-dom';
 describe('PostCard', () => {
   const mockPost = {
     id: '4',
@@ -40,7 +40,9 @@ describe('PostCard', () => {
       const { getByTestId } = render(
         <ThemeProvider theme={theme}>
           <ApolloProvider client={client}>
-            <PostCard post={mockPost} />
+            <Router>
+              <PostCard post={mockPost} />
+            </Router>
           </ApolloProvider>
         </ThemeProvider>
       );

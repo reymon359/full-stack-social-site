@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Post } from '../../graphql/types';
 import styled from 'styled-components';
 import { timeFromNow } from '../../utils/timeFromNow';
-import { log } from 'util';
+import { Link } from 'react-router-dom';
 
 const PostCardContainer = styled.div`
   margin: 1.6rem 0;
@@ -12,6 +12,7 @@ const PostCardContainer = styled.div`
   box-shadow: 0px 0px 5px 1px ${(props) => props.theme.colors.medium};
   cursor: pointer;
   transition: 0.5s;
+  color: ${(props) => props.theme.colors.darker};
 
   &:hover,
   &:focus {
@@ -43,7 +44,9 @@ const PostUserUsername = styled.h2`
   font-size: ${(props) => props.theme.fontSizes.mediumLarge};
   font-weight: ${(props) => props.theme.fontWeights.regular};
 `;
-const PostCreatedAt = styled.p``;
+const PostCreatedAt = styled.p`
+  margin-top: 10px;
+`;
 
 const PostCardBody = styled.div``;
 
@@ -79,27 +82,29 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
   const createdAtTfn = timeFromNow(new Date(post.createdAt));
 
   return (
-    <PostCardContainer>
-      <PostCardHeader>
-        <PostUserPicture
-          data-testid="post-user-picture"
-          src={post.user?.picture}
-        />
-        <UsernameAndCreatedAtWrapper>
-          <PostUserUsername data-testid="post-user-username">
-            {post.user?.username}
-          </PostUserUsername>
-          <PostCreatedAt data-testid="post-created-at">{`${createdAtTfn?.time} ${createdAtTfn?.unitOfTime} ago`}</PostCreatedAt>
-        </UsernameAndCreatedAtWrapper>
-      </PostCardHeader>
-      <PostCardBody>
-        <PostPicture data-testid="post-picture" url={post.picture} />
-        <PostTitle data-testid="post-title">{post.title}</PostTitle>
-        <PostDescription data-testid="post-description">
-          {post.description}
-        </PostDescription>
-      </PostCardBody>
-    </PostCardContainer>
+    <Link to={`/post/${post.id}`}>
+      <PostCardContainer>
+        <PostCardHeader>
+          <PostUserPicture
+            data-testid="post-user-picture"
+            src={post.user?.picture}
+          />
+          <UsernameAndCreatedAtWrapper>
+            <PostUserUsername data-testid="post-user-username">
+              {post.user?.username}
+            </PostUserUsername>
+            <PostCreatedAt data-testid="post-created-at">{`${createdAtTfn?.time} ${createdAtTfn?.unitOfTime} ago`}</PostCreatedAt>
+          </UsernameAndCreatedAtWrapper>
+        </PostCardHeader>
+        <PostCardBody>
+          <PostPicture data-testid="post-picture" url={post.picture} />
+          <PostTitle data-testid="post-title">{post.title}</PostTitle>
+          <PostDescription data-testid="post-description">
+            {post.description}
+          </PostDescription>
+        </PostCardBody>
+      </PostCardContainer>
+    </Link>
   );
 };
 

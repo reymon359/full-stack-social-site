@@ -40,6 +40,8 @@ export const theme = {
   fonts: {
     primary:
       '"Open Sans", "Lato", "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif',
+    serif:
+      'medium-content-serif-font, Georgia, Cambria, "Times New Roman",  Times, serif',
     code:
       '"SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace',
     mono: "'Roboto Mono', stack-mono, monospace",
