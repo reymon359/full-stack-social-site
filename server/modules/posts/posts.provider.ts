@@ -4,6 +4,12 @@ import { Database } from '../common/database.provider';
 import { Post } from '../../db';
 import DataLoader from 'dataloader';
 import { QueryResult } from 'pg';
+import bcrypt from 'bcrypt';
+import {
+  validateEmail,
+  validateLength,
+  validatePassword,
+} from '../../validators';
 
 type PostById = { postId: string };
 type PostsKey = PostById;
@@ -89,16 +95,21 @@ export class Posts {
     userId,
   }: {
     title: string;
-    picture: string;
+    picture?: string | null | undefined;
     description: string;
     content: string;
     userId: string;
   }) {
-    // console.log(title);
-    // console.log(picture);
-    // console.log(description);
-    // console.log(content);
-    // console.log(userId);
+    validateLength('Title', title, 5, 150);
+    validateLength('Description', description, 10, 500);
+    validateLength('Content', content, 10, 30000);
+
+    if (picture) {
+      validateLength('Picture', picture, 5, 1000);
+    } else {
+      picture = `https://source.unsplash.com/1600x900/?${title.charAt(0)}`;
+    }
+
     const { rows } = await this.db.query(sql`
         INSERT INTO posts( title, picture, description, content, user_id)
         VALUES(${title}, ${picture}, ${description}, ${content}, ${userId})

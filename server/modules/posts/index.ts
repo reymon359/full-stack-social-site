@@ -29,7 +29,7 @@ const typeDefs = gql`
   extend type Mutation {
     addPost(
       title: String!
-      picture: String!
+      picture: String
       description: String!
       content: String!
     ): Post
