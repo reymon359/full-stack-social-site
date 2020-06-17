@@ -4,6 +4,7 @@ import { Navbar } from '../Navbar';
 import gql from 'graphql-tag';
 import * as fragments from '../../graphql/fragments';
 import { useGetPostByIdQuery } from '../../graphql/types';
+import PostDetails from './PostDetails';
 
 // eslint-disable-next-line
 const getPostByIdQuery = gql`
@@ -34,20 +35,20 @@ export const PostContainer: React.FC<PostContainerProps> = ({
   postId,
 }) => {
   console.log(postId);
-  // const { loading: loadingPost, data } = useGetPostByIdQuery({
-  //   variables: { postId },
-  // });
-
+  const { loading: loadingPost, data } = useGetPostByIdQuery({
+    variables: { postId },
+  });
+  console.log(data);
   return (
     <>
       <Navbar history={history} />
-      {/*{loadingPost? (*/}
-      {/*  <h1>Loading post...</h1>*/}
-      {/*) : data && data.post ? (*/}
-      {/*  <PostsList posts={dataata.lastPosts} />*/}
-      {/*) : (*/}
-      {/*  <h1>No posts found</h1>*/}
-      {/*)}*/}
+      {loadingPost ? (
+        <h1>Loading post...</h1>
+      ) : data && data.post ? (
+        <PostDetails post={data.post} />
+      ) : (
+        <h1>No posts found</h1>
+      )}
     </>
   );
 };
