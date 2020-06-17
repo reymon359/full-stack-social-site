@@ -89,10 +89,25 @@ const PostButton = styled.button<PostButtonProps>`
  `}
 `;
 
-const PostDetailsBody = styled.div``;
-const PostIntro = styled.div``;
-const PostTitle = styled.h1``;
-const PostDescription = styled.p``;
+const PostDetailsBody = styled.div`
+  padding: 10px;
+`;
+const PostIntro = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 10px;
+`;
+const PostTitle = styled.h1`
+  font-size: ${(props) => props.theme.fontSizes.xLarge};
+  font-weight: ${(props) => props.theme.fontWeights.bold};
+  margin-bottom: 0.5rem;
+`;
+const PostDescription = styled.p`
+  font-size: ${(props) => props.theme.fontSizes.mediumLarge};
+  font-weight: ${(props) => props.theme.fontWeights.regular};
+  color: ${(props) => props.theme.colors.mediumdark};
+`;
 type PostPictureProps = {
   url: string;
 };
