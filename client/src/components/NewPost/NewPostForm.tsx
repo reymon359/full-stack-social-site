@@ -67,7 +67,7 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ history }) => {
   }, []);
 
   const mayAddNewPost = useCallback(() => {
-    return !!(title && description && picture && content);
+    return !!(title && description && content);
   }, [title, description, picture, content]);
 
   const handleAddPost = useCallback(() => {
