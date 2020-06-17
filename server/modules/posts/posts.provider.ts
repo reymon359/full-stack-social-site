@@ -121,6 +121,18 @@ export class Posts {
   async removePost(postId: string) {
     try {
       await this.db.query('BEGIN');
+
+      const { rows } = await this.db.query(sql`
+        SELECT * FROM posts WHERE id = ${postId}
+      `);
+
+      const post = rows[0];
+
+      if (!post) {
+        await this.db.query('ROLLBACK');
+        return null;
+      }
+
       await this.db.query(sql`
         DELETE FROM posts WHERE posts.id = ${postId}
       `);

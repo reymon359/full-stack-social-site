@@ -39,7 +39,7 @@ const typeDefs = gql`
       description: String!
       content: String!
     ): Post
-    removePost(postId: ID!): String
+    removePost(postId: ID!): ID
     likePost(postId: ID!): Post
     unlikePost(postId: ID!): Post
   }
