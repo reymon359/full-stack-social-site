@@ -1,6 +1,5 @@
 import React from 'react';
 import { useCallback, useState } from 'react';
-// import { useSignUp } from '../../../services/auth.service';
 import {
   FormContainer,
   Label,
@@ -15,7 +14,6 @@ import LoadingSpinner from '../Shared/LoadingSpinner';
 import { History } from 'history';
 import { useAddPostMutation } from '../../graphql/types';
 import gql from 'graphql-tag';
-import * as fragments from '../../graphql/fragments';
 
 // eslint-disable-next-line
 const addPostMutation = gql`
@@ -79,7 +77,7 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ history }) => {
         console.log(data);
         setMessage('🎉 New Post Created!');
         setTimeout(() => {
-          // history.replace('/sign-in');
+          history.replace(`/post/${data.data.addPost.id}`);
           setLoading(false);
         }, 2000);
       })

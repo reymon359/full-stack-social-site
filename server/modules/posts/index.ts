@@ -11,7 +11,7 @@ const typeDefs = gql`
   type Post {
     id: ID!
     title: String!
-    picture: URL
+    picture: String!
     description: String!
     content: String!
     createdAt: DateTime!
