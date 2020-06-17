@@ -26,7 +26,6 @@ export const Label = styled.p`
 `;
 
 export const Input = styled.input`
-  background-color: ${(props) => props.theme.inputColor};
   border: none;
   border-radius: 5px;
   height: 40px;
