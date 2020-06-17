@@ -34,11 +34,10 @@ export const PostContainer: React.FC<PostContainerProps> = ({
   history,
   postId,
 }) => {
-  console.log(postId);
   const { loading: loadingPost, data } = useGetPostByIdQuery({
     variables: { postId },
   });
-  console.log(data);
+
   return (
     <>
       <Navbar history={history} />
@@ -47,7 +46,7 @@ export const PostContainer: React.FC<PostContainerProps> = ({
       ) : data && data.post ? (
         <PostDetails post={data.post} />
       ) : (
-        <h1>No posts found</h1>
+        <h1>No post found</h1>
       )}
     </>
   );

@@ -10,13 +10,20 @@ const PostDetailsContainer = styled.div`
   align-items: center;
   margin: 0px auto;
   padding: 2rem 1rem;
+  max-width: 700px;
 `;
 const PostDetailsHeader = styled.div`
+  display: flex;
+  width: 100%;
+  margin-bottom: 0;
+  padding: 10px;
+  justify-content: space-between;
+`;
+const PostUserInfo = styled.div`
   display: flex;
   margin-bottom: 0;
   padding: 10px;
 `;
-const UserInfo = styled.div``;
 
 const PostUserPicture = styled.img`
   border-radius: 100%;
@@ -72,7 +79,7 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post }) => {
   return (
     <PostDetailsContainer>
       <PostDetailsHeader>
-        <UserInfo>
+        <PostUserInfo>
           <PostUserPicture
             data-testid="post-user-picture"
             src={post.user?.picture}
@@ -82,10 +89,10 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post }) => {
               {post.user?.username}
             </PostUserUsername>
             <PostCreatedAt data-testid="post-created-at">
-              {post.createdAt}
+              {post.createdAt.slice(0, 10)}
             </PostCreatedAt>
           </UsernameAndCreatedAtWrapper>
-        </UserInfo>
+        </PostUserInfo>
         <PostLikesContainer>
           <PostLikesNumber data-testid="post-likes-number">
             {post.likes}
