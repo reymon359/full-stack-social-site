@@ -5,7 +5,7 @@ import { History } from 'history';
 import { useAddPostMutation } from '../../graphql/types';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
-import { validateUrl } from '../../utils/validateUrl';
+// import { validateUrl } from '../../utils/validateUrl';
 
 // eslint-disable-next-line
 const addPostMutation = gql`
@@ -172,12 +172,12 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ history }) => {
     setContent(target.value);
   }, []);
 
-  const validatePostPicture = useCallback(() => {
-    if (picture.length <= 0) return;
-    if (!validateUrl(picture))
-      setMessage('❌ If you enter a picture it must be a valid URL');
-    else setMessage('✅ That seems to be a valid picture!');
-  }, [picture]);
+  // const validatePostPicture = useCallback(() => {
+  //   if (picture.length <= 0) return;
+  //   if (!validateUrl(picture))
+  //     setMessage('❌ If you enter a picture it must be a valid URL');
+  //   else setMessage('✅ That seems to be a valid picture!');
+  // }, [picture]);
 
   const mayAddNewPost = useCallback(() => {
     return !!(title && description && content);
@@ -235,7 +235,7 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ history }) => {
           data-testid="picture-input"
           value={picture}
           type="text"
-          onKeyUp={validatePostPicture}
+          // onKeyUp={validatePostPicture}
           onChange={updatePicture}
           placeholder="Enter the post picture url (not required)"
         />
