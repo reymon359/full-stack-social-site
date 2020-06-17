@@ -48,9 +48,38 @@ const PostUserUsername = styled.h2`
 const PostCreatedAt = styled.p`
   margin-top: 10px;
 `;
-const PostLikesContainer = styled.div``;
-const PostLikesNumber = styled.div``;
-const PostLikeButton = styled.button``;
+const PostLikesContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+  padding: 10px;
+`;
+const PostLikesNumber = styled.div`
+  margin-right: 10px;
+  font-size: ${(props) => props.theme.fontSizes.medium};
+  font-weight: ${(props) => props.theme.fontWeights.regular};
+`;
+const PostLikeButton = styled.button`
+  color: ${(props) => props.theme.colors.primary};
+  background-color: ${(props) => props.theme.colors.lightest};
+  font-size: ${(props) => props.theme.fontSizes.medium};
+  font-weight: ${(props) => props.theme.fontWeights.regular};
+  border: none;
+  margin-left: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.25s;
+
+  &:hover,
+  &:focus {
+    box-shadow: 0px 0px 5px 1px ${(props) => props.theme.colors.medium};
+  }
+
+  ${(props) => props.theme.media.sm`
+    font-size: ${props.theme.fontSizes.normal};
+ `}
+`;
 
 const PostDetailsBody = styled.div``;
 const PostIntro = styled.div``;
@@ -97,9 +126,9 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post }) => {
         </PostUserInfo>
         <PostLikesContainer>
           <PostLikesNumber data-testid="post-likes-number">
-            {post.likes}
+            {post.likes} Likes
           </PostLikesNumber>
-          <PostLikeButton data-testid="post-like-button" />
+          <PostLikeButton data-testid="post-like-button">Like</PostLikeButton>
         </PostLikesContainer>
       </PostDetailsHeader>
       <PostDetailsBody>
