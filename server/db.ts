@@ -271,6 +271,18 @@ export const resetDb = async () => {
       created_at: new Date(baseTime - 3 * 60 * 1000 * 1000),
       user_id: '5',
     },
+    {
+      id: '7',
+      title: 'Beer is the best',
+      picture:
+        'https://images.unsplash.com/photo-1436076863939-06870fe779c2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      content:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet volutpat consequat mauris nunc. A diam maecenas sed enim ut sem. In tellus integer feugiat scelerisque. Scelerisque varius morbi enim nunc faucibus a pellentesque. Placerat orci nulla pellentesque dignissim enim sit amet venenatis. Neque volutpat ac tincidunt vitae. Non tellus orci ac auctor augue mauris augue neque gravida. Viverra nibh cras pulvinar mattis nunc. Lacus viverra vitae congue eu. Diam donec adipiscing tristique risus nec feugiat. Vitae sapien pellentesque habitant morbi tristique. Magna sit amet purus gravida quis blandit. Aliquam sem fringilla ut morbi tincidunt augue. Suspendisse in est ante in nibh. Nulla aliquet porttitor lacus luctus accumsan tortor. Risus ultricies tristique nulla aliquet enim. Ornare aenean euismod elementum nisi quis. Auctor urna nunc id cursus metus aliquam eleifend mi. Eget nunc lobortis mattis aliquam faucibus.',
+      created_at: new Date(baseTime - 10 * 60 * 1000 * 1000),
+      user_id: '1',
+    },
   ];
   for (const samplePost of samplePosts) {
     await pool.query(sql`
@@ -284,7 +296,7 @@ export const resetDb = async () => {
 
   // Posts_liked_users
   await pool.query(sql`DELETE FROM posts_liked_users`);
-  const samplePostsUsers = [
+  const samplePostsLikedUsers = [
     {
       created_at: new Date(baseTime - 60 * 1000 * 1000),
       post_id: '1',
@@ -297,7 +309,7 @@ export const resetDb = async () => {
     },
     {
       created_at: new Date(baseTime - 62 * 1000 * 1000),
-      post_id: '2',
+      post_id: '4',
       user_id: '1',
     },
     {
@@ -326,10 +338,10 @@ export const resetDb = async () => {
       user_id: '5',
     },
   ];
-  for (const samplePostUser of samplePostsUsers) {
+  for (const samplePostLikedUser of samplePostsLikedUsers) {
     await pool.query(sql`
       INSERT INTO posts_liked_users(created_at, post_id, user_id)
-      VALUES(${samplePostUser.created_at}, ${samplePostUser.post_id}, ${samplePostUser.user_id})
+      VALUES(${samplePostLikedUser.created_at}, ${samplePostLikedUser.post_id}, ${samplePostLikedUser.user_id})
     `);
   }
 

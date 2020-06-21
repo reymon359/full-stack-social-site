@@ -73,7 +73,7 @@ export class Posts {
     const { rows } = await this.db.query(sql`
       SELECT posts.* FROM posts, posts_liked_users
       WHERE posts_liked_users.user_id = ${userId}
-      AND posts.user_id = ${userId}
+      AND posts.id = posts_liked_users.post_id
       ORDER BY posts_liked_users.created_at DESC 
     `);
 

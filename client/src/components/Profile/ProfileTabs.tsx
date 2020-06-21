@@ -1,16 +1,37 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import * as fragments from '../../graphql/fragments';
-import { useGetUserPostsQuery } from '../../graphql/types';
+import {
+  useGetUserPostsQuery,
+  useGetUserLikedPostsQuery,
+} from '../../graphql/types';
 import PostsList from '../Shared/PostsList';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import styled from 'styled-components';
-import Toolbar from '@material-ui/core/Toolbar';
 
 // eslint-disable-next-line
 const getUserPostsQuery = gql`
   query GetUserPosts($userId: ID!) {
     userPosts(userId: $userId) {
+      id
+      title
+      picture
+      description
+      content
+      createdAt
+      likes
+      user {
+        ...User
+      }
+    }
+  }
+  ${fragments.user}
+`;
+
+// eslint-disable-next-line
+const getUserLikedPostsQuery = gql`
+  query GetUserLikedPosts($userId: ID!) {
+    userLikedPosts(userId: $userId) {
       id
       title
       picture
@@ -58,9 +79,21 @@ interface ProfileTabsParams {
 }
 
 export const ProfileTabs: React.FC<ProfileTabsParams> = ({ userId }) => {
-  const { data, loading: loadingUserPosts } = useGetUserPostsQuery({
+  const {
+    data: userPostsData,
+    loading: loadingUserPosts,
+  } = useGetUserPostsQuery({
     variables: { userId },
   });
+  console.log(userPostsData);
+  const {
+    data: userLikedPostsData,
+    loading: loadingUserLikedPosts,
+  } = useGetUserLikedPostsQuery({
+    variables: { userId },
+  });
+  console.log(userLikedPostsData);
+
   return (
     <>
       <StyledTabs>
@@ -72,14 +105,20 @@ export const ProfileTabs: React.FC<ProfileTabsParams> = ({ userId }) => {
         <StyledTabPanel>
           {loadingUserPosts ? (
             <h1>Loading posts...</h1>
-          ) : data && data.userPosts ? (
-            <PostsList posts={data.userPosts} />
+          ) : userPostsData && userPostsData.userPosts ? (
+            <PostsList posts={userPostsData.userPosts} />
           ) : (
             <h1>No user posts found</h1>
           )}
         </StyledTabPanel>
         <StyledTabPanel>
-          <h2>Liked Posts content</h2>
+          {loadingUserLikedPosts ? (
+            <h1>Loading Liked posts...</h1>
+          ) : userLikedPostsData && userLikedPostsData.userLikedPosts ? (
+            <PostsList posts={userLikedPostsData.userLikedPosts} />
+          ) : (
+            <h1>No user posts found</h1>
+          )}
         </StyledTabPanel>
       </StyledTabs>
     </>
