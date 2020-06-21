@@ -1,5 +1,5 @@
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import { ApolloClient } from 'apollo-client';
+import { ApolloClient, DefaultOptions } from 'apollo-client';
 import { getMainDefinition } from 'apollo-utilities';
 import { HttpLink } from 'apollo-link-http';
 import { WebSocketLink } from 'apollo-link-ws';
@@ -43,7 +43,18 @@ const link = ApolloLink.from([terminatingLink]);
 
 const inMemoryCache = new InMemoryCache();
 
+const defaultOptions: DefaultOptions = {
+  watchQuery: {
+    fetchPolicy: 'no-cache',
+    errorPolicy: 'ignore',
+  },
+  query: {
+    fetchPolicy: 'no-cache',
+    errorPolicy: 'all',
+  },
+};
 export default new ApolloClient({
   link,
   cache: inMemoryCache,
+  defaultOptions: defaultOptions,
 });

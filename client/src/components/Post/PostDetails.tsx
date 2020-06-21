@@ -1,15 +1,9 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import {
-  Post,
-  useLikePostMutation,
-  useUnlikePostMutation,
-  useGetUserLikedPostsIdsQuery,
-} from '../../graphql/types';
+import React from 'react';
+import { Post } from '../../graphql/types';
 import styled from 'styled-components';
 import { useMe } from '../../services/auth.service';
 import { Link } from 'react-router-dom';
-import gql from 'graphql-tag';
-import * as fragments from '../../graphql/fragments';
+import PostLikes from './PostLikes';
 
 const PostDetailsContainer = styled.div`
   display: flex;
@@ -61,14 +55,7 @@ const PostLikesContainer = styled.div`
   margin-bottom: 0;
   //padding: 10px;
 `;
-const PostLikesNumber = styled.div`
-  margin-right: 10px;
-  font-size: ${(props) => props.theme.fontSizes.medium};
-  font-weight: ${(props) => props.theme.fontWeights.regular};
-  ${(props) => props.theme.media.sm`
-    font-size: ${props.theme.fontSizes.normal};
- `}
-`;
+
 type PostButtonProps = {
   color: string;
 };
@@ -159,29 +146,6 @@ const PostContent = styled.div`
     line-height: 28px;
  `}
 `;
-// eslint-disable-next-line
-const getUserLikedPostsIdsQuery = gql`
-  query GetUserLikedPostsIds($userId: ID!) {
-    userLikedPosts(userId: $userId) {
-      id
-    }
-  }
-  ${fragments.user}
-`;
-
-// eslint-disable-next-line
-const likePostMutation = gql`
-  mutation LikePost($postId: ID!) {
-    likePost(postId: $postId)
-  }
-`;
-
-// eslint-disable-next-line
-const unlikePostMutation = gql`
-  mutation UnlikePost($postId: ID!) {
-    unlikePost(postId: $postId)
-  }
-`;
 
 interface PostDetailsProps {
   post: Post;
@@ -189,57 +153,8 @@ interface PostDetailsProps {
 
 const PostDetails: React.FC<PostDetailsProps> = ({ post }) => {
   const currentUser = useMe();
-  const [userLikedThePost, setUserLikedThePost] = useState(false);
 
-  const [likePost] = useLikePostMutation();
-  const [unlikePost] = useUnlikePostMutation();
   const isCurrentUserPost = currentUser && post?.user?.id === currentUser.id;
-  const userId = currentUser?.id;
-  const {
-    data: userLikedPosts,
-    // loading: loadingUserLikedPostsIds,
-  } = useGetUserLikedPostsIdsQuery({
-    //@ts-ignore
-    variables: { userId },
-  });
-
-  useEffect(() => {
-    const booleanAux = userLikedPosts?.userLikedPosts
-      .map(
-        // @ts-ignore
-        (postId) => (postId = postId?.id)
-      )
-      .includes(post?.id);
-    // @ts-ignore
-    setUserLikedThePost(booleanAux);
-  }, [post, userLikedPosts]);
-
-  const handleLikePost = useCallback(() => {
-    likePost({ variables: { postId: post.id } })
-      .then((data: any) => {
-        console.log(data.data.likePost);
-        post.likes++;
-        setUserLikedThePost(
-          data.data.likePost !== null && data.data.likePost === post.id
-        );
-      })
-      .catch((error: any) => {
-        console.error(error);
-      });
-  }, [post.id, likePost]);
-  const handleUnlikePost = useCallback(() => {
-    unlikePost({ variables: { postId: post.id } })
-      .then((data: any) => {
-        console.log(data.data.unlikePost);
-        post.likes--;
-        setUserLikedThePost(
-          !(data.data.unlikePost !== null && data.data.unlikePost === post.id)
-        );
-      })
-      .catch((error: any) => {
-        console.error(error);
-      });
-  }, [post.id, unlikePost]);
 
   return (
     <PostDetailsContainer>
@@ -259,10 +174,7 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post }) => {
           </UsernameAndCreatedAtWrapper>
         </PostUserInfo>
         <PostLikesContainer>
-          <PostLikesNumber data-testid="post-likes-number">
-            {post.likes} Likes
-          </PostLikesNumber>
-          {isCurrentUserPost ? (
+          {isCurrentUserPost && (
             <>
               <PostButton color="primary" data-testid="post-edit-button">
                 Edit
@@ -271,21 +183,8 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post }) => {
                 Delete
               </PostButton>
             </>
-          ) : userLikedThePost ? (
-            <PostButton
-              color="primary"
-              data-testid="post-like-button"
-              onClick={handleUnlikePost}>
-              Unlike
-            </PostButton>
-          ) : (
-            <PostButton
-              color="primary"
-              data-testid="post-like-button"
-              onClick={handleLikePost}>
-              Like
-            </PostButton>
           )}
+          <PostLikes isCurrentUserPost={isCurrentUserPost} post={post} />
         </PostLikesContainer>
       </PostDetailsHeader>
       <PostDetailsBody>
