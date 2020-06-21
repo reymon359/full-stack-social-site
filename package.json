@@ -5,7 +5,11 @@
   "private": true,
   "author": "ramon morcillo @reymon359",
   "license": "ISC",
-  "scripts": {},
+  "scripts": {
+    "test:server": "cd server && npm run test",
+    "test:client": "cd client && npm run test",
+    "test:all": "npm run test:server && npm run test:client"
+  },
   "eslintConfig": {},
   "browserslist": {
     "production": [
