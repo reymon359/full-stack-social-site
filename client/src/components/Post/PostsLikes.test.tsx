@@ -13,6 +13,7 @@ import {
   GetUserLikedPostsDocument,
   GetUserLikedPostsIdsDocument,
   LikePostDocument,
+  UnlikePostDocument,
 } from '../../graphql/types';
 import { mockApolloClient } from '../../test-helpers';
 import { ThemeProvider } from 'styled-components';
@@ -45,7 +46,7 @@ describe('PostLikes', () => {
       following: 2,
     },
   };
-  it('likes increase when user clicks the like button', async () => {
+  it('likes and unlikes a post properly', async () => {
     const mockUserId = 1;
     mockAuth(mockUserId);
     const client = mockApolloClient([
@@ -75,6 +76,19 @@ describe('PostLikes', () => {
         result: {
           data: {
             likePost: mockPost.id,
+          },
+        },
+      },
+      {
+        request: {
+          query: UnlikePostDocument,
+          variables: {
+            postId: mockPost.id,
+          },
+        },
+        result: {
+          data: {
+            unlikePost: mockPost.id,
           },
         },
       },
@@ -113,72 +127,17 @@ describe('PostLikes', () => {
         `${initialLikesNumber + 1} Likes`
       )
     );
+
+    const postUnlikeButton = await waitFor(
+      () => getByTestId('post-unlike-button') as HTMLButtonElement
+    );
+
+    act(() => {
+      fireEvent.click(postUnlikeButton);
+    });
+
+    await waitFor(() =>
+      expect(postLikesNumber).toHaveTextContent(`${initialLikesNumber} Likes`)
+    );
   });
-  // it('likes decrease when user clicks the unlike button', async () => {});
-  //
-  // it('prints server error if input was wrong', async () => {
-  //   const history = createMemoryHistory();
-  //
-  //   const client = mockApolloClient([
-  //     {
-  //       request: {
-  //         query: AddPostDocument,
-  //         variables: {
-  //           title: 'title',
-  //           picture: 'picture',
-  //           description: 'description',
-  //           content: 'content',
-  //         },
-  //       },
-  //       get result() {
-  //         throw Error('add-post failed');
-  //       },
-  //     },
-  //   ]);
-  //
-  //   let getByTestId: any = null;
-  //
-  //   act(() => {
-  //     getByTestId = render(
-  //       <ThemeProvider theme={theme}>
-  //         <ApolloProvider client={client}>
-  //           <NewPostForm history={history} />
-  //         </ApolloProvider>
-  //       </ThemeProvider>
-  //     ).getByTestId;
-  //   });
-  //
-  //   const titleInput = await waitFor(() => getByTestId('title-input'));
-  //   const descriptionInput = await waitFor(() =>
-  //     getByTestId('description-input')
-  //   );
-  //   const pictureInput = await waitFor(() => getByTestId('picture-input'));
-  //   const contentInput = await waitFor(() => getByTestId('content-input'));
-  //
-  //   const addPostButton = await waitFor(
-  //     () => getByTestId('add-post-button') as HTMLButtonElement
-  //   );
-  //
-  //   act(() => {
-  //     fireEvent.change(titleInput, { target: { value: 'title' } });
-  //     fireEvent.change(descriptionInput, { target: { value: 'description' } });
-  //     fireEvent.change(pictureInput, { target: { value: 'picture' } });
-  //     fireEvent.change(contentInput, { target: { value: 'content' } });
-  //   });
-  //
-  //   await waitFor(() => expect(titleInput.value).toEqual('title'));
-  //   await waitFor(() => expect(descriptionInput.value).toEqual('description'));
-  //   await waitFor(() => expect(pictureInput.value).toEqual('picture'));
-  //   await waitFor(() => expect(contentInput.value).toEqual('content'));
-  //
-  //   act(() => {
-  //     fireEvent.click(addPostButton);
-  //   });
-  //
-  //   const errorMessage = await waitFor(() => getByTestId('message'));
-  //
-  //   await waitFor(() =>
-  //     expect(errorMessage.innerHTML).toContain('add-post failed')
-  //   );
-  // });
 });
