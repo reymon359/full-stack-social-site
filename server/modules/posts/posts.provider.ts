@@ -63,6 +63,7 @@ export class Posts {
     const { rows } = await this.db.query(sql`
       SELECT posts.* FROM posts
       WHERE posts.user_id = ${userId}
+      ORDER BY created_at DESC 
     `);
 
     return rows || null;
@@ -73,6 +74,7 @@ export class Posts {
       SELECT posts.* FROM posts, posts_liked_users
       WHERE posts_liked_users.user_id = ${userId}
       AND posts.user_id = ${userId}
+      ORDER BY posts_liked_users.created_at DESC 
     `);
 
     return rows || null;
