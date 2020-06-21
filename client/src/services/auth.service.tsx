@@ -8,7 +8,6 @@ import {
   useSignInMutation,
   useSignUpMutation,
 } from '../graphql/types';
-import { useCacheService } from './cache.service';
 
 const MyContext = React.createContext<User | null>(null);
 
@@ -30,8 +29,6 @@ export const withAuth = <P extends object>(
 
     const signOut = useSignOut();
     const { data, error, loading } = useMeQuery();
-
-    useCacheService();
 
     if (loading) return null;
 

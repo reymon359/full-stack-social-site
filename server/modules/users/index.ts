@@ -4,7 +4,6 @@ import commonModule from '../common';
 import { Resolvers } from '../../types/graphql';
 import { Users } from './users.provider';
 import { Auth } from './auth.provider';
-import { Chats } from '../chats/chats.provider';
 
 const typeDefs = gql`
   type User {

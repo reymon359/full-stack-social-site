@@ -1,11 +1,9 @@
 {
-  "name": "whatsapp-clone-server",
-  "description": "A newly created Tortilla project",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Urigo/WhatsApp-Clone-Server.git"
-  },
-  "private": true,
+  "name": "typescript-graphql-server",
+  "version": "0.0.1",
+  "description": "Server part of the TypeScript GraphQL Client Server Project",
+  "author": "ramon morcillo @reymon359",
+  "license": "ISC",
   "scripts": {
     "prestart": "npm run codegen",
     "start": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec ts-node ./index.ts",

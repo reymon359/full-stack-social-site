@@ -9,17 +9,9 @@ generates:
       useIndexSignature: true
       contextType: ../context#MyContext
       mappers:
-        # import { Message } from '../db'
-        # The root types of Message resolvers
         User: ../db#User
-        Message: ../db#Message
-        Chat: ../db#Chat
         Post: ../db#Post
       scalars:
-        # e.g. Message.createdAt will be of type Date
         Date: Date
         URL: string
-  ./types/unsplash.d.ts:
-    schema: ./logs/main/Unsplash.RandomPhoto.graphql
-    plugins:
-      - typescript
+

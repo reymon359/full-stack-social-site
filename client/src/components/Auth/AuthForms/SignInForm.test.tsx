@@ -19,7 +19,7 @@ describe('SignInForm', () => {
 
   it('enables sign-in button when filled in', async () => {
     const history = createMemoryHistory();
-    const client = mockApolloClient();
+    const client = mockApolloClient([]);
 
     let getByTestId: any = null;
 
