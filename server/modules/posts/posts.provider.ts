@@ -65,7 +65,7 @@ export class Posts {
       WHERE posts.user_id = ${userId}
     `);
 
-    return rows;
+    return rows || null;
   }
 
   async findPostsLikedByUser(userId: string) {
@@ -75,7 +75,7 @@ export class Posts {
       AND posts.user_id = ${userId}
     `);
 
-    return rows;
+    return rows || null;
   }
 
   async getPostLikes(postId: string) {

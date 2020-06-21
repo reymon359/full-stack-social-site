@@ -82,21 +82,21 @@ const resolvers: Resolvers = {
       return injector.get(Posts).lastPosts();
     },
 
-    // async userPosts(root, { userId }, { injector }) {
-    //   const currentUser = await injector.get(Auth).currentUser();
-    //
-    //   if (!currentUser) return null;
-    //
-    //   return injector.get(Posts).findPostsByUser(userId);
-    // },
-    //
-    // async userLikedPosts(root, { userId }, { injector }) {
-    //   const currentUser = await injector.get(Auth).currentUser();
-    //
-    //   if (!currentUser) return null;
-    //
-    //   return injector.get(Posts).findPostsLikedByUser(userId);
-    // },
+    async userPosts(root, { userId }, { injector }) {
+      const currentUser = await injector.get(Auth).currentUser();
+
+      if (!currentUser) return [];
+
+      return injector.get(Posts).findPostsByUser(userId);
+    },
+
+    async userLikedPosts(root, { userId }, { injector }) {
+      const currentUser = await injector.get(Auth).currentUser();
+
+      if (!currentUser) return [];
+
+      return injector.get(Posts).findPostsLikedByUser(userId);
+    },
   },
 
   Mutation: {
