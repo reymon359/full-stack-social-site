@@ -90,6 +90,7 @@ export async function initDb(): Promise<void> {
   );`);
 
   await pool.query(sql`CREATE TABLE posts_liked_users(
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     post_id INTEGER NOT NULL REFERENCES posts(id) ON DELETE CASCADE,
     user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE
   );`);
@@ -282,7 +283,7 @@ export const resetDb = async () => {
   const samplePostsUsers = [
     {
       post_id: '1',
-      user_id: '1',
+      user_id: '3',
     },
     {
       post_id: '1',
@@ -306,7 +307,7 @@ export const resetDb = async () => {
     },
     {
       post_id: '3',
-      user_id: '1',
+      user_id: '2',
     },
     {
       post_id: '4',

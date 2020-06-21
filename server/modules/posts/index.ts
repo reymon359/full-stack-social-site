@@ -40,8 +40,8 @@ const typeDefs = gql`
       content: String!
     ): Post
     removePost(postId: ID!): ID
-    likePost(postId: ID!): Post
-    unlikePost(postId: ID!): Post
+    likePost(postId: ID!): ID
+    unlikePost(postId: ID!): ID
   }
 
   extend type Subscription {
@@ -124,6 +124,14 @@ const resolvers: Resolvers = {
       if (!currentUser) return null;
 
       return injector.get(Posts).removePost(postId);
+    },
+
+    async likePost(root, { postId }, { injector }) {
+      const currentUser = await injector.get(Auth).currentUser();
+
+      if (!currentUser) return null;
+
+      return injector.get(Posts).likePost({ postId, userId: currentUser.id });
     },
   },
 };

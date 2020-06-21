@@ -144,6 +144,35 @@ export class Posts {
     }
   }
 
+  async likePost({ postId, userId }: { postId: string; userId: string }) {
+    try {
+      await this.db.query('BEGIN');
+
+      const { rows } = await this.db.query(sql`
+        SELECT * FROM posts_liked_users
+        WHERE post_id = ${postId}
+        AND user_id = ${userId}
+      `);
+      const post = rows[0];
+
+      // If user has already liked the post
+      if (post) {
+        await this.db.query('ROLLBACK');
+        return null;
+      }
+
+      await this.db.query(sql`
+        INSERT INTO posts_liked_users( post_id, user_id)
+        VALUES(${postId}, ${userId})
+        RETURNING *
+      `);
+      await this.db.query('COMMIT');
+      return postId;
+    } catch (e) {
+      throw e;
+    }
+  }
+
   private _readPostFromCache(postId: string) {
     return this.postsCache.get(postId);
   }
