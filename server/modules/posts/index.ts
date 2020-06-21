@@ -133,6 +133,14 @@ const resolvers: Resolvers = {
 
       return injector.get(Posts).likePost({ postId, userId: currentUser.id });
     },
+
+    async unlikePost(root, { postId }, { injector }) {
+      const currentUser = await injector.get(Auth).currentUser();
+
+      if (!currentUser) return null;
+
+      return injector.get(Posts).unlikePost({ postId, userId: currentUser.id });
+    },
   },
 };
 
