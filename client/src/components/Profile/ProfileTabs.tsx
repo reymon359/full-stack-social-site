@@ -87,14 +87,12 @@ export const ProfileTabs: React.FC<ProfileTabsParams> = ({ userId }) => {
   } = useGetUserPostsQuery({
     variables: { userId },
   });
-  console.log(userPostsData);
   const {
     data: userLikedPostsData,
     loading: loadingUserLikedPosts,
   } = useGetUserLikedPostsQuery({
     variables: { userId },
   });
-  console.log(userLikedPostsData);
 
   return (
     <>
