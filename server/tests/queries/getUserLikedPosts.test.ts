@@ -4,18 +4,18 @@ import { server } from '../../server';
 import { resetDb } from '../../db';
 import { mockAuth } from '../mocks/auth.provider';
 
-describe('Query.userPosts', () => {
+describe('Query.userLikedPosts', () => {
   beforeEach(resetDb);
 
-  it('should fetch the user posts', async () => {
+  it('should fetch the user liked posts', async () => {
     mockAuth(1);
     const { query } = createTestClient(server);
 
     const res = await query({
       variables: { userId: '2' },
       query: gql`
-        query GetUserPosts($userId: ID!) {
-          userPosts(userId: $userId) {
+        query GetUserLikedPosts($userId: ID!) {
+          userLikedPosts(userId: $userId) {
             id
             title
             picture
