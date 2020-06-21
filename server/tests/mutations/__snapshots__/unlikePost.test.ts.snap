@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Mutation.unlikePost should unlike a Post just once properly 1`] = `
+Object {
+  "unlikePost": "1",
+}
+`;

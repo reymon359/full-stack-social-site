@@ -3,6 +3,7 @@ import { Post } from '../../graphql/types';
 import styled from 'styled-components';
 import { useMe } from '../../services/auth.service';
 import { Link } from 'react-router-dom';
+import PostLikes from './PostLikes';
 
 const PostDetailsContainer = styled.div`
   display: flex;
@@ -54,14 +55,7 @@ const PostLikesContainer = styled.div`
   margin-bottom: 0;
   //padding: 10px;
 `;
-const PostLikesNumber = styled.div`
-  margin-right: 10px;
-  font-size: ${(props) => props.theme.fontSizes.medium};
-  font-weight: ${(props) => props.theme.fontWeights.regular};
-  ${(props) => props.theme.media.sm`
-    font-size: ${props.theme.fontSizes.normal};
- `}
-`;
+
 type PostButtonProps = {
   color: string;
 };
@@ -76,6 +70,7 @@ const PostButton = styled.button<PostButtonProps>`
   border-radius: 10px;
   cursor: pointer;
   transition: 0.25s;
+  min-width: 80px;
 
   &:hover {
     box-shadow: 0px 0px 5px 1px ${(props) => props.theme.colors.medium};
@@ -158,6 +153,7 @@ interface PostDetailsProps {
 
 const PostDetails: React.FC<PostDetailsProps> = ({ post }) => {
   const currentUser = useMe();
+
   const isCurrentUserPost = currentUser && post?.user?.id === currentUser.id;
 
   return (
@@ -178,10 +174,7 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post }) => {
           </UsernameAndCreatedAtWrapper>
         </PostUserInfo>
         <PostLikesContainer>
-          <PostLikesNumber data-testid="post-likes-number">
-            {post.likes} Likes
-          </PostLikesNumber>
-          {isCurrentUserPost ? (
+          {isCurrentUserPost && (
             <>
               <PostButton color="primary" data-testid="post-edit-button">
                 Edit
@@ -190,11 +183,8 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post }) => {
                 Delete
               </PostButton>
             </>
-          ) : (
-            <PostButton color="primary" data-testid="post-like-button">
-              Like
-            </PostButton>
           )}
+          <PostLikes isCurrentUserPost={isCurrentUserPost} post={post} />
         </PostLikesContainer>
       </PostDetailsHeader>
       <PostDetailsBody>

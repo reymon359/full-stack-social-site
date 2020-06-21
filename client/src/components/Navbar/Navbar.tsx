@@ -23,6 +23,7 @@ const NavbarContainer = styled.div`
 `;
 
 const LogoContainer = styled.div`
+  margin-top: 10px;
   padding: 1rem;
   cursor: pointer;
 `;
@@ -75,7 +76,7 @@ export const Navbar: React.FC<NavbarProps> = ({ history }) => {
   return (
     <NavbarContainer>
       <LogoContainer data-testid="root-logo" onClick={redirectToRoot}>
-        <Logo fill={themeContext.colors.primary} width={40} height={40} />
+        <Logo fill={themeContext.colors.primary} width={50} height={50} />
       </LogoContainer>
       <NavbarButtonsContainer>
         <NavbarButton data-testid="new-post-button" onClick={redirectToNewPost}>

@@ -4,6 +4,7 @@
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom/extend-expect';
 import { GlobalWithFetchMock } from 'jest-fetch-mock';
+import 'reflect-metadata';
 import { act } from '@testing-library/react';
 
 const customGlobal: GlobalWithFetchMock = global as GlobalWithFetchMock;

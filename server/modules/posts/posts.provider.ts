@@ -63,19 +63,21 @@ export class Posts {
     const { rows } = await this.db.query(sql`
       SELECT posts.* FROM posts
       WHERE posts.user_id = ${userId}
+      ORDER BY created_at DESC 
     `);
 
-    return rows;
+    return rows || null;
   }
 
   async findPostsLikedByUser(userId: string) {
     const { rows } = await this.db.query(sql`
       SELECT posts.* FROM posts, posts_liked_users
       WHERE posts_liked_users.user_id = ${userId}
-      AND posts.user_id = ${userId}
+      AND posts.id = posts_liked_users.post_id
+      ORDER BY posts_liked_users.created_at DESC 
     `);
 
-    return rows;
+    return rows || null;
   }
 
   async getPostLikes(postId: string) {
@@ -140,6 +142,64 @@ export class Posts {
       return postId;
     } catch (e) {
       await this.db.query('ROLLBACK');
+      throw e;
+    }
+  }
+
+  async likePost({ postId, userId }: { postId: string; userId: string }) {
+    try {
+      await this.db.query('BEGIN');
+
+      const { rows } = await this.db.query(sql`
+        SELECT * FROM posts_liked_users
+        WHERE post_id = ${postId}
+        AND user_id = ${userId}
+      `);
+      const post = rows[0];
+
+      // If user has already liked the post
+      if (post) {
+        await this.db.query('ROLLBACK');
+        return null;
+      }
+
+      await this.db.query(sql`
+        INSERT INTO posts_liked_users( post_id, user_id)
+        VALUES(${postId}, ${userId})
+        RETURNING *
+      `);
+      await this.db.query('COMMIT');
+      return postId;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  async unlikePost({ postId, userId }: { postId: string; userId: string }) {
+    try {
+      await this.db.query('BEGIN');
+
+      const { rows } = await this.db.query(sql`
+        SELECT * FROM posts_liked_users
+        WHERE post_id = ${postId}
+        AND user_id = ${userId}
+      `);
+      const post = rows[0];
+
+      // If user has not already liked the post
+      if (!post) {
+        await this.db.query('ROLLBACK');
+        return null;
+      }
+
+      await this.db.query(sql`
+        DELETE FROM posts_liked_users
+        WHERE post_id = ${postId}
+        AND user_id = ${userId}
+      `);
+      await this.db.query('COMMIT');
+      return postId;
+    } catch (e) {
       throw e;
     }
   }

@@ -10,9 +10,6 @@ export const theme = {
     secondaryLight: '#d3bfec',
     secondaryDark: '#5a4ba3',
 
-    terciary: '#9266c8',
-    terciaryLight: '#d3bfec',
-
     info: '#0284fe',
     warning: '#d6ae3e',
     danger: '#D93025',
@@ -31,11 +28,6 @@ export const theme = {
     darker: '#444444',
     darkest: '#333333',
     black: '#000000',
-
-    // border: 'rgba(0,0,0,.1)',
-    // boxShadowsmall: '0 1px 2px 0 rgba(0, 0, 0, 0.1)',
-    // boxShadowmedium: '0 1px 2px 0 rgba(0, 0, 0, 0.6)',
-    // boxShadowlarge: '0 1px 2px 0 rgba(0, 0, 0, 0.6)',
   },
   fonts: {
     primary:

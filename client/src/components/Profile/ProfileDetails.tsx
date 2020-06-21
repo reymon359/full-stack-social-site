@@ -14,11 +14,14 @@ const ProfileDetailsContainer = styled.div`
 
 const UserPicture = styled.img`
   border-radius: 100%;
-  width: 20%;
-  height: 20%;
-  min-height: 100px;
-  min-width: 100px;
+  max-height: 220px;
+  max-width: 220px;
   border: 3px solid ${(props) => props.theme.colors.primaryDark};
+
+  ${(props) => props.theme.media.sm`
+    max-height: 100px;
+    max-width: 100px;
+ `}
 `;
 
 const UserName = styled.h1`

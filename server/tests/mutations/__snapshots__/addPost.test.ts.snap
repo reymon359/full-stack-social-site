@@ -3,7 +3,7 @@
 exports[`Mutation.addPost should add a new Post 1`] = `
 Object {
   "addPost": Object {
-    "id": "7",
+    "id": "8",
   },
 }
 `;
@@ -13,7 +13,7 @@ Object {
   "post": Object {
     "content": "new post content",
     "description": "new post emadescription",
-    "id": "7",
+    "id": "8",
     "likes": 0,
     "picture": "https://images.unsplash.com/photo-1575713076235-8a4ea6500645?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
     "title": "new post title",

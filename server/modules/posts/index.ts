@@ -40,8 +40,8 @@ const typeDefs = gql`
       content: String!
     ): Post
     removePost(postId: ID!): ID
-    likePost(postId: ID!): Post
-    unlikePost(postId: ID!): Post
+    likePost(postId: ID!): ID
+    unlikePost(postId: ID!): ID
   }
 
   extend type Subscription {
@@ -82,21 +82,21 @@ const resolvers: Resolvers = {
       return injector.get(Posts).lastPosts();
     },
 
-    // async userPosts(root, { userId }, { injector }) {
-    //   const currentUser = await injector.get(Auth).currentUser();
-    //
-    //   if (!currentUser) return null;
-    //
-    //   return injector.get(Posts).findPostsByUser(userId);
-    // },
-    //
-    // async userLikedPosts(root, { userId }, { injector }) {
-    //   const currentUser = await injector.get(Auth).currentUser();
-    //
-    //   if (!currentUser) return null;
-    //
-    //   return injector.get(Posts).findPostsLikedByUser(userId);
-    // },
+    async userPosts(root, { userId }, { injector }) {
+      const currentUser = await injector.get(Auth).currentUser();
+
+      if (!currentUser) return [];
+
+      return injector.get(Posts).findPostsByUser(userId);
+    },
+
+    async userLikedPosts(root, { userId }, { injector }) {
+      const currentUser = await injector.get(Auth).currentUser();
+
+      if (!currentUser) return [];
+
+      return injector.get(Posts).findPostsLikedByUser(userId);
+    },
   },
 
   Mutation: {
@@ -124,6 +124,22 @@ const resolvers: Resolvers = {
       if (!currentUser) return null;
 
       return injector.get(Posts).removePost(postId);
+    },
+
+    async likePost(root, { postId }, { injector }) {
+      const currentUser = await injector.get(Auth).currentUser();
+
+      if (!currentUser) return null;
+
+      return injector.get(Posts).likePost({ postId, userId: currentUser.id });
+    },
+
+    async unlikePost(root, { postId }, { injector }) {
+      const currentUser = await injector.get(Auth).currentUser();
+
+      if (!currentUser) return null;
+
+      return injector.get(Posts).unlikePost({ postId, userId: currentUser.id });
     },
   },
 };
