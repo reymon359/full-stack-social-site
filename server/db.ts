@@ -305,7 +305,7 @@ export const resetDb = async () => {
     {
       created_at: new Date(baseTime - 61 * 1000 * 1000),
       post_id: '1',
-      user_id: '2',
+      user_id: '4',
     },
     {
       created_at: new Date(baseTime - 62 * 1000 * 1000),
@@ -320,7 +320,7 @@ export const resetDb = async () => {
     {
       created_at: new Date(baseTime - 64 * 1000 * 1000),
       post_id: '3',
-      user_id: '1',
+      user_id: '5',
     },
     {
       created_at: new Date(baseTime - 65 * 1000 * 1000),
@@ -330,7 +330,7 @@ export const resetDb = async () => {
     {
       created_at: new Date(baseTime - 66 * 1000 * 1000),
       post_id: '3',
-      user_id: '2',
+      user_id: '1',
     },
     {
       created_at: new Date(baseTime - 67 * 1000 * 1000),

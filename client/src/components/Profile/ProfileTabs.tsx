@@ -72,7 +72,9 @@ const StyledTab = styled(Tab)`
   }
 `;
 
-const StyledTabPanel = styled(TabPanel)``;
+const StyledTabPanel = styled(TabPanel)`
+  margin: auto;
+`;
 
 interface ProfileTabsParams {
   userId: string;
@@ -105,19 +107,30 @@ export const ProfileTabs: React.FC<ProfileTabsParams> = ({ userId }) => {
         <StyledTabPanel>
           {loadingUserPosts ? (
             <h1>Loading posts...</h1>
-          ) : userPostsData && userPostsData.userPosts ? (
+          ) : userPostsData && userPostsData.userPosts.length > 0 ? (
             <PostsList posts={userPostsData.userPosts} />
           ) : (
-            <h1>No user posts found</h1>
+            <div
+              style={{
+                textAlign: 'center',
+              }}>
+              No user posts found
+            </div>
           )}
         </StyledTabPanel>
         <StyledTabPanel>
           {loadingUserLikedPosts ? (
             <h1>Loading Liked posts...</h1>
-          ) : userLikedPostsData && userLikedPostsData.userLikedPosts ? (
+          ) : userLikedPostsData &&
+            userLikedPostsData.userLikedPosts.length > 0 ? (
             <PostsList posts={userLikedPostsData.userLikedPosts} />
           ) : (
-            <h1>No user posts found</h1>
+            <div
+              style={{
+                textAlign: 'center',
+              }}>
+              No user Liked posts found
+            </div>
           )}
         </StyledTabPanel>
       </StyledTabs>

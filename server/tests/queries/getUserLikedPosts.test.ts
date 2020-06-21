@@ -12,7 +12,7 @@ describe('Query.userLikedPosts', () => {
     const { query } = createTestClient(server);
 
     const res = await query({
-      variables: { userId: '2' },
+      variables: { userId: '1' },
       query: gql`
         query GetUserLikedPosts($userId: ID!) {
           userLikedPosts(userId: $userId) {
