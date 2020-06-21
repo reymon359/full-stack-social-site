@@ -53,6 +53,7 @@
     "react-router-transition": "2.0.0",
     "react-scripts": "3.4.1",
     "react-tabs": "3.1.1",
+    "reflect-metadata": "0.1.13",
     "styled-components": "5.1.0",
     "subscriptions-transport-ws": "0.9.16",
     "typescript": "3.8.3"

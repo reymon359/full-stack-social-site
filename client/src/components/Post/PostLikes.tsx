@@ -129,7 +129,7 @@ const PostLikes: React.FC<PostLikesProps> = ({ isCurrentUserPost, post }) => {
         ? !isCurrentUserPost && (
             <PostButton
               color="primary"
-              data-testid="post-like-button"
+              data-testid="post-unlike-button"
               onClick={handleUnlikePost}>
               Unlike
             </PostButton>
