@@ -96,6 +96,7 @@ export async function initDb(): Promise<void> {
   );`);
 
   await pool.query(sql`CREATE TABLE follows(
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     following_user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     followed_user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE
   );`);
@@ -121,6 +122,9 @@ export async function initDb(): Promise<void> {
     sql`GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO testuser;`
   );
 }
+
+// Utils
+const baseTime = new Date('15 Jun 2020 GMT').getTime();
 
 export const resetDb = async () => {
   await initDb();
@@ -193,7 +197,7 @@ export const resetDb = async () => {
 
   // Posts
   await pool.query(sql`DELETE FROM posts`);
-  const baseTime = new Date('15 Jun 2020 GMT').getTime();
+
   const samplePosts = [
     {
       id: '1',
@@ -282,42 +286,50 @@ export const resetDb = async () => {
   await pool.query(sql`DELETE FROM posts_liked_users`);
   const samplePostsUsers = [
     {
+      created_at: new Date(baseTime - 60 * 1000 * 1000),
       post_id: '1',
       user_id: '3',
     },
     {
+      created_at: new Date(baseTime - 61 * 1000 * 1000),
       post_id: '1',
       user_id: '2',
     },
     {
+      created_at: new Date(baseTime - 62 * 1000 * 1000),
       post_id: '2',
       user_id: '1',
     },
     {
+      created_at: new Date(baseTime - 63 * 1000 * 1000),
       post_id: '2',
       user_id: '3',
     },
     {
+      created_at: new Date(baseTime - 64 * 1000 * 1000),
       post_id: '3',
       user_id: '1',
     },
     {
+      created_at: new Date(baseTime - 65 * 1000 * 1000),
       post_id: '3',
       user_id: '4',
     },
     {
+      created_at: new Date(baseTime - 66 * 1000 * 1000),
       post_id: '3',
       user_id: '2',
     },
     {
+      created_at: new Date(baseTime - 67 * 1000 * 1000),
       post_id: '4',
       user_id: '5',
     },
   ];
   for (const samplePostUser of samplePostsUsers) {
     await pool.query(sql`
-      INSERT INTO posts_liked_users(post_id, user_id)
-      VALUES(${samplePostUser.post_id}, ${samplePostUser.user_id})
+      INSERT INTO posts_liked_users(created_at, post_id, user_id)
+      VALUES(${samplePostUser.created_at}, ${samplePostUser.post_id}, ${samplePostUser.user_id})
     `);
   }
 
@@ -325,42 +337,50 @@ export const resetDb = async () => {
   await pool.query(sql`DELETE FROM follows`);
   const sampleFollows = [
     {
+      created_at: new Date(baseTime - 60 * 1000 * 1000),
       following_user_id: '1',
       followed_user_id: '1',
     },
     {
+      created_at: new Date(baseTime - 61 * 1000 * 1000),
       following_user_id: '1',
       followed_user_id: '2',
     },
     {
+      created_at: new Date(baseTime - 62 * 1000 * 1000),
       following_user_id: '2',
       followed_user_id: '1',
     },
     {
+      created_at: new Date(baseTime - 63 * 1000 * 1000),
       following_user_id: '2',
       followed_user_id: '3',
     },
     {
+      created_at: new Date(baseTime - 64 * 1000 * 1000),
       following_user_id: '3',
       followed_user_id: '1',
     },
     {
+      created_at: new Date(baseTime - 65 * 1000 * 1000),
       following_user_id: '3',
       followed_user_id: '4',
     },
     {
+      created_at: new Date(baseTime - 66 * 1000 * 1000),
       following_user_id: '4',
       followed_user_id: '1',
     },
     {
+      created_at: new Date(baseTime - 67 * 1000 * 1000),
       following_user_id: '4',
       followed_user_id: '5',
     },
   ];
   for (const sampleFollow of sampleFollows) {
     await pool.query(sql`
-      INSERT INTO follows(following_user_id, followed_user_id)
-      VALUES(${sampleFollow.following_user_id}, ${sampleFollow.followed_user_id})
+      INSERT INTO follows(created_at, following_user_id, followed_user_id)
+      VALUES(${sampleFollow.created_at}, ${sampleFollow.following_user_id}, ${sampleFollow.followed_user_id})
     `);
   }
 
