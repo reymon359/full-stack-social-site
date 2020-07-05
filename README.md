@@ -2,14 +2,13 @@
 
 A Social Network Project that uses the technologies:
 
-- React⚛
-- Typescript🔝
-- GraphQL🌸
-- Styled Components💅
-- Next.js🔼
-- Apollo🚀
-- Docker🐳
-- PostgreSQL🐘
+- [React (with Hooks and Suspense)](http://react.com)
+- [Styled-Components](https://styled-components.com)
+- [TypeScript](https://typescriptlang.org)
+- [Apollo GraphQL](https://www.apollographql.com)
+- [GraphQL Code Generator](http://graphql-code-generator.com)
+- [GraphQL Modules](https://graphql-modules.com)
+- [PostgreSQL](https://www.postgresql.org/)
 
 ## Authors
 
