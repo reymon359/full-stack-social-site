@@ -1,7 +1,7 @@
 {
-  "name": "typescript-graphql-server",
+  "name": "full-stack-social-site-server",
   "version": "0.0.1",
-  "description": "Server part of the TypeScript GraphQL Client Server Project",
+  "description": "Server part of the Full Stack Social Site TypeScript GraphQL Client Server Project",
   "author": "ramon morcillo @reymon359",
   "license": "ISC",
   "scripts": {
