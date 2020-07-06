@@ -56,3 +56,6 @@ This project is licensed under the MIT License
 ## Author
 
 - **Ramon Morcillo** - [reymon359](https://github.com/reymon359)
+
+## Side Notes
+Although the project is far from being finished the main objective has been accomplished, so I do not know if I will keep working on it.
