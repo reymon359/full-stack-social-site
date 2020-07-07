@@ -1,13 +1,14 @@
 <p align="center">
-  <img width="100" height="100" src="./client/src/assets/icons/logo.png">
+  <a href="https://github.com/reymon359/full-stack-social-site">
+    <img alt="full-stack-social-site" src="./assets/logo.png" width="100" />
+  </a>
 </p>
-<h1 style="text-align: center;">
- Full Stack Social Site
+<h1 align="center">
+  Full Stack Social Site
 </h1>
 
-
-
 Full Stack Social Site is an Open Source Client-Server social site app.
+
 
 //TODO GIF
 
