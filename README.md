@@ -9,8 +9,12 @@
 
 Full Stack Social Site is an Open Source Client-Server social site app.
 
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=VIFTRre9T40">
+    <img alt="full-stack-social-site-video" src="./assets/video_thumbnail.gif" />
+  </a>
+</p>
 
-//TODO GIF
 
 ## Table of Contents
 // TODO
