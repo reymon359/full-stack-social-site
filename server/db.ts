@@ -1,7 +1,5 @@
 import { Pool } from 'pg';
 import sql from 'sql-template-strings';
-import faker from 'faker';
-import addMinutes from 'date-fns/addMinutes';
 import {
   resetDb as envResetDb,
   postgresHost,
@@ -45,7 +43,6 @@ export const dbConfig = {
 export let pool: Pool = new Pool(dbConfig);
 
 export async function initDb(): Promise<void> {
-  console.log('initDB');
 
   // Clear tables
   await pool.query(sql`DROP TABLE IF EXISTS posts_liked_users;`);
@@ -97,7 +94,6 @@ const baseTime = new Date('15 Jun 2020 GMT').getTime();
 
 export const resetDb = async () => {
   await initDb();
-  console.log(`Resetting database`);
 
   // Users
   await pool.query(sql`DELETE FROM users`);
