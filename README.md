@@ -56,8 +56,33 @@ REACT_APP_SERVER_URL=http://localhost:4000
 
 ## Available Scripts
 
+You can execute the different commands within each directory (client and server). The commands below must be executed from the root folder.
 
+### `npm run start:all`
 
+  Runs each part (client & server) in development mode.<br />
+    Open [http://localhost:3000](http://localhost:3000) to view the client in the browser.
+    
+### `npm run start:server`
+
+Runs the server part of the app.
+
+### `npm run start:client`
+
+Runs the client part of the app.
+
+### `npm run test:all`
+
+  Runs all the app tests.
+    
+### `npm run test:server`
+
+Runs the server tests.
+
+### `npm run test:client`
+
+Runs the client tests.
+  
 ## License
 
 This project is licensed under the MIT License
@@ -67,4 +92,4 @@ This project is licensed under the MIT License
 - **Ramon Morcillo** - [reymon359](https://github.com/reymon359)
 
 ## Side Notes
-Although the project is far from being finished the main objective has been accomplished, so I do not know if I will keep working on it.
+Although the project is far from being finished (no software project is 100% finished) the main objective has been accomplished, so I will probably stop spending time on this and focus in other projects.
