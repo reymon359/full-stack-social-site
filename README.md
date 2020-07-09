@@ -48,7 +48,7 @@ I made this project for my final thesis of the [Web Engineering Master from the 
 
 First you need to install [Node.js](https://nodejs.org/en/) and [PostgreSQL](https://www.postgresql.org/). Then after cloning it have a look at [the scripts](https://github.com/reymon359/full-stack-social-site/blob/67a6d509f66612255c0929d170441fe24240db5f/server/db.ts#L45) to set up the database and then run `npm install` in both, the client and the server directories.
 
-In the client directory you will need to create a `env` file with this variable
+In the client directory you will need to create a `.env` file with this variable
 
 ```
 REACT_APP_SERVER_URL=http://localhost:4000
